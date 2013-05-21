@@ -1,0 +1,28 @@
+#!/bin/bash -u
+
+USEQ_GENES_MERGED_MM9="/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.clean.constitutive.table"
+USEQ_GENES_MERGED_HG19="/work/Common/Data/Annotation/human/2011_Archive/hg19EnsGenesMergedNoOverlap.ucsc"
+MM9_VERS="M_musculus_Jul_2007" # ← this only matters for hyperlinking
+HG19_VERS="H_sapiens_Feb_2009" # ← this only matters for hyperlinking
+WHICHR=/usr/bin/R
+# DRDSJAR="/work/Apps/bin/DefinedRegionDifferentialSeqTest"
+DRDSJAR="/home/alexgw/USEQ/useq-source/Releases/USeq_vcf/Apps/DefinedRegionDifferentialSeq"
+GIGB=8
+MINMAPPINGREADS=0
+MIN_LOG10_SPACE_FDR=0
+MIN_LOG2_SPACE_FOLD_CHANGE=0
+UCSCGENES=${USEQ_GENES_MERGED_MM9}
+GENVERSION=${MM9_VERS}
+PROJ="116R"
+USEQOUT=${PROJ}_USEQ_OUT_test
+CONDITIONDIR="USEQ_CONDITIONS" ## this has as SUB FOLDERS all the actual conditions!
+MAXBASEALIGNDEPTH="ALL"
+
+
+mkdir -p ${USEQOUT} &&
+java -Xmx${GIGB}G -jar ${DRDSJAR}  -r ${WHICHR}  -s ${USEQOUT}  \
+   -c ${CONDITIONDIR}  -g ${GENVERSION}  -x ${MAXBASEALIGNDEPTH}\
+   -f ${MIN_LOG10_SPACE_FDR}  -l ${MIN_LOG2_SPACE_FOLD_CHANGE}  \
+   -e ${MINMAPPINGREADS}  -u ${UCSCGENES}  --showfragments --plainp\
+   2>&1 | tee --append ${USEQOUT}/agw.useq.log.txt
+

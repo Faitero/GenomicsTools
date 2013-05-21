@@ -1,0 +1,50 @@
+#!/bin/bash
+
+#Script file for aligning .bz2 zipped fastq files
+
+HAT_ARGS="--min-anchor=5 --segment-length=25 --no-coverage-search --segment-mismatches=2 --splice-mismatches=2 --microexon-search"
+NUM_THREADS=6
+
+MM9_INDEX=/work/Common/Data/Bowtie_Indexes/mm9
+HG19_INDEX=/work/Common/Data/Bowtie_Indexes/hg19
+HG_GTF="/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.68.clean.gtf"
+MM_GTF="/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.gtf"
+
+INPUT_FASTQ_PATTERN=*.fq.bz2
+PAIRED_MATE_INNER_DIST=250         # make sure to set this!!!
+
+#for human
+# TOPGTF=${HG_GTF}
+# TOPINDEX=${HG19_INDEX}
+
+#for mouse
+TOPGTF=${MM_GTF}
+TOPINDEX=${MM9_INDEX}
+
+for FQ in $(ls $INPUT_FASTQ_PATTERN) ; do
+  TOPHATDIR=Tophat_$(sed -e's/[.]\(fq\|fastq\)[.]\(gz\|bz2\)//; s/[\\ ,]/_/g; s/_pair1/_PAIRED/' <<< $FQ)
+  ABOUTFILE=$TOPHATDIR/agw.log.$(basename $TOPHATDIR).txt
+  if [[ "$FQ" =~ R1 ]] 
+  then
+    mkdir -p $TOPHATDIR ; touch $ABOUTFILE
+    FQ2=$(sed -e's/-R1/-R2/' <<< $FQ) 
+    echo "AGW: Aligning PAIRED END FILES $FQ and $FQ2 --> $TOPHATDIR ..."
+    unset BOWTIE_INDEXES && tophat -o $TOPHATDIR \
+      --GTF=$TOPGTF $HAT_ARGS --num-threads=$NUM_THREADS \
+      --mate-inner-dist=$PAIRED_MATE_INNER_DIST \
+      --no-discordant \
+      --no-mixed \
+      $TOPINDEX $FQ $FQ2 \
+      2>&1 | tee --append $ABOUTFILE
+  elif [[ "$FQ" =~ R2 ]]
+  then
+    echo "AGW: Skipping pair #2 of a paired-end pair."
+  else
+    mkdir -p $TOPHATDIR ; touch $ABOUTFILE
+    echo "AGW: Aligning SINGLE END file $FQ ..."
+    unset BOWTIE_INDEXES && tophat -o $TOPHATDIR \
+      --GTF=$TOPGTF $HAT_ARGS --num-threads=$NUM_THREADS \
+      $TOPINDEX $FQ \
+      2>&1 | tee --append $ABOUTFILE
+  fi
+done
