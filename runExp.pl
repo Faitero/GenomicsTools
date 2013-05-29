@@ -38,6 +38,9 @@ chomp $exp;
 
 $analysisDir .= $exp."/";
 
+system("mkdir -p $analysisDir");
+chdir($analysisDir) or die "$!";
+
 my $now_string = localtime;
 $now_string =~ s/\s/_/g;
 my $logfile = $analysisDir."runExp_".$now_string.".log";
@@ -376,15 +379,16 @@ sub runTophat{
 				$sampleHash->{$key}->{"used"} = 1;
 
 			}
+			chomp $read1;
+			chomp $read2;
+			print "read1 : $read1\n";
+			print "read2 : $read2\n";
+
 			if( !defined (${$sampleHash}{$key}{"Bam Root"}) ) {die "Missing Bam Root field\n"};
 			my $outpath = $analysisDir."Tophat_".${$sampleHash}{$key}{'Bam Root'};
 			my $aboutfile = "${outpath}/RunLog-Tophat_".${$sampleHash}{$key}{'Bam Root'}.".log";
 			print "about file = $aboutfile\n";
 			print "outpath : $outpath\n";
-			chomp $read1;
-			chomp $read2;
-			print "read1 : $read1";
-			print "read2 : $read2";
 			my $tophatCommand = "tophat -o ${outpath} ${HAT_ARGS} ";
 			$tophatCommand .= "--GTF=${TOPGTF} --num-threads=${NUM_THREADS} ";
 			$tophatCommand .= "--mate-inner-dist=250 " if ($pairedEnd);

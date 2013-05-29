@@ -22,6 +22,7 @@ my $outDir		= "output/";
 my $noMarkDup; 						## this flag will skip the dedup step.		
 my $noClipping;						## this flag will skip the clipping profile
 my $markedDupFile;
+my $qcTabOnly;
 # This is the bd they recommend my $refgene = "/work/Common/Data/mouse/mm9/mm9_Ensembl_gene.bed";	## this is a bed annotation of the genes
 # our Mus...clean.gtf -> Mus...clean.bed
 my $refgene = "/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.bed";
@@ -69,6 +70,7 @@ GetOptions(
 	"noQC"			=>		\$noQC,	
 	"noCatTab"		=>		\$noCatTab,
 	"species=s"			=>	\$species,
+	"qcTabOnly"		=>		\$qcTabOnly,
 	);
 
 my $outPath = $startingDir.$outDir;
@@ -81,6 +83,11 @@ if (lc($species) eq "human"){
 	my $refgene = "/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.bed";
 } else {
 	die "species not recognized -- contact bioinformatician\n";
+}
+
+
+if ($qcTabOnly){
+	goto qcTAB;
 }
 
 # my $SORTSAM_PATH = `which SortSam.jar`;
@@ -146,8 +153,8 @@ for my $file (@inputFiles){
 	}
 # }
 
-
-# catQCtab() unless ($noCatTab && $noBamStat);
+qcTAB:
+catQCtab() unless ($noCatTab && $noBamStat);
 
 sub runQC{
 	my ($args) = @_;
