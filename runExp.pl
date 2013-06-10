@@ -281,7 +281,7 @@ sub runDRDS{
 	my $USEQCommand = "java -Xmx${GIGB}G -jar ${DRDSJAR}  -r ${WHICHR}  -s ${USEQOUT} ";
    $USEQCommand .= "-c ${CONDITIONDIR}  -g ${GENVERSION}  -x ${MAXBASEALIGNDEPTH} ";
    $USEQCommand .= "-f ${MIN_LOG10_SPACE_FDR}  -l ${MIN_LOG2_SPACE_FOLD_CHANGE} ";
-   $USEQCommand .= "-e ${MINMAPPINGREADS}  -u ${UCSCGENES} ";
+   $USEQCommand .= "-e ${MINMAPPINGREADS}  -u ${UCSCGENES} -t";
    $USEQCommand .= "2>&1 | tee --append ${USEQOUT}useq.log.txt";
 
    print "$USEQCommand\n" ;
