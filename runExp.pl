@@ -202,14 +202,40 @@ sub runDRDS{
 	my $USEQ_CONDdir = "${analysisDir}USEQ_CONDITIONS/";
 	runAndLog("mkdir -p $USEQ_CONDdir");
 
-	for my $key ( keys ( %$sampleHash ) ){
-		my $bamRoot = ${$sampleHash}{$key}{"Bam Root"};
-		print "bamRoot = $bamRoot\t\t";
-		my $rootPattern = $bamRoot;
-		$rootPattern =~ s/X\d+$//;
-		print "rootPattern = $rootPattern\n";
-		$groupHash->{$rootPattern}{$bamRoot} = $bamRoot;
+## this commented code was causing problems in the case that read1
+# and read 2 are recorded as different samples
+	# for my $key ( keys ( %$sampleHash ) ){
+	# 	my $bamRoot = ${$sampleHash}{$key}{"Bam Root"};
+	# 	print "bamRoot = $bamRoot\t\t";
+	# 	my $rootPattern = $bamRoot;
+	# 	$rootPattern =~ s/X\d+$//;
+	# 	print "rootPattern = $rootPattern\n";
+	# 	# $groupHash->{$rootPattern}{$bamRoot} = $bamRoot;
+	# }
+	# print "new way of doing things\n";
+	my $lsCommand = "ls -d ${analysisDir}Tophat*/*processed.bam";
+	print $lsCommand."\n";
+	my @bamFiles = `$lsCommand`;
+	print "bamFiles = @bamFiles\n";
+	for my $file (@bamFiles){
+		chomp $file;
+		print "file\t$file\n";
+		if ( $file =~ m/Tophat_(.+)\/(accepted_hits_processed.bam)/){
+			my $bamRoot = $1;
+			print "bamRoot = $bamRoot\t\t";
+			my $rootPattern = $bamRoot;
+			$rootPattern =~ s/X\d+$//;
+			print "rootPattern = $rootPattern\n";
+			$groupHash->{$rootPattern}{$bamRoot} = $bamRoot;
+		} else{
+			print "noMatch for $file\n";
+		}
+
+
+
 	}
+
+
 	for my $key ( keys ( %$groupHash ) ){
 		my $mkdirCommand = "mkdir -p ${USEQ_CONDdir}$key";
 		print "$mkdirCommand\n";
@@ -456,7 +482,7 @@ sub findFastQPath{
 	print "files : $files\n";
 	my @files = split(" ", $files);
 	print "searching for file : $files[0] in $dataPath\n";
-	my $dir = `find $dataPath -name $files[0]*`;
+	my $dir = `find $dataPath -name *$files[0]*`;
 	if (!defined($dir)){
 		die "Could not find the correct directory for experiment : ${exp}\n";
 	}
