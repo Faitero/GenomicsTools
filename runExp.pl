@@ -230,9 +230,6 @@ sub runDRDS{
 		} else{
 			print "noMatch for $file\n";
 		}
-
-
-
 	}
 
 
@@ -301,7 +298,7 @@ sub runTophat{
 	my	 $NUM_THREADS=6;
 	my	 $MM9_INDEX="/work/Common/Data/Bowtie_Indexes/mm9";
 	my	 $HG19_INDEX="/work/Common/Data/Bowtie_Indexes/hg19";
-	my	 $HG_GTF="/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.68.clean.gtf";
+	my	 $HG_GTF="/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.71.gtf";
 	my	 $MM_GTF="/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.gtf";
 	my 	 $transcriptomeIndex = "/work/Common/Data/Annotation/bowtie_transcriptome_index";
 	my	 $TOPGTF;
