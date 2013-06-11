@@ -25,7 +25,9 @@ my $markedDupFile;
 my $qcTabOnly;
 # This is the bd they recommend my $refgene = "/work/Common/Data/mouse/mm9/mm9_Ensembl_gene.bed";	## this is a bed annotation of the genes
 # our Mus...clean.gtf -> Mus...clean.bed
-my $refgene = "/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.bed";
+my $mouserefgene = "/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.bed"
+my $humanrefgene = "/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.71.fixed.bed"
+my $refgene;
 my $now_string = localtime;
 $now_string =~ s/\s/_/g;
 my $logfile = $startingDir."runQC_".$now_string.".log";
@@ -77,10 +79,10 @@ my $outPath = $startingDir.$outDir;
 
 if (lc($species) eq "human"){
 	printL ("species: human\n");
-	my $refgene = "/work/Common/Data/Annotation/human/2011_Archive/Homo_sapiens.GRCh37.56.chr.bed"
+	my $refgene = $humanrefgene;
 } elsif (lc($species) eq "mouse"){
 	printL ("species: mouse\n");
-	my $refgene = "/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.bed";
+	my $refgene = $mouserefgene;
 } else {
 	die "species not recognized -- contact bioinformatician\n";
 }
