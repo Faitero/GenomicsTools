@@ -246,7 +246,7 @@ sub runDRDS{
 	
 	## now to setup the Useq command: 
 	my $USEQ_GENES_MERGED_MM9="/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.clean.constitutive.table";
-	my $USEQ_GENES_MERGED_HG19="/work/Common/Data/Annotation/human/2011_Archive/hg19EnsGenesMergedNoOverlap.ucsc";
+	my $USEQ_GENES_MERGED_HG19="/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.71.clean.constitutive.table";
 	my $MM9_VERS="M_musculus_Jul_2007"; # ← this only matters for hyperlinking
 	my $HG19_VERS="H_sapiens_Feb_2009"; # ← this only matters for hyperlinking
 	my $UCSCGENES;
@@ -295,10 +295,10 @@ sub runDRDS{
 # experiments
 sub runTophat{
 	my	 $HAT_ARGS="--min-anchor=5 --segment-length=25 --no-coverage-search --segment-mismatches=2 --splice-mismatches=2 --microexon-search --no-discordant --no-mixed ";
-	my	 $NUM_THREADS=6;
+	my	 $NUM_THREADS=12;
 	my	 $MM9_INDEX="/work/Common/Data/Bowtie_Indexes/mm9";
 	my	 $HG19_INDEX="/work/Common/Data/Bowtie_Indexes/hg19";
-	my	 $HG_GTF="/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.71.gtf";
+	my	 $HG_GTF="/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.71.fixed.gtf";
 	my	 $MM_GTF="/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.gtf";
 	my 	 $transcriptomeIndex = "/work/Common/Data/Annotation/bowtie_transcriptome_index";
 	my	 $TOPGTF;
