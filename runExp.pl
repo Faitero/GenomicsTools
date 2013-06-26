@@ -10,7 +10,8 @@ use IO::Handle;
 my $debug = 1;
 my $dry = 0;
 
-my	 $samplesheet = "/home/laurentt/sampleSheet/gnomex_sampleannotations_SEIDMAN_030713.txt";
+# my	 $samplesheet = "/home/laurentt/sampleSheet/BruneauExperimentsGNOMex20130325.txt";
+my 	 $samplesheet = "/home/laurentt/sampleSheet/gnomex_sampleannotations_SEIDMAN_030713.txt";
 my	 $dataPath = "/Data01/gnomex/ExperimentData/";
 my 	 $exp; 
 my	 $analysisDir = "/Data01/gnomex/Analysis/experiment/";
@@ -348,14 +349,17 @@ sub runTophat{
 			print "files : $files\n";
 			my @files = split(" ", $files);
 			
-
+			print "Sequencing Read Type:\t".lc(${$sampleHash}{$key}{"Sequencing Read Type"})."\n";
 			if ( @files == 2 ){
 				print "paired end library\n";
+				$files[0] =~ s/[,;]//;
+				$files[1] =~ s/[,;]//;
 				$pairedEnd=1;
 				$read1 = `find $fastqDir -name $files[0]*`;
 				$read2 = `find $fastqDir -name $files[1]*`;
 				$sampleHash->{$key}->{"used"} = 1;
 			} elsif ( lc(${$sampleHash}{$key}{"Sequencing Read Type"}) =~ m/paired/ ){
+				print("annotated as a paired end read\n");
 				if( $files =~ m/^(\S+)(\d)(\D+)$/ ){
 					print "searching for mate to $files\n";
 					my $pre = $1;
@@ -373,12 +377,18 @@ sub runTophat{
 						die "error processing $files\n";
 					}
 					print ("num2 : $num2\n");
+					my $target = $pre.$num2.$post;
+					chomp($target);
 					print ("searching for $pre$num2$post\n");
 					for my $key2 ( keys( %$sampleHash ) ){
 						my $test = $sampleHash->{$key2}->{"Associated Files"};
 						print "testing : $test\n";
-						if ($test =~ m/${pre}${num2}${post}/){
+						chomp($test);
+
+						if ($test =~ m/$target/){
 							print "paired end library\n";
+							my $command = "find $fastqDir -name $test*";
+							print $command."\n";
 							if ($num2 == 1){
 								$read1 = `find $fastqDir -name $test*`;
 							} elsif ( $num2 == 2 ){
@@ -390,8 +400,12 @@ sub runTophat{
 							$sampleHash->{$key}->{"used"} = 1;
 							$pairedEnd = 1;
 							last;
+						} else {
+							print "no Match\n";
 						}
 					}				
+				} else {
+					print "no match on regex\n";
 				}
 			}
 			else{
@@ -523,16 +537,17 @@ sub parseSampleSheet{
 	print "trace1\n";
 	while ( $line = <IN> ){
 		# my $res = <stdin>;
-		# print "line : $line\n";
+		print "line : $line\n";
 		my @row = split(/\t/, $line);
-		chomp($row[-1]);
 		for ($i = 0 ; $i < @row; $i++) {
-			if ($row[$i] ne ""){
-				# print "$row[$i]\n";
-				# print "adding $row[$sampleNumberIndex]->$header[$i] = $row[$i]\n";
+			if ($row[$i] ne "" ){
+				chomp($row[$i]);
+				print "$row[$i]\t$i\n";
+				print "adding $row[$sampleNumberIndex]->$header[$i] = $row[$i]\n";
 				$outHash->{$row[$sampleNumberIndex]}{$header[$i]} = $row[$i];
 			}
 		}
+		# readline;
 	}
 	close IN;
 	return $outHash;
