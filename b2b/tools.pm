@@ -1,14 +1,20 @@
-#!/usr/bin/perl -w
-
+package b2b::tools;
+require Exporter;
 use strict;
-package b2b;
-
+use Getopt::Long;
+use Data::Dumper;
+use File::Basename;
+use File::Glob;
+use IO::Handle;
+# our (@ISA, @EXPORT);
+# @ISA = qw(Exporter);
+# @EXPORT = qc(getSpecies runDRDS runTophat makeExpSampleHash findFastQPath parseSampleSheet runAndLog);
 
 ## returns species of experiment
 sub getSpecies{
 	my %args = @_; 
 	my $exp = $args{exp}; 
-	my $samplehash = $args{sampleHash};
+	my $sampleHash = $args{sampleHash};
 	my $sample1 = $exp;
 	$sample1 =~ s/R//;
 	$sample1 .= "X1";
@@ -340,4 +346,4 @@ sub runAndLog{
 
 
 
-1;
+return 1;
