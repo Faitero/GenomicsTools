@@ -12,8 +12,8 @@ use diagnostics -verbose;
 my $debug = 1;
 my $dry = 0;
 
-# my	 $samplesheet = "/home/laurentt/sampleSheet/BruneauExperimentsGNOMex20130325.txt";
-my 	 $samplesheet = "/home/laurentt/sampleSheet/gnomex_sampleannotations_SEIDMAN_030713.txt";
+my	 $samplesheet = "/home/laurentt/sampleSheet/BruneauExperimentsGNOMex20130325.txt";
+# my 	 $samplesheet = "/home/laurentt/sampleSheet/gnomex_sampleannotations_SEIDMAN_030713.txt";
 my	 $dataPath = "/Data01/gnomex/ExperimentData/";
 my 	 $exp; 
 my	 $analysisDir = "/Data01/gnomex/Analysis/experiment/";

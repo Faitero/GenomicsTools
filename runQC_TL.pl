@@ -74,19 +74,21 @@ GetOptions(
 	"species=s"			=>	\$species,
 	"qcTabOnly"		=>		\$qcTabOnly,
 	);
-
+my $refgene;
 my $outPath = $startingDir.$outDir;
+print "mouseRefGene\t$mouserefgene\n";
 
 if (lc($species) eq "human"){
 	printL ("species: human\n");
-	my $refgene = $humanrefgene;
+	$refgene = $humanrefgene;
 } elsif (lc($species) eq "mouse"){
 	printL ("species: mouse\n");
-	my $refgene = $mouserefgene;
+	$refgene = $mouserefgene;
 } else {
 	die "species not recognized -- contact bioinformatician\n";
 }
 
+print "refgene = $refgene\n";
 
 if ($qcTabOnly){
 	goto qcTAB;
@@ -105,7 +107,7 @@ if (@inputFiles == 0 ){
 
 for my $file (@inputFiles){
 	printL("Processing $file");
-	buildBamIndex($file);
+	# buildBamIndex($file);
 	## make folder for each file
 	my $outfolder = $file;
 	if($outfolder =~ m/(Tophat.+\/)/){
@@ -139,15 +141,11 @@ for my $file (@inputFiles){
 	for my $file (@markedFiles){	
 		printL("processing\t$file");
 		## make folder for each file
-
 		$file = filterBam($file);
 		printL("processed file:\t$file");
-		
 		buildBamIndex($file);
-
 		my $outfolder = $file;
 		my $outFileRoot = $file;
-		
 		runQC({
 			file => $file,
 			refgene => $refgene,
@@ -161,7 +159,7 @@ catQCtab() unless ($noCatTab && $noBamStat);
 sub runQC{
 	my ($args) = @_;
 	my $outdir   = $args->{outdir};
-	my $outfile  = $args->{outfile};
+
 	
 	my $file	= $args->{file};
 	my $refgene = $args->{refgene};
@@ -171,7 +169,7 @@ sub runQC{
 		$outdir .= "_QC/";
 	}
 	printL("outdir\t$outdir");
-	my $outpath = $outdir.$outfile;
+	my $outpath = $outdir;
 	
 	runAndLog("mkdir -p $outpath");
 
@@ -369,6 +367,7 @@ sub markDup{
 	my $dedupCmd = (qq{java -Xmx${GIGABYTES_FOR_PICARD}g -jar ${MARKDUPLICATES_PATH} }
 		    . qq{ INPUT=$inFile } ## Picard SortSam.jar accepts both SAM and BAM files as input!
 		    . qq{ REMOVE_DUPLICATES=FALSE }
+		    . qq{ CREATE_INDEX=TRUE }
 		    #. ((!$shouldSort) ? qq{ ASSUME_SORTED=TRUE } : qq { }) ## <-- if we use --nosort, then ASSUME they are sorted no matter what!
 		    . qq{ MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=$maxFileHandles }
 		    . qq{ OPTICAL_DUPLICATE_PIXEL_DISTANCE=10 } ## <-- 100 is default but our libraries have single integer coordinate values
