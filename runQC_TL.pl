@@ -76,7 +76,7 @@ GetOptions(
 	);
 my $refgene;
 my $outPath = $startingDir.$outDir;
-print "mouseRefGene\t$mouserefgene\n";
+# print "mouseRefGene\t$mouserefgene\n";
 
 if (lc($species) eq "human"){
 	printL ("species: human\n");

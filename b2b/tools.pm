@@ -1,14 +1,10 @@
 package b2b::tools;
-require Exporter;
 use strict;
 use Getopt::Long;
 use Data::Dumper;
 use File::Basename;
 use File::Glob;
 use IO::Handle;
-# our (@ISA, @EXPORT);
-# @ISA = qw(Exporter);
-# @EXPORT = qc(getSpecies runDRDS runTophat makeExpSampleHash findFastQPath parseSampleSheet runAndLog);
 
 ## returns species of experiment
 sub getSpecies{
@@ -35,17 +31,6 @@ sub runDRDS{
 	my $USEQ_CONDdir = "${analysisDir}USEQ_CONDITIONS/";
 	runAndLog("mkdir -p $USEQ_CONDdir");
 
-## this commented code was causing problems in the case that read1
-# and read 2 are recorded as different samples
-	# for my $key ( keys ( %$sampleHash ) ){
-	# 	my $bamRoot = ${$sampleHash}{$key}{"Bam Root"};
-	# 	print "bamRoot = $bamRoot\t\t";
-	# 	my $rootPattern = $bamRoot;
-	# 	$rootPattern =~ s/X\d+$//;
-	# 	print "rootPattern = $rootPattern\n";
-	# 	# $groupHash->{$rootPattern}{$bamRoot} = $bamRoot;
-	# }
-	# print "new way of doing things\n";
 	my $lsCommand = "ls -d ${analysisDir}Tophat*/*processed.bam";
 	print $lsCommand."\n";
 	my @bamFiles = `$lsCommand`;
@@ -64,7 +49,6 @@ sub runDRDS{
 			print "noMatch for $file\n";
 		}
 	}
-
 
 	for my $key ( keys ( %$groupHash ) ){
 		my $mkdirCommand = "mkdir -p ${USEQ_CONDdir}$key";
@@ -186,7 +170,7 @@ sub runTophat{
 				$read2 = `find $fastqDir -name $files[1]*`;
 				$sampleHash->{$key}->{"used"} = 1;
 			} elsif ( lc(${$sampleHash}{$key}{"Sequencing Read Type"}) =~ m/paired/ ){
-				die("annotated as a paired end read but only has 1 file listed");
+				die("Annotated as a paired end read but only has 1 file listed");
 			}
 			else{
 				print "single read library\n";
@@ -197,8 +181,9 @@ sub runTophat{
 			chomp $read1;
 			chomp $read2;
 			print "read1 : $read1\n";
-			print "read2 : $read2\n";
-
+			if ( defined($read2)){
+				print "read2 : $read2\n";
+			}
 			if( !defined (${$sampleHash}{$key}{"Bam Root"}) ) {die "Missing Bam Root field\n"};
 			my $outpath = $analysisDir."Tophat_".${$sampleHash}{$key}{'Bam Root'};
 			my $aboutfile = "${outpath}/RunLog-Tophat_".${$sampleHash}{$key}{'Bam Root'}.".log";
@@ -331,16 +316,11 @@ sub parseSampleSheet{
 	return $outHash;
 }
 
-# Prints to standard out and to the log file
-sub printL{
-	my $string = shift;
-	print STDERR "$string\n\n";
-	print "$string\n\n";
-}
+
 sub runAndLog{
 	my $command = shift;
 	my $time = localtime;
-	printL("$time\t$command");
+	print "$time\t$command";
 	system($command);
 }
 
