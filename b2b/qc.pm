@@ -7,6 +7,22 @@ use IO::Handle;
 use diagnostics -verbose;
 
 
+sub collectDups{
+	my %args = @_;
+	my $file = $args{file};
+	my $dupfile = $file;
+	$dupfile =~ s/marked_dup.bam$/dupes.bam/;
+	my $gatherDupCommand = (
+		qq{ samtools view -bhu -f 0x400 $file} ## only grab those marked as duplicates
+		. qq{ | samtools view -hbu -F 0x004 - } ## remove unmapped reads
+		. qq{ | samtools view -hbu -F 0x100 - } ## remove non-primary alignment
+		. qq{ | samtools view -hbu -F 0x008 - } ## remove mate pair did not map
+		. qq{ | samtools view -hb -F 0x200 -}   ## remove reads failed QC
+		. qq{ > $dupfile });
+	print $gatherDupCommand."\n";
+	system($gatherDupCommand);
+}
+
 sub runQC{
 	my ($args) = @_;
 	my $outdir   = $args->{outdir};
@@ -215,10 +231,6 @@ sub markDup{
     return $outFile;
 }
 
-# Tests log file printing in sub
-sub testSTDERRprintInSub{
-	printL("printing in Sub");
-}
 
 # pastes together QC tables
 sub catQCtab{
@@ -240,12 +252,12 @@ sub catQCtab{
 
 	$markDupPattern = "*_mark_dup_metrics.txt" unless $markDupPattern;
 
-	printL "\$qcTabPattern\t$qcTabPattern";
+	print "\$qcTabPattern\t$qcTabPattern";
 	# my @qcTables = glob $baseFolder.$qcTabPattern;
 	my @folders = glob $baseFolder.$bamFolder;
-	printL("folders\t@folders");
+	print "folders\t@folders";
 	my $arraySize = @folders;
-	# printL "$arraySize\t entries\n";
+	# print "$arraySize\t entries\n";
 	my @outTable; # = ( [ "sample" , "Total_Records" , "QC_failed" , "Optical_PCR_Duplicates" ,
 	 # ] );
 	## build file fields
@@ -286,8 +298,8 @@ sub catQCtab{
 
 		if( $_ =~ m/^(.+)\s+(\d+)$/ ){
 				
-				# printL "match 1: $1\\\n";
-				# printL "match 2: $2\\\n";
+				# print "match 1: $1\\\n";
+				# print "match 2: $2\\\n";
 				my $entry = $1;
 				$entry =~ s/^\s*(.*?)\s*$/$1/;
 				$outTable[0][$i] = $entry;
@@ -308,7 +320,7 @@ sub catQCtab{
 	print @folders."\n";
 	for my $folder (@folders){
 		# my $pause = <STDIN>;
-		# printL $table."\n";
+		# print $table."\n";
 		my $table = `ls ${folder}${qcTabPattern}`;
 		my $dupTab = `ls ${folder}${markDupPattern}`;
 		print "$table\n";
@@ -336,7 +348,7 @@ sub catQCtab{
 		if( $table =~ m/(Tophat.*\/)/){
 			$sampleName = $1;
 		}
-		printL("sampleName\t$sampleName");
+		print "sampleName\t$sampleName";
 	
 		$outTable[$j][0] = $sampleName;
 		$i = 1;		## element counter
@@ -352,8 +364,8 @@ sub catQCtab{
 
 			if( $_ =~ m/^(.+)\s+(\d+)$/ ){
 			
-			# printL "match 1: $1\\\n";
-			# printL "match 2: $2\\\n";
+			# print "match 1: $1\\\n";
+			# print "match 2: $2\\\n";
 				$outTable[$j][$i] = $2;
 				$i++;
 			}
@@ -367,23 +379,23 @@ sub catQCtab{
 
 	}	
 	my $l = @outTable;
-	printL "$l\n";
+	print "$l\n";
 	my $k = @{$outTable[0]};
-	printL "there are $k rows in the table\n";
+	print "there are $k rows in the table\n";
 
 	for ($i = 0 ; $i < $k ; $i++ ){			
 			for ($j = 0 ; $j < $l; $j++ ){
 				print ALLTAB "$outTable[$j][$i]\t";
 				# print  "$outTable[$j][$i]\t";
 
-				# printL "i:$i\tj:$j\t"
+				# print "i:$i\tj:$j\t"
 			}
 		print "\n";
 
 		print ALLTAB "\n";
 	}
 		close ALLTAB;
-	printL "Finished making $baseFolder/bam_stat_all_files.tab\n";
+	print "Finished making $baseFolder/bam_stat_all_files.tab\n";
 
 }
 

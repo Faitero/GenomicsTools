@@ -21,6 +21,7 @@ sub getSpecies{
 
 sub runDRDS{
 	my %args 	= 	@_;
+	my $bamID = $args{bamID};
 	my $sampleHash = $args{sampleHash};
 	my $analysisDir = $args{analysisDir};
 	my $dry = $args{dry};
@@ -28,25 +29,27 @@ sub runDRDS{
 	my $groupHash = {};
 	my $analysisDirComplete = 0;
 
-	my $USEQ_CONDdir = "${analysisDir}USEQ_CONDITIONS/";
+	my $USEQ_CONDdir = "${analysisDir}${bamID}_USEQ_CONDITIONS/";
 	runAndLog("mkdir -p $USEQ_CONDdir");
 
-	my $lsCommand = "ls -d ${analysisDir}Tophat*/*processed.bam";
+	my $lsCommand = "ls ${analysisDir}Tophat*/*$bamID.bam";
 	print $lsCommand."\n";
 	my @bamFiles = `$lsCommand`;
 	print "bamFiles = @bamFiles\n";
 	for my $file (@bamFiles){
 		chomp $file;
 		print "file\t$file\n";
-		if ( $file =~ m/Tophat_(.+)\/(accepted_hits_processed.bam)/){
+		
+		if ( $file =~ qq/Tophat_(.+)\/(accepted_hits_${bamID}.bam)/){
 			my $bamRoot = $1;
 			print "bamRoot = $bamRoot\t\t";
 			my $rootPattern = $bamRoot;
 			$rootPattern =~ s/X\d+$//;
 			print "rootPattern = $rootPattern\n";
-			$groupHash->{$rootPattern}{$bamRoot} = $bamRoot;
+			$groupHash->{$rootPattern}->{$bamRoot} = $bamRoot;
 		} else{
 			print "noMatch for $file\n";
+			die "no Match for $file";
 		}
 	}
 
@@ -55,7 +58,7 @@ sub runDRDS{
 		print "$mkdirCommand\n";
 		runAndLog($mkdirCommand);
 		for my $bamRoot ( keys %{ $groupHash->{ $key } } ){
-			my $linkCommand = "ln -s -f ${analysisDir}Tophat_${bamRoot}/accepted_hits_processed.bam ${USEQ_CONDdir}$key/${bamRoot}${key}_accepted_hits_processed.bam";
+			my $linkCommand = "ln -s -f ${analysisDir}Tophat_${bamRoot}/accepted_hits_$bamID.bam ${USEQ_CONDdir}$key/${bamRoot}${key}_accepted_hits_processed.bam";
 			print "linkCommand = $linkCommand\n";
 			runAndLog($linkCommand) unless ($dry);
 		}
@@ -81,7 +84,7 @@ sub runDRDS{
 		die "Undefined species: script needs configuring : contact bioinformatician\n";
 	}
 	my $DRDSJAR = "/work/Apps/USeq_8.5.7/Apps/DefinedRegionDifferentialSeq";
-	my $USEQOUT = "${analysisDir}USEQ_OUT/";
+	my $USEQOUT = "${analysisDir}${bamID}_USEQ_OUT/";
 	system("mkdir -p $USEQOUT");
 	my $GIGB=8;
 	my $WHICHR = `which R`;
@@ -89,7 +92,7 @@ sub runDRDS{
 	my $MINMAPPINGREADS=0;
 	my $MIN_LOG10_SPACE_FDR=0;
 	my $MIN_LOG2_SPACE_FOLD_CHANGE=0;
-	my $CONDITIONDIR="${analysisDir}USEQ_CONDITIONS"; ## this has as SUB FOLDERS all the actual conditions!
+	my $CONDITIONDIR="${analysisDir}${bamID}_USEQ_CONDITIONS"; ## this has as SUB FOLDERS all the actual conditions!
 	my $MAXBASEALIGNDEPTH=100000000;
 
 	my $USEQCommand = "java -Xmx${GIGB}G -jar ${DRDSJAR}  -r ${WHICHR}  -s ${USEQOUT} ";
@@ -297,7 +300,7 @@ sub parseSampleSheet{
 	}
 	# $line = <IN>;
 	# print $line."\n";
-	print "trace1\n";
+	# print "trace1\n";
 	while ( $line = <IN> ){
 		# my $res = <stdin>;
 		print "line : $line\n";
@@ -320,7 +323,7 @@ sub parseSampleSheet{
 sub runAndLog{
 	my $command = shift;
 	my $time = localtime;
-	print "$time\t$command";
+	print "$time\t$command\n";
 	system($command);
 }
 
