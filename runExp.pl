@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-# use b2b::tools;
+
 use strict;
 use warnings;
 use Getopt::Long;
@@ -9,17 +9,23 @@ use File::Glob;
 use IO::Handle;
 use b2b::tools;
 use b2b::qc;
-use diagnostics -verbose;
+use b2b::runval;
+use b2b::db;
+use b2b::report;
+use TimUtil;
+# use diagnostics -verbose;
 my $debug = 1;
 my $dry = 0;
 
-# my	 $samplesheet = "/home/laurentt/sampleSheet/BruneauExperimentsGNOMex20130325.txt";
-my 	 $samplesheet = "/home/laurentt/sampleSheet/gnomex_sampleannotations_SEIDMAN_030713.txt";
+my $log = 0;
+my	 $samplesheet = "/home/laurentt/sampleSheet/BruneauExperimentsGNOMex20130325.txt";
+# my 	 $samplesheet = "/home/laurentt/sampleSheet/gnomex_sampleannotations_SEIDMAN_030713.txt";
 my	 $dataPath = "/Data01/gnomex/ExperimentData/";
 my 	 $exp; 
 my	 $analysisDir = "/Data01/gnomex/Analysis/experiment/";
 my 	 $fastqDir;
 my 	 $nofastqc;
+my 	 $fastQConly;
 my 	 $USEQonly;
 my	 $TRACKonly;
 my   $noTophat;
@@ -48,7 +54,7 @@ my $species;
 my $mouserefgene = "/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.bed";
 my $humanrefgene = "/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.71.fixed.bed";
 my $refgene;
-my $now_string = localtime;
+my $now_string = TimUtil::getCurrentTime();
 $now_string =~ s/\s/_/g;
 my $skipFlag = 0;
 my $repOnly;
@@ -78,6 +84,7 @@ GetOptions(
 	"noCatTab"		=>		\$noCatTab,
 	"qcTabOnly"		=>		\$qcTabOnly,
 	"repOnly"		=> 		\$repOnly,
+	"fastQConly"	=>		\$fastQConly,
 	);
 
 if (!defined($exp)){
@@ -93,7 +100,7 @@ if ( $exp =~ m/^\d+$/){
 	die "Invalid Experiment: must be of the form <experiment #>R";
 }
 
-open my $RUNLOG, '>', $analysisDir.$now_string."_".$exp."runlog.txt";
+open my $RUNLOG, '>', $analysisDir.$now_string."_".$exp."runlog.txt" or die "error opening run log: $!\n";
 print $RUNLOG "$now_string\nrunlog for experiment $exp\n\n";
 
 print "Experiment $exp\n";
@@ -104,16 +111,15 @@ chdir($analysisDir) or die "$!";
 
 print $RUNLOG "\n$analysisDir created successfully";
 
-my $logfile = $analysisDir."runExp_".$now_string.".log";
-
-open (LOG, ">$logfile");
-
-*STDERR = *LOG;
-*STDOUT = *LOG;
-
+if ($log){
+	my $logfile = $analysisDir."runExp_".$now_string.".log";
+	## this code allows all STDOUT and STDERR to print to the log file. 
+	open (LOG, ">$logfile");
+	*STDERR = *LOG;
+	*STDOUT = *LOG;
+}
 # open ERROR,  '>', $logfile  or die $!;
 # STDERR->fdopen( \*ERROR,  'w' ) or die $!;
-
 
 unless ( -e $samplesheet ){
 	die "Invalid Sample Sheet";
@@ -124,15 +130,51 @@ my $expSampleHash = b2b::tools::makeExpSampleHash(
 	exp => $exp,
 	sampleHash => $sampleHash,
 	);
+
+# print Dumper($expSampleHash);
+# <STDIN>;
+
 $species = b2b::tools::getSpecies(
 	exp => $exp,
 	sampleHash => $sampleHash,
 	); 
+
+$fastqDir = b2b::tools::findFastQPath (
+	exp 		=> $exp,
+	path 		=> $dataPath,
+	sampleHash 	=> $sampleHash,
+	) unless ($nofastqc && $noTophat);
+
+
+
+# ## addRows to sample database
+b2b::db::addSamples( sh => $expSampleHash, fastqdir => $fastqDir );
+
+
+b2b::db::addBams(
+	sh => $expSampleHash,
+	type => "accepted_hits_marked_dup"
+);
+
+b2b::db::addMarkDup(sh =>$expSampleHash);
+
+b2b::db::addBamStat(sh => $expSampleHash);
+
+my $filename = "${now_string}-${exp}-QCreport.html";
+print "filename: ".$filename."\n";
+
+open my $QCreport, "> $filename" or die "could not open QC report\n";
+b2b::report::writeBamStat(fh => $QCreport, exp => $exp  );
+
+die;
+
+print "species\t$species\n";
+
 if( defined($species) ){
 	print $RUNLOG "Species:\t$species\n"; 
 } else{
 	print $RUNLOG "Species could not be determined from the sample sheet\n";
-	die "No Specied defined";
+	die "No Species defined";
 }
 
 ## check if USEQ only
@@ -146,13 +188,6 @@ if ($TRACKonly) {
 	print "Making browser tracks only\n";
 	goto TRACK;
 }
-
-$fastqDir = b2b::tools::findFastQPath (
-	exp 		=> $exp,
-	path 		=> $dataPath,
-	sampleHash 	=> $sampleHash,
-	) unless ($nofastqc && $noTophat);
-
 
 ## Step --- fastQC 
 
@@ -174,12 +209,16 @@ b2b::tools::runAndLog("$fastQCcommand") unless($dry || $nofastqc);
 #check that all fastqc dirs were created
 print $RUNLOG "\n\nFASTQC VALIDATION\n";
 
-b2b::report::checkFastQC(
+b2b::runval::checkFastQC(
 	RUNLOG =>	$RUNLOG,
 	fastqDir => $fastqDir,
 	analysisDir => $analysisDir
 	);
 
+
+if ($fastQConly){
+	goto FINISH;
+}
 
 b2b::tools::runTophat(
 	exp 	=> $exp,
@@ -191,7 +230,7 @@ b2b::tools::runTophat(
 
 print $RUNLOG "\n\nTOPHAT VALIDATION\n";
 
-b2b::report::checkTophat(
+b2b::runval::checkTophat(
 	RUNLOG => $RUNLOG,
 	sampleHash => $expSampleHash,
 	analysisDir => $analysisDir,
@@ -233,16 +272,16 @@ for my $file (@inputFiles){
     $file = $markedDupFile unless !$markedDupFile;
 	
     print $RUNLOG "\n\nMARK DUP VALIDATION\n";
-	b2b::report::checkIfExists( file=>$markedDupFile , RUNLOG=>$RUNLOG);
+	b2b::runval::checkIfExists( file=>$markedDupFile , RUNLOG=>$RUNLOG);
     my $indexFile = $markedDupFile;
     $indexFile =~ s/.bam$/.bai/;
-	b2b::report::checkIfExists( file=>$indexFile , RUNLOG=>$RUNLOG);
+	b2b::runval::checkIfExists( file=>$indexFile , RUNLOG=>$RUNLOG);
     
     my $bamstattab = $file."bam_stat.tab";
     runAndLog("bam_stat.py -i $file 2> $file.bam_stat.tab") unless $noBamStat;   
 
     print $RUNLOG "\n\nBAMSTAT TAB VALIDATIONfor $file\n";
-	b2b::report::checkIfExists( file=>$bamstattab , RUNLOG=>$RUNLOG);
+	b2b::runval::checkIfExists( file=>$bamstattab , RUNLOG=>$RUNLOG);
 	
 	b2b::qc::runQC({
 		file => $file,
@@ -250,80 +289,91 @@ for my $file (@inputFiles){
 		}) unless $noQC;	
 	
 	print $RUNLOG "\n\nrunQC VALIDATION for $file\n";
-	b2b::report::checkRunQC(
+	b2b::runval::checkRunQC(
 		outfolder => $file."_QC/",
 		RUNLOG => $RUNLOG,
 		);
 }	
 
-print "Beginning to process marked files";
+print "Beginning to process marked files\n";
 my @markedFiles = glob "Tophat*/*marked_dup.bam";
+
+b2b::db::addBams{
+	sh => $expSampleHash,
+	type => "accepted_hits_marked_dup"
+};
+
+b2b::db::addMarkDup(sh =>$expSampleHash);
+
 for my $file (@markedFiles){	
 	print "processing\t$file";
-	## make folder for each file
+	my $baiFile = $file;
+	$baiFile =~ s/.bam$/.bai/;	
+	print $RUNLOG "\n\nmarkedDup BAM index file validation\n";
+	b2b:runval::checkIfExists(file=>$baiFile, RUNLOG=>$RUNLOG);
+
 	$file = filterBam($file);
 	print "processed file:\t$file";
 	
 	buildBamIndex($file);
 
-	my $baiFile = $file;
+	$baiFile = $file;
 	$baiFile =~ s/.bam$/.bai/;
 
-	print $RUNLOG "\n\nBAM index file validation\n";
-	b2b:report::checkIfExists(file=>$baiFile, RUNLOG=>$RUNLOG);
+	print $RUNLOG "\n\nprocessed BAM index file validation\n";
+	b2b:runval::checkIfExists(file=>$baiFile, RUNLOG=>$RUNLOG);
 
-	runQC({
-		file => $file,
-		refgene => $refgene,
-	});
+# code below is unnecessary for the new analysis plan
+	# runQC({
+	# 	file => $file,
+	# 	refgene => $refgene,
+	# });
 
-	print $RUNLOG "\n\nrunQC VALIDATION for $file\n";
-	b2b::report::checkRunQC(
-		outfolder => $file."_QC/",
-		RUNLOG => $RUNLOG,
-		);
+	# print $RUNLOG "\n\nrunQC VALIDATION for $file\n";
+	# b2b::runval::checkRunQC(
+	# 	outfolder => $file."_QC/",
+	# 	RUNLOG => $RUNLOG,
+	# 	);
 }
-
-b2b::qc::catQCtab() unless (($noCatTab && $noBamStat) || $dry || $repOnly);	
-
-
-print $RUNLOG "\n\nQUALITY SUMMARY TABLE VALIDATION\n";
-b2b::report::checkIfExists( file=>"quality_summary.tab" , RUNLOG=>$RUNLOG );
-
 
 TRACK:
 ## make Genome tracks
 
-my @files = glob("${analysisDir}Tophat*/*processed.bam");
+my @files = glob("${analysisDir}Tophat*/*marked_dup.bam");
+
+print $RUNLOG "\n\nBROWSER TRACK VALIDATION\n";
+for my $file (@files){
+	
+	my $trackGenCommand = "convert_SAM_or_BAM_for_Genome_Browser.pl --nosort $file";
+	print "$trackGenCommand\n";
+	b2b::tools::runAndLog($trackGenCommand) unless ($dry);
+	b2b::runval::checkBrowserTracks( file => $file , RUNLOG => $RUNLOG );
+}
+
+print "Finished making browser tracks for markedDup.bam's\n";
+
+@files = glob("${analysisDir}Tophat*/*processed.bam");
 
 print $RUNLOG "\n\nBROWSER TRACK VALIDATION\n";
 for my $file (@files){
 	my $trackGenCommand = "convert_SAM_or_BAM_for_Genome_Browser.pl --nosort $file";
 	print "$trackGenCommand\n";
 	b2b::tools::runAndLog($trackGenCommand) unless ($dry);
-	b2b::report::checkBrowserTracks( file => $file , RUNLOG => $RUNLOG );
+	b2b::runval::checkBrowserTracks( file => $file , RUNLOG => $RUNLOG );
 }
 
-print "Finished making browser tracks\n";
+print "Finished making browser tracks for processed.bam's\n";
 
 ## check for track only
 if ($TRACKonly) {
-	
 	goto FINISH;
 }
 
-
+## does differenial expression analysis
 USEQ:
 print "Starting USEQ DefinedRegionDifferentialSeq\n";
-## differential expression 
-b2b::tools::runDRDS(
-	bamID=> 	"processed",
-	sampleHash => $expSampleHash,
-	analysisDir => $analysisDir,
-	dry 	=>	$dry, 
-	species => $species,
-	);
 
+## differential expression 
 b2b::tools::runDRDS(
 	bamID=> 	"marked_dup",
 	sampleHash => $expSampleHash,
@@ -332,19 +382,25 @@ b2b::tools::runDRDS(
 	species => $species,
 	);
 
+b2b::tools::runDRDS(
+	bamID=> 	"processed",
+	sampleHash => $expSampleHash,
+	analysisDir => $analysisDir,
+	dry 	=>	$dry, 
+	species => $species,
+	);
 
-
-b2b::report::checkDRDS(
+b2b::runval::checkDRDS(
 	bamID=>	"processed",
 	sampleHash => $expSampleHash,
 	analysisDir => $analysisDir,
-		);
+	);
 
-b2b::report::checkDRDS(
+b2b::runval::checkDRDS(
 	bamID=>	"marked_dup",
 	sampleHash => $expSampleHash,
 	analysisDir => $analysisDir,
-		);
+	);
 
 if ($USEQonly){
 	goto FINISH;
@@ -354,6 +410,7 @@ if ($USEQonly){
 FINISH:
 print "analysis complete\n";
 close( $RUNLOG );
+close ( LOG );
 
 sub runAndLog{
 	my $command = shift;

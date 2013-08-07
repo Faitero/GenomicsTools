@@ -1,4 +1,8 @@
 package b2b::qc;
+# this library contains code required to run QC metrics on 
+# Bam files 
+
+
 ## test to save
 use strict;
 # use warnings;
@@ -7,6 +11,8 @@ use IO::Handle;
 use diagnostics -verbose;
 
 
+
+## extracts all duplicate reads and puts in a new bam file
 sub collectDups{
 	my %args = @_;
 	my $file = $args{file};
@@ -232,6 +238,13 @@ sub markDup{
 }
 
 
+
+
+
+
+
+
+
 # pastes together QC tables
 sub catQCtab{
 	my ($args) = @_;
@@ -420,10 +433,4 @@ sub runAndLog{
 	print ("$time\t$command");
 	system($command);
 }
-
-
-
-
-
-
 1;

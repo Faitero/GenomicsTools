@@ -32,7 +32,7 @@ sub runDRDS{
 	my $USEQ_CONDdir = "${analysisDir}${bamID}_USEQ_CONDITIONS/";
 	runAndLog("mkdir -p $USEQ_CONDdir");
 
-	my $lsCommand = "ls ${analysisDir}Tophat*/*$bamID.bam";
+	my $lsCommand = "ls ${analysisDir}Tophat*/accepted_hits_$bamID.bam";
 	print $lsCommand."\n";
 	my @bamFiles = `$lsCommand`;
 	print "bamFiles = @bamFiles\n";
@@ -217,6 +217,11 @@ sub makeExpSampleHash{
 	my $expSampleHash = {};
 	my $exp = $args{exp};
 	$exp =~ s/R//;
+	## check if experiment exists in this sample sheet
+	if ( !defined ( $sampleHash )){
+		die "exp: $exp not found in the sample sheet\n";
+	}
+
 	print "Building hash of experiment $exp samples\n";
 	for my $sample ( keys( %$sampleHash ) ){
 		if( $sample =~ m/^${exp}X\d+/ ){
@@ -224,7 +229,7 @@ sub makeExpSampleHash{
 		}
 	}
 	if (keys( %$expSampleHash ) == 0 ){
-		die "Invalid experiment! try again";
+		die "Invalid experiment! try again\n";
 	}
 	print "Found samples:\n";
 	for  my $key ( keys( %$expSampleHash ) ){
@@ -248,7 +253,7 @@ sub findFastQPath{
 	my $dataPath  = $args{path};
 	my $sampleHash = $args{sampleHash};
 	$exp =~ s/R//;
-	print "findFastQPath experiment\t".$exp."\n";
+	# print "findFastQPath experiment\t".$exp."\n";
 	my $sample = $exp."X1";
 	print "sample: $sample\n";
 	# print "$%{$sampleHash}{$sample}{Associated Files}\n";
