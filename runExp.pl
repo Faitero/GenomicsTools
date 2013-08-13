@@ -157,14 +157,22 @@ b2b::db::addBams(
 );
 
 b2b::db::addMarkDup(sh =>$expSampleHash);
-
 b2b::db::addBamStat(sh => $expSampleHash);
+b2b::db::addReadDistribution(sh => $expSampleHash);
 
-my $filename = "${now_string}-${exp}-QCreport.html";
+
+my $repDir = "QCreport";
+system("mkdir -p $repDir");
+my $filename = "${repDir}/${now_string}-${exp}-QCreport.html";
 print "filename: ".$filename."\n";
 
 open my $QCreport, "> $filename" or die "could not open QC report\n";
+b2b::report::writeHeader(fh => $QCreport, exp => $exp );
+b2b::report::writeLegend(fh => $QCreport, exp => $exp );
 b2b::report::writeBamStat(fh => $QCreport, exp => $exp  );
+b2b::report::writeMarkDup(fh => $QCreport, exp => $exp  );
+
+b2b::report::writeFooter(fh => $QCreport);
 
 die;
 

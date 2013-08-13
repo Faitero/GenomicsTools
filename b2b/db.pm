@@ -35,18 +35,17 @@ sub getSampleMap{
 
 ## returns a hash of the information in the bamstat analysis for an
 ## experiment
-
 sub getBamStat{
 	my %args = @_;
 	my $exp = $args{exp};
 	my $dbh = dbConnect();
 	my $rethash = {};
-	my @flds = ("Total_records", "Optical-PCR_duplicate", "Non_Primary_Hits", 
+	my @flds = ("Total_records", "Optical-PCR_duplicate", "Non_Primary_Hits", "Unmapped_Reads",
 		 "mapqLTmapq_cut_non_unique", "mapqGTEmapq_cut_unique", "Read-1", "Read-2", "Reads_mapped_to_+",
 		 "Reads_mapped_to_-", "Non-splice_reads", "Splice_reads", "Reads_mapped_in_proper_pairs"
 		);
 	print @flds."\n";
-	$rethash->{fields} = ["Total_records", "Optical-PCR_duplicate", "Non_Primary_Hits", 
+	$rethash->{fields} = ["Total_records", "Optical-PCR_duplicate", "Non_Primary_Hits", "Unmapped_Reads",
 		 "mapqLTmapq_cut_non_unique", "mapqGTEmapq_cut_unique", "Read-1", "Read-2", "Reads_mapped_to_+",
 		 "Reads_mapped_to_-", "Non-splice_reads", "Splice_reads", "Reads_mapped_in_proper_pairs"
 		];
@@ -64,16 +63,106 @@ sub getBamStat{
 	my $sth = $dbh->prepare($ps);
 
 	$sth->execute();
-
+	my $totfld = "Total_records";
 	while (my $row = $sth->fetchrow_hashref ){
 		# print "rowID ". $row->{sampleID}."\n";
 		for my $fld (@flds){
 			# print "$fld\t".$row->{$fld}."\n";
-			$rethash->{samples}->{ $row->{sampleID} }->{ $fld } = $row->{$fld} ;
+			if ($fld eq $totfld){
+				$rethash->{samples}->{ $row->{sampleID} }->{ $fld } = $row->{$fld} ;
+			}	else {
+				my $val = $row->{$fld} / $row->{$totfld};
+				$rethash->{samples}->{ $row->{sampleID} }->{ $fld } = $val ;
+			}
 		}
 	}
 	return $rethash;
 } 
+
+## returns hash_ref of the information the the markDup table
+sub getMarkDup{
+	my %args = @_;
+	my $exp = $args{exp};
+	my $dbh = dbConnect();
+	my $rethash = {};
+	my @flds = ("UNPAIRED_READS_EXAMINED", "READ_PAIRS_EXAMINED", "UNPAIRED_READ_DUPLICATES", 
+			"READ_PAIR_DUPLICATES", "READ_PAIR_OPTICAL_DUPLICATES", "PERCENT_DUPLICATION", "ESTIMATED_LIBRARY_SIZE");
+	$rethash->{fields} = ["UNPAIRED_READS_EXAMINED", "READ_PAIRS_EXAMINED", "UNPAIRED_READ_DUPLICATES", 
+			"READ_PAIR_DUPLICATES", "READ_PAIR_OPTICAL_DUPLICATES", "PERCENT_DUPLICATION", "ESTIMATED_LIBRARY_SIZE"];
+	my $ps = "select `sampleID`, ";
+	for my $fld (@flds){
+		$ps .= "`$fld`";
+		if ($fld  ne $flds[-1]){
+			$ps .= ", ";
+		}
+	}
+	$ps .= " from samples natural join markDup where `experiment` = '$exp' ";			
+	my $sth = $dbh->prepare($ps);
+	my $totfld1 = "READ_PAIRS_EXAMINED";
+	my $totfld2 = "UNPAIRED_READS_EXAMINED";
+	$sth->execute();
+	while (my $row = $sth->fetchrow_hashref ){
+		# print "rowID ". $row->{sampleID}."\n";
+		for my $fld (@flds){
+			# print "$fld\t".$row->{$fld}."\n";
+			if ($fld eq $totfld1 || $fld eq 'ESTIMATED_LIBRARY_SIZE' || $fld eq $totfld2 || $fld eq 'PERCENT_DUPLICATION'){
+				$rethash->{samples}->{ $row->{sampleID} }->{ $fld } = $row->{$fld} ;
+			} else{
+				my $val = $row->{$fld} / ($row->{$totfld1} + $row->{$totfld2});
+				$rethash->{samples}->{ $row->{sampleID} }->{ $fld } = $val ;
+			}
+		}
+	}
+	return $rethash;
+}
+
+## add rows to the readdisttibution table 
+sub addReadDistribution {
+	my %args = @_;
+	my $dbh = dbConnect();
+	my $sh = $args{sh};
+	my $expDir = $args{expdir};
+	my $type = $args{type};
+	my @samps = keys( %$sh );
+	$type = "accepted_hits_marked_dup" unless ( defined ( $type ) );
+	my $exp = $samps[0];
+	$exp =~ s/(\d+).+/$1/;
+	$exp .= "R";
+	unless ( defined ($expDir ) ){
+		$expDir = "/Data01/gnomex/Analysis/experiment/$exp";
+	}
+	for my $samp ( keys ( %$sh ) ){
+		my $RDTab = $expDir."/Tophat_".$sh->{$samp}->{'Bam Root'}."/$type.bam_QC/read_distribution.txt";
+		my $rh = {};
+		open IN, "< $RDTab" or die "cannot open $RDTab, $!\n";
+		while ( my $line = <IN> ){
+			chomp $line;
+			if ($line =~ m/^Total/ || $line=~ m/^=/ || $line =~ /^Group/){
+				next;
+			}
+			my @elems = split(/\s+/, $line);
+			$elems[0] =~ s/'//;
+			print $elems[0]."\t".$elems[3]."\n";
+			$rh->{$elems[0]} = $elems[3];
+		}
+		my $ps = qq{
+			insert into readDistribution (bam, sampleID, CDS_Exons, `Exons_5'UTR`, `Exons_3'UTR`,
+				Introns, TSS_up_1kb, TSS_up_5kb, TSS_up_10kb, TES_down_1kb, TES_down_5kb,
+				TES_down_10kb) values (?,?,?,?,?,?,?,?,?,?,?,?) on duplicate key update
+				`CDS_Exons` = ?, `Exons_5'UTR` = ? , `Exons_3'UTR` = ? , `Introns` = ?, `TSS_up_1kb` = ?,
+				`TSS_up_5kb` = ? , `TSS_up_10kb` = ? , `TES_down_1kb` = ? , `TES_down_5kb` = ? ,
+				`TES_down_10kb` = ? 
+		};
+		print $ps."\n";
+		my $sth = $dbh->prepare($ps);
+		$sth->execute( $type, $samp, $rh->{CDS_Exons}, $rh->{'5UTR_Exons'}, $rh->{'3UTR_Exons'},
+			$rh->{Introns}, $rh->{TSS_up_1kb}, $rh->{TSS_up_5kb}, $rh->{TSS_up_10kb},
+			$rh->{TES_down_1kb}, $rh->{TES_down_5kb}, $rh->{TES_down_10kb}, $rh->{CDS_Exons}, $rh->{'5UTR_Exons'}, $rh->{'3UTR_Exons'},
+			$rh->{Introns}, $rh->{TSS_up_1kb}, $rh->{TSS_up_5kb}, $rh->{TSS_up_10kb},
+			$rh->{TES_down_1kb}, $rh->{TES_down_5kb}, $rh->{TES_down_10kb}
+			);
+	}
+}
 
 ## add rows to bamstat table
 sub addBamStat{
@@ -342,7 +431,7 @@ sub buildDatabase{
 	$sth = $dbh->prepare(qq{
 	CREATE TABLE IF NOT EXISTS markDup
 	(
-		`ID` INT  NULL AUTO_INCREMENT
+		`ID` INT  NOT NULL AUTO_INCREMENT
 		, KEY(ID)
 		,`bam` VARCHAR(250) NOT NULL 
 		, `sampleID` VARCHAR(250) NOT NULL
@@ -353,12 +442,35 @@ sub buildDatabase{
 		,`UNPAIRED_READ_DUPLICATES` INT NOT NULL 
 		,`READ_PAIR_DUPLICATES` INT NOT NULL 
 		,`READ_PAIR_OPTICAL_DUPLICATES` INT NOT NULL 
-		,`PERCENT_DUPLICATION` DECIMAL NOT NULL 
+		,`PERCENT_DUPLICATION` FLOAT NOT NULL 
 		,`ESTIMATED_LIBRARY_SIZE` INT NOT NULL 
 	)
 	ENGINE=INNODB
 	});
 	$sth->execute();
+	# create Table :readDistrib
+	$sth = $dbh->prepare(qq{
+		CREATE TABLE IF NOT EXISTS readDistribution
+		(
+			`ID` INT NOT NULL AUTO_INCREMENT
+			, KEY(ID)
+			, `bam` VARCHAR(250) NOT NULL
+			, `sampleID` VARCHAR(250) NOT NULL
+			, PRIMARY KEY (bam, sampleID)
+			, `CDS_Exons` float NOT NULL
+			, `Exons_5'UTR` float NOT NULL
+			, `Exons_3'UTR` float NOT NULL
+			, `Introns` float NOT NULL
+			, `TSS_up_1kb` float NOT NULL
+			, `TSS_up_5kb` float NOT NULL
+			, `TSS_up_10kb` float NOT NULL
+			, `TES_down_1kb` float NOT NULL
+			, `TES_down_5kb` float NOT NULL
+			, `TES_down_10kb` float NOT NULL
+			)
+			ENGINE=INNODB
+	});
+
 	# -- Create Foreign Key: bam.sampleID -> samples.sampleID
 	$sth = $dbh->prepare(qq{ALTER TABLE bam ADD FOREIGN KEY (sampleID) REFERENCES samples(sampleID)});
 	$sth->execute();
@@ -373,6 +485,8 @@ sub buildDatabase{
 	$sth->execute();
 	# $sth = $dbh->prepare(qq{ALTER TABLE markDup ADD FOREIGN KEY (sampleID) REFERENCES bam(bam)});
 	# $sth->execute();
+
+
 	print "tables built!\n";
 }
 
