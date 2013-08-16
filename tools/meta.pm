@@ -1,4 +1,4 @@
-package b2b::samplesheet;
+package tools::meta;
 use strict;
 use Getopt::Long;
 use Data::Dumper;
@@ -9,9 +9,7 @@ use IO::Handle;
 ## returns species of experiment
 sub getSpecies{
 	my %args = @_; 
-	my $exp = $args{exp}; 
 	my $sampleHash = $args{sampleHash};
-	my $sample1 = $exp;
 	my @samps = keys(%{ $sampleHash });
 	for my $samp (@samps){
 		if (exists($sampleHash->{$samp}->{'Organism'})){
