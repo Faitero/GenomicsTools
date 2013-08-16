@@ -306,7 +306,6 @@ sub addSamples{
 	my $sh = $args{sh};  ## sample hash object
 	my $fastqDir= $args{fastqdir};
 	for my $samp ( keys ( %$sh ) ){
-		
 		my $sampID = $samp;
 		my $species = $sh->{$samp}->{Organism};
 		my $files = $sh->{$samp}->{"Associated Files"};
@@ -319,9 +318,7 @@ sub addSamples{
 			$files[1] =~ s/[,;]//;
 			print "file2\t".$files[1]."\n";
 			$read1 = `find $fastqDir -name $files[0]*`;
-			
 			$read2 = `find $fastqDir -name $files[1]*`;
-			
 		} else {
 			$read1 = `find $fastqDir -name $files[0]*`;
 			$read2 = "NULL";
@@ -355,9 +352,7 @@ sub addSamples{
 		$sth->execute($sampID, $read1, $read2, $exp, $species, $bamroot, $group, $read1, $read2, $exp, $species, $bamroot, $group);
 		# $sth->execute($sampID, $files[0], defined $files[1] ? $files[1] : 0 , $exp, $species, $bamroot, $group, $read1, $read2, $exp, $species, $bamroot, $group);
 	}
-
 }
-
 
 ## database build command
 sub buildDatabase{
