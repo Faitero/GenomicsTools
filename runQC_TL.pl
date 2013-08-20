@@ -52,7 +52,7 @@ my $noFilter;						## prevent script from deDuping
 my $noBamStat;						## prenent bam_stat.py from being run
 my $noQC;							## prevent the runQC sub from being run
 my $noCatTab;						## prevent cating together QC tables
-my $species = "mouse";							## specify use to human bed file
+my $tophatonly;
 
 GetOptions(
 	"inPattern=s"	=>		\$inPattern,
@@ -73,6 +73,7 @@ GetOptions(
 	"noCatTab"		=>		\$noCatTab,
 	"species=s"			=>	\$species,
 	"qcTabOnly"		=>		\$qcTabOnly,
+	"tophatonly"    =>      \$tophatonly
 	);
 my $refgene;
 my $outPath = $startingDir.$outDir;
@@ -90,9 +91,7 @@ if (lc($species) eq "human"){
 
 print "refgene = $refgene\n";
 
-if ($qcTabOnly){
-	goto qcTAB;
-}
+
 
 # my $SORTSAM_PATH = `which SortSam.jar`;
 # my $MARKDUPLICATES_PATH = `which MarkDuplicates.jar`;

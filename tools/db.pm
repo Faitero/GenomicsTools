@@ -1,4 +1,4 @@
-package b2b::db;
+package tools::db;
 use strict;
 use DBI;
 ## connects to the b2b database
@@ -21,7 +21,7 @@ sub getSampleMap{
 	my $ps = qq{
 		select `group` , sampleID from samples where `experiment` = "$exp"
 	};
-	print $ps."\n";
+	# print $ps."\n";
 	my $sth = $dbh->prepare($ps);
 	$sth->execute();
 	while ( my @row = $sth->fetchrow_array ){
@@ -58,7 +58,7 @@ sub getBamStat{
 	}
 	$ps .= " from samples natural join bamstat where `experiment` = '$exp' ";
 
-	print $ps."\n";
+	# print $ps."\n";
 
 	my $sth = $dbh->prepare($ps);
 
@@ -153,7 +153,7 @@ sub addReadDistribution {
 				`TSS_up_5kb` = ? , `TSS_up_10kb` = ? , `TES_down_1kb` = ? , `TES_down_5kb` = ? ,
 				`TES_down_10kb` = ? 
 		};
-		print $ps."\n";
+		# print $ps."\n";
 		my $sth = $dbh->prepare($ps);
 		$sth->execute( $type, $samp, $rh->{CDS_Exons}, $rh->{'5UTR_Exons'}, $rh->{'3UTR_Exons'},
 			$rh->{Introns}, $rh->{TSS_up_1kb}, $rh->{TSS_up_5kb}, $rh->{TSS_up_10kb},
@@ -222,7 +222,7 @@ sub addBamStat{
 				mapqGTEmapq_cut_unique = ? , `Read-1` = ? , `Read-2` = ?, `Reads_mapped_to_+` = ? , `Reads_mapped_to_-` = ?, `Non-splice_reads`=?, Splice_reads = ?,
 				Reads_mapped_in_proper_pairs=? 
 		};
-		print $ps."\n";
+		# print $ps."\n";
 		my $sth = $dbh->prepare($ps);
 		$sth->execute( $type, $samp, $rh->{Total_Records}, $rh->{QC_failed}, $rh->{'Optical-PCR_duplicate'}, $rh->{Non_Primary_Hits}, $rh->{Unmapped_reads},
 			$rh->{'mapq_LT_mapq_cut_non-unique'}, $rh->{mapq_GTE_mapq_cut_unique}, $rh->{'Read-1'}, $rh->{'Read-2'}, $rh->{'Reads_map_to_+'},
@@ -272,7 +272,7 @@ sub addMarkDup{
 				$header[7]=?, 
 				$header[8]=?
 			};
-			print $ps;
+			# print $ps;
 			my $sth = $dbh->prepare($ps);
 			$sth->execute( $type, $samp, $data[1], $data[2], $data[3], $data[4], $data[5], $data[6], $data[7], $data[8],$data[1], $data[2], $data[3], $data[4], $data[5], $data[6], $data[7], $data[8]);
 		}
@@ -305,9 +305,10 @@ sub addSamples{
 	my %args = @_;
 	my $sh = $args{sh};  ## sample hash object
 	my $fastqDir= $args{fastqdir};
+	my $species = $args{species}; 
 	for my $samp ( keys ( %$sh ) ){
 		my $sampID = $samp;
-		my $species = $sh->{$samp}->{Organism};
+		# my $species = $sh->{$samp}->{Organism};
 		my $files = $sh->{$samp}->{"Associated Files"};
 		print "Files\t$files\n";
 		my @files = split(" ", $files);
@@ -323,8 +324,10 @@ sub addSamples{
 			$read1 = `find $fastqDir -name $files[0]*`;
 			$read2 = "NULL";
 		}
+		chomp($read1);
+		chomp($read2);
 		print "read1\t".$read1."\n";
-		print "read2\t$read2\n";
+		print "read2\t".$read2."\n";
 		my $exp = $samp;
 		$exp =~ s/(\d+).+/$1/;
 		$exp .= "R";
@@ -347,7 +350,7 @@ sub addSamples{
 		bam_root = ? ,
 		`group` = ?
 		};
-		print "prepared statement: ".$ps."\n";
+		# print "prepared statement: ".$ps."\n";
 		my $sth = $dbh->prepare($ps);
 		$sth->execute($sampID, $read1, $read2, $exp, $species, $bamroot, $group, $read1, $read2, $exp, $species, $bamroot, $group);
 		# $sth->execute($sampID, $files[0], defined $files[1] ? $files[1] : 0 , $exp, $species, $bamroot, $group, $read1, $read2, $exp, $species, $bamroot, $group);

@@ -2,12 +2,13 @@ package tools::bam;
 # this library contains code required to run QC metrics on 
 # Bam files 
 ## test to save
-use runval;
+use tools::runval;
 use strict;
 # use warnings;
 use Getopt::Long;
 use IO::Handle;
 use diagnostics -verbose;
+my $dry = 0;
 
 my $mouserefgene = "/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.bed";
 my $humanrefgene = "/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.71.fixed.bed";
@@ -42,15 +43,15 @@ sub processBam{
 	die "species not recognized -- contact bioinformatician\n";
 	}
 	print "refgene = $refgene\n";
-
+	print "Bam Pattern = $inPattern\n";
 	my @inputFiles = glob $inPattern;
-	if (@inputFiles == 0 ){
+	if ((scalar(@inputFiles) == 0 )){
 		print $RUNLOG "Tried to run QC without valid BAM files that match the in Pattern, dying\n"; 
 		die "no Input Files matching the pattern\n";
 	}
 
 	for my $file (@inputFiles){
-		print "Processing $file";
+		print "Processing $file\n";
 		my $outfolder = $file;
 		if($outfolder =~ m/(Tophat.+\/)/){
 			print("outfolder\t$1\n");
@@ -93,7 +94,7 @@ sub processBam{
 		$baiFile = $file;
 		$baiFile =~ s/.bam$/.bai/;
 		print $RUNLOG "\n\nprocessed BAM index file validation\n";
-		b2b:runval::checkIfExists(file=>$baiFile, RUNLOG=>$RUNLOG);
+		tools:runval::checkIfExists(file=>$baiFile, RUNLOG=>$RUNLOG);
 	}
 }
 
@@ -104,10 +105,10 @@ sub makeTracks{
 	my $pattern1 = $args{pattern1};
 	my $pattern2 = $args{pattern2};
 	my $RUNLOG = $args{RUNLOG};
-	if (!exists $pattern1){
+	if (!$pattern1){
 		$pattern1 = "Tophat*/*marked_dup.bam";
 	}
-	if (!exists $pattern2){
+	if (!$pattern2){
 		$pattern2 = "Tophat*/*processed.bam";
 	}
 	my @files = glob(${analysisDir}.$pattern1);
@@ -354,7 +355,8 @@ sub readDuplication{
 	my $outpath = $args->{outpath};
 	my $file	= $args->{file};
 	my $refgene = $args->{refgene};
-	runAndLog("read_duplication.py -i $file -o ${outpath}read_duplication -u 20000");
+	# runAndLog("read_duplication.py -i $file -o ${outpath}read_duplication -u 20000");
+	runAndLog("read_duplication.py -i $file -o ${outpath}read_duplication");
 }
 
 sub readGC{

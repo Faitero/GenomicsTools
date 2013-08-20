@@ -13,12 +13,15 @@ sub getSpecies{
 	my @samps = keys(%{ $sampleHash });
 	for my $samp (@samps){
 		if (exists($sampleHash->{$samp}->{'Organism'})){
-			print "getSpecies\t" + $sampleHash->{$samp}->{'Organism'}
-			return $sampleHash->{$samp}->{'Organism'}
+			print "getSpecies\t" + $sampleHash->{$samp}->{'Organism'};
+			return $sampleHash->{$samp}->{'Organism'};
 		}
 	}
 	print "'Organism' field not defined in the sample sheet.\nEnter species (Mouse, Chicken, Human)\n>";
-	return chomp(<stdin>);
+	
+	my $return = <STDIN>;
+	chomp $return;
+	return $return;
 }
 
 # takes the sampleHash and the experiment and returns a
@@ -77,7 +80,7 @@ sub parseSampleSheet{
 	# print __LINE__, "\n";
 	for ( $i = 0 ; $i < @header ; $i++ ){
 		# if ($debug) {print "$header[$i]\n";}
-		if ($header[$i] eq "Sample Number"){
+		if ($header[$i] eq "Sample Number" || $header[$i] eq "ID"){
 			$sampleNumberIndex = $i;
 		}
 	}
@@ -101,3 +104,4 @@ sub parseSampleSheet{
 	close IN;
 	return $outHash;
 }
+1;

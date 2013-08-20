@@ -1,4 +1,4 @@
-package b2b::runval;
+package tools::runval;
 use strict;
 use Getopt::Long;
 use IO::Handle;

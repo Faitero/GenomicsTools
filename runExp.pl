@@ -7,19 +7,20 @@ use Data::Dumper;
 use File::Basename;
 use File::Glob;
 use IO::Handle;
-use tools::tools;
-use tools::qc;
+use tools::fq;
+use tools::bam;
+use tools::meta;
 use tools::runval;
 use tools::db;
 use tools::report;
-use TimUtil;
 # use diagnostics -verbose;
 our $debug = 1;
 our $dry = 0;
 
-my $log = 0;
-my	 $samplesheet = "/home/laurentt/sampleSheet/BruneauExperimentsGNOMex20130325.txt";
+my $log = 1;
+#my	 $samplesheet = "/home/laurentt/sampleSheet/BruneauExperimentsGNOMex20130325.txt";
 # my 	 $samplesheet = "/home/laurentt/sampleSheet/gnomex_sampleannotations_SEIDMAN_030713.txt";
+my 	 $samplesheet = "/home/laurentt/sampleSheet/Alisha144R_2013-08-14.txt";
 my	 $dataPath = "/Data01/gnomex/ExperimentData/";
 my 	 $exp; 
 my	 $analysisDir = "/Data01/gnomex/Analysis/experiment/";
@@ -49,15 +50,15 @@ my $noRPKMSat;						## prevent RPKM_saturation.py from being run
 my $noFilter;						## prevent script from deDuping
 my $noBamStat;						## prenent bam_stat.py from being run
 my $noQC;							## prevent the runQC sub from being run
-my $noCatTab;				
+my $tophatonly;			
 my $species;
 my $mouserefgene = "/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.bed";
 my $humanrefgene = "/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.71.fixed.bed";
 my $refgene;
-my $now_string = TimUtil::getCurrentTime();
-$now_string =~ s/\s/_/g;
+my $now_string = getCurrentTime();
 my $skipFlag = 0;
 my $repOnly;
+my $qconly;
 
 GetOptions(
 	"exp=s"			=>	\$exp,
@@ -81,10 +82,10 @@ GetOptions(
 	"noFilter"		=>		\$noFilter,
 	"noBamStat"		=>		\$noBamStat,
 	"noQC"			=>		\$noQC,	
-	"noCatTab"		=>		\$noCatTab,
-	"qcTabOnly"		=>		\$qcTabOnly,
 	"repOnly"		=> 		\$repOnly,
 	"fastQConly"	=>		\$fastQConly,
+	"tophatonly"    =>      \$tophatonly,
+	"qconly"		=>		\$qconly
 	);
 
 if (!defined($exp)){
@@ -123,7 +124,7 @@ unless ( -e $samplesheet ){
 	die "Invalid Sample Sheet";
 }
 
-my $expSampleHash = tools::meta::makeExpSampleHash(
+my $sampleHash = tools::meta::makeExpSampleHash(
 	exp => $exp,
 	samplesheet => $samplesheet,
 	);
@@ -132,23 +133,42 @@ $species = tools::meta::getSpecies(
 	exp => $exp,
 	sampleHash => $sampleHash,
 	); 
+print "species\t$species\n";
 
-$fastqDir = tools::fq::findFastQPath (
+if ( $qconly ){
+	print "QC only\n";
+	goto QC;
+}
+
+$fastqDir = tools::fq::findFastQPath(
 	exp 		=> $exp,
 	path 		=> $dataPath,
 	sampleHash 	=> $sampleHash,
 	) unless ($nofastqc && $noTophat);
 
 # ## addRows to sample database
-tools::db::addSamples( sh => $expSampleHash, fastqdir => $fastqDir );
-
-print "species\t$species\n";
+tools::db::addSamples( sh => $sampleHash, fastqdir => $fastqDir, species => $species );
 
 if( defined($species) ){
 	print $RUNLOG "Species:\t$species\n"; 
 } else{
 	print $RUNLOG "Species could not be determined from the sample sheet\n";
 	die "No Species defined";
+}
+
+if ($fastQConly){
+	print "fastQC only\n";
+	goto FASTQC;
+}
+
+if ($nofastqc){
+	print "nofastqc\n";
+	goto ENDFASTQC;
+}
+
+if ( $tophatonly ){
+	print "Tophat only\n";
+	goto ENDFASTQC;
 }
 
 ## check if USEQ only
@@ -163,11 +183,12 @@ if ($TRACKonly) {
 	goto TRACK;
 }
 
+FASTQC:
 ## Step --- fastQC 
-
 tools::fq::fastQC(
 	analysisDir => $analysisDir,
-	);
+	fastqDir => $fastqDir
+	) unless $nofastqc;
 
 #check that all fastqc dirs were created
 print $RUNLOG "\n\nFASTQC VALIDATION\n";
@@ -180,12 +201,13 @@ tools::runval::checkFastQC(
 if ($fastQConly){
 	goto FINISH;
 }
+ENDFASTQC:
 
 ## Step -- TOPHAT
 
 tools::fq::runTophat(
 	exp 	=> $exp,
-	sampleHash => $expSampleHash,
+	sampleHash => $sampleHash,
 	fastqDir 	=> $fastqDir,
 	analysisDir => $analysisDir,
 	species => $species,
@@ -196,28 +218,37 @@ print $RUNLOG "\n\nTOPHAT VALIDATION\n";
 
 tools::runval::checkTophat(
 	RUNLOG => $RUNLOG,
-	sampleHash => $expSampleHash,
+	sampleHash => $sampleHash,
 	analysisDir => $analysisDir,
 	);
 
+if ($tophatonly){
+	goto FINISH;
+}
+
+QC:
 ## Step -- QC
 
 print("running QC\n");
 
 tools::bam::processBam(
 	species => $species,
-	inpattern => $inPattern,
+	inPattern => $inPattern,
 	RUNLOG => $RUNLOG
 	);
 
 tools::db::addBams{
-	sh => $expSampleHash,
+	sh => $sampleHash,
 	type => "accepted_hits_marked_dup"
 };
 
-tools::db::addMarkDup(sh =>$expSampleHash);
-tools::db::addBamStat(sh => $expSampleHash);
-tools::db::addReadDistribution(sh => $expSampleHash);
+tools::db::addMarkDup(sh =>$sampleHash);
+tools::db::addBamStat(sh => $sampleHash);
+tools::db::addReadDistribution(sh => $sampleHash);
+
+if ( $qconly ){
+	goto FINISH;
+}
 
 TRACK:
 ## make Genome tracks
@@ -228,6 +259,7 @@ tools::bam::makeTracks(
 	);
 ## check for track only
 if ($TRACKonly) {
+	print "Qconly - going to FINSH\n";
 	goto FINISH;
 }
 
@@ -238,7 +270,7 @@ print "Starting USEQ DefinedRegionDifferentialSeq\n";
 ## differential expression 
 tools::bam::runDRDS(
 	bamID=> 	"marked_dup",
-	sampleHash => $expSampleHash,
+	sampleHash => $sampleHash,
 	analysisDir => $analysisDir,
 	dry 	=>	$dry, 
 	species => $species,
@@ -246,7 +278,7 @@ tools::bam::runDRDS(
 
 tools::bam::runDRDS(
 	bamID=> 	"processed",
-	sampleHash => $expSampleHash,
+	sampleHash => $sampleHash,
 	analysisDir => $analysisDir,
 	dry 	=>	$dry, 
 	species => $species,
@@ -254,13 +286,13 @@ tools::bam::runDRDS(
 
 tools::runval::checkDRDS(
 	bamID=>	"processed",
-	sampleHash => $expSampleHash,
+	sampleHash => $sampleHash,
 	analysisDir => $analysisDir,
 	);
 
 tools::runval::checkDRDS(
 	bamID=>	"marked_dup",
-	sampleHash => $expSampleHash,
+	sampleHash => $sampleHash,
 	analysisDir => $analysisDir,
 	);
 
@@ -291,4 +323,26 @@ sub runAndLog{
 	my $time = localtime;
 	print "$time\t$command";
 	system($command);
+}
+
+sub getCurrentTime{
+	my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
+	$mon = $mon + 1;
+	$mon = prependZero($mon);
+	$mday = prependZero($mday);
+	$hour = prependZero($hour);
+	$min = prependZero($min);
+	$sec = prependZero($sec);
+
+	my $curTime = $year + 1900 ."-".( $mon)  ."-". $mday . "-" . $hour . "-" . $min . "-" . $sec ."-";
+	$curTime =~ s/\s/_/g;
+	return $curTime;
+}
+
+sub prependZero{
+	my $num = shift;
+	if (length ($num ) == 1 ){
+		$num = "0" . $num;
+	}
+	return $num;
 }
