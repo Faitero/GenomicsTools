@@ -1,5 +1,5 @@
 package tools::bam;
-# this library contains code required to run QC metrics on 
+# this library contains code required to run QC metrics and differentail expression analysis on 
 # Bam files 
 ## test to save
 use tools::runval;
@@ -67,6 +67,7 @@ sub processBam{
 		tools::runval::checkIfExists( file=>$indexFile , RUNLOG=>$RUNLOG);
 		
 		unless ( $noQC ){
+			runAndLog("bam_stat.py -i $file 2> $file.bam_stat.tab");
 			runRSEQC({
 			file => $file,
 			refgene => $refgene,
@@ -79,6 +80,14 @@ sub processBam{
 		}
 	}	
 
+	processBam(RUNLOG=> $RUNLOG);
+	
+}
+
+
+sub makeProcessedBam{
+	my %args = @_;
+	my $RUNLOG = $args{RUNLOG};
 	print "Beginning to process marked files\n";
 	my @markedFiles = glob "Tophat*/*marked_dup.bam";
 
@@ -87,7 +96,7 @@ sub processBam{
 		my $baiFile = $file;
 		$baiFile =~ s/.bam$/.bai/;	
 		print $RUNLOG "\n\nmarkedDup BAM index file validation\n";
-		b2b:runval::checkIfExists(file=>$baiFile, RUNLOG=>$RUNLOG);
+		tools:runval::checkIfExists(file=>$baiFile, RUNLOG=>$RUNLOG);
 		$file = filterBam($file);
 		print "processed file:\t$file";
 		buildBamIndex($file);
@@ -97,6 +106,8 @@ sub processBam{
 		tools:runval::checkIfExists(file=>$baiFile, RUNLOG=>$RUNLOG);
 	}
 }
+
+
 
 ## this runs the convert_SAM_or_BAM_for_Genome_Browser.pl on a collection of bams
 sub makeTracks{
@@ -190,8 +201,10 @@ sub runDRDS{
 	## now to setup the Useq command: 
 	my $USEQ_GENES_MERGED_MM9="/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.clean.constitutive.table";
 	my $USEQ_GENES_MERGED_HG19="/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.71.clean.constitutive.table";
+	my $USEQ_GENES_MERGED_GG4="/work/Common/Data/Annotation/chicken/Gallus_gallus.Galgal4.72.table";
 	my $MM9_VERS="M_musculus_Jul_2007"; # ← this only matters for hyperlinking
 	my $HG19_VERS="H_sapiens_Feb_2009"; # ← this only matters for hyperlinking
+	my $GG4_VERS="G_gallus_Nov_2011";
 	my $UCSCGENES;
 	my $GENVERSION;
 
@@ -203,7 +216,11 @@ sub runDRDS{
 		print "Species : human";
 		$UCSCGENES=${USEQ_GENES_MERGED_HG19};
 		$GENVERSION=${HG19_VERS};
-	} else {
+	} elsif (lc($species) eq "chicken\n" ){
+		print "Species : human";
+		$UCSCGENES=${USEQ_GENES_MERGED_GG4};
+		$GENVERSION=${HG19_VERS};
+	}else {
 		die "Undefined species: script needs configuring : contact bioinformatician\n";
 	}
 	my $DRDSJAR = "/work/Apps/USeq_8.5.7/Apps/DefinedRegionDifferentialSeq";
@@ -306,17 +323,17 @@ sub runRSEQC{
 		refgene => $refgene,
 		});
 
-	juncAnnot({
-		outpath => $outpath,
-		file 	=> $file,
-		refgene => $refgene,
-		});
+	# juncAnnot({
+	# 	outpath => $outpath,
+	# 	file 	=> $file,
+	# 	refgene => $refgene,
+	# 	});
 
-	juncSat({
-		outpath => $outpath,
-		file 	=> $file,
-		refgene => $refgene,
-		});
+	# juncSat({
+	# 	outpath => $outpath,
+	# 	file 	=> $file,
+	# 	refgene => $refgene,
+	# 	});
 
 	readDist({
 		outpath => $outpath,

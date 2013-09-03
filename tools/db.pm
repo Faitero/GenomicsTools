@@ -1,6 +1,7 @@
 package tools::db;
 use strict;
 use DBI;
+use Data::Dumper;
 ## connects to the b2b database
 sub dbConnect{
 	my $dbp = "DBI:mysql:b2b";
@@ -49,14 +50,14 @@ sub getBamStat{
 		 "mapqLTmapq_cut_non_unique", "mapqGTEmapq_cut_unique", "Read-1", "Read-2", "Reads_mapped_to_+",
 		 "Reads_mapped_to_-", "Non-splice_reads", "Splice_reads", "Reads_mapped_in_proper_pairs"
 		];
-	my $ps = "select `sampleID`, ";
+	my $ps = "select sample.`sampleID`, ";
 	for my $fld (@flds){
 		$ps .= "`$fld`";
 		if ($fld  ne $flds[-1]){
 			$ps .= ", ";
 		}
 	}
-	$ps .= " from samples natural join bamstat where `experiment` = '$exp' ";
+	$ps .= " from samples join bamstat on samples.sampleID=bamstat.sampleID where `experiment` = '$exp' ";
 
 	# print $ps."\n";
 
@@ -89,22 +90,24 @@ sub getMarkDup{
 			"READ_PAIR_DUPLICATES", "READ_PAIR_OPTICAL_DUPLICATES", "PERCENT_DUPLICATION", "ESTIMATED_LIBRARY_SIZE");
 	$rethash->{fields} = ["UNPAIRED_READS_EXAMINED", "READ_PAIRS_EXAMINED", "UNPAIRED_READ_DUPLICATES", 
 			"READ_PAIR_DUPLICATES", "READ_PAIR_OPTICAL_DUPLICATES", "PERCENT_DUPLICATION", "ESTIMATED_LIBRARY_SIZE"];
-	my $ps = "select `sampleID`, ";
+	my $ps = "select samples.`sampleID`, ";
 	for my $fld (@flds){
 		$ps .= "`$fld`";
 		if ($fld  ne $flds[-1]){
 			$ps .= ", ";
 		}
 	}
-	$ps .= " from samples natural join markDup where `experiment` = '$exp' ";			
+	$ps .= " from samples join markDup on markDup.sampleID=samples.sampleID where `experiment` = '$exp' ";			
+	print "\$ps = $ps\n";
 	my $sth = $dbh->prepare($ps);
 	my $totfld1 = "READ_PAIRS_EXAMINED";
 	my $totfld2 = "UNPAIRED_READS_EXAMINED";
 	$sth->execute();
 	while (my $row = $sth->fetchrow_hashref ){
+		# print "row\t".Dumper(%$row);
 		# print "rowID ". $row->{sampleID}."\n";
 		for my $fld (@flds){
-			# print "$fld\t".$row->{$fld}."\n";
+			# print "getMarkDup Field\t$fld\t".$row->{$fld}."\n";
 			if ($fld eq $totfld1 || $fld eq 'ESTIMATED_LIBRARY_SIZE' || $fld eq $totfld2 || $fld eq 'PERCENT_DUPLICATION'){
 				$rethash->{samples}->{ $row->{sampleID} }->{ $fld } = $row->{$fld} ;
 			} else{
@@ -113,6 +116,8 @@ sub getMarkDup{
 			}
 		}
 	}
+	# print "getMarkDup ###\n". Dumper(%{$rethash});
+
 	return $rethash;
 }
 
@@ -238,6 +243,7 @@ sub addBamStat{
 
 ## add rows to mark dup table
 sub addMarkDup{
+	
 	my $dbh = dbConnect();
 	my %args = @_;
 	my $sh = $args{sh};
@@ -282,17 +288,21 @@ sub addMarkDup{
 
 ## add rows to b2b bam table
 sub addBams{
+	print "in Add Bams\n";
 	my $dbh = dbConnect();
+	# print Dumper(@_);
 	my %args = @_;
-	my $sh = $args{sh}; ##
+	# print 'args\t'.Dumper(%args);
+	 my $sh = $args{sh}; ##
 	my $type = $args{type};
-
+	print "sh\t$sh\ttype\t$type\n";
 	for my $samp ( keys %$sh ){
 		my $ps = qq {
 			insert into bam (bam, sampleID)
 			VALUES
 			(?,?) on duplicate key update bam =?, sampleID=?
 		};
+		print $ps."\n";
 		my $sth = $dbh->prepare($ps);
 		$sth->execute($type , $samp,$type , $samp);
 	}
@@ -301,6 +311,7 @@ sub addBams{
 
 ## add rows to db sample table
 sub addSamples{
+	print "adding samples to the database\n";
 	my $dbh = dbConnect();
 	my %args = @_;
 	my $sh = $args{sh};  ## sample hash object
@@ -310,6 +321,9 @@ sub addSamples{
 		my $sampID = $samp;
 		# my $species = $sh->{$samp}->{Organism};
 		my $files = $sh->{$samp}->{"Associated Files"};
+		$files =~ s/"//g;
+		$files =~ s/,//g;
+
 		print "Files\t$files\n";
 		my @files = split(" ", $files);
 		my ($read1, $read2);

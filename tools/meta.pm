@@ -13,7 +13,7 @@ sub getSpecies{
 	my @samps = keys(%{ $sampleHash });
 	for my $samp (@samps){
 		if (exists($sampleHash->{$samp}->{'Organism'})){
-			print "getSpecies\t" + $sampleHash->{$samp}->{'Organism'};
+			print "getSpecies\t" . $sampleHash->{$samp}->{'Organism'};
 			return $sampleHash->{$samp}->{'Organism'};
 		}
 	}
@@ -93,6 +93,7 @@ sub parseSampleSheet{
 		my @row = split(/\t/, $line);
 		for ($i = 0 ; $i < @row; $i++) {
 			if ($row[$i] ne "" ){
+				$row[$i] =~ s/"//g;
 				chomp($row[$i]);
 				print "$row[$i]\t$i\n";
 				print "adding $row[$sampleNumberIndex]->$header[$i] = $row[$i]\n";

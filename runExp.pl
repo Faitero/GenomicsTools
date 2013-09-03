@@ -10,26 +10,27 @@ use IO::Handle;
 use tools::fq;
 use tools::bam;
 use tools::meta;
-use tools::runval;
 use tools::db;
 use tools::report;
 # use diagnostics -verbose;
 our $debug = 1;
 our $dry = 0;
 
-my $log = 1;
-#my	 $samplesheet = "/home/laurentt/sampleSheet/BruneauExperimentsGNOMex20130325.txt";
+my $log = 0;
+# my	 $samplesheet = "/home/laurentt/sampleSheet/BruneauExperimentsGNOMex20130325.txt";
 # my 	 $samplesheet = "/home/laurentt/sampleSheet/gnomex_sampleannotations_SEIDMAN_030713.txt";
-my 	 $samplesheet = "/home/laurentt/sampleSheet/Alisha144R_2013-08-14.txt";
+# my 	 $samplesheet = "/home/laurentt/sampleSheet/Alisha144R_2013-08-14.txt";
+my 	 $samplesheet= "/home/laurentt/sampleSheet/166R_2013-08-20.txt";
+my 	 $alignGTF;						
 my	 $dataPath = "/Data01/gnomex/ExperimentData/";
 my 	 $exp; 
 my	 $analysisDir = "/Data01/gnomex/Analysis/experiment/";
 my 	 $fastqDir;
 my 	 $nofastqc;
-my 	 $fastQConly;
-my 	 $USEQonly;
-my	 $TRACKonly;
-my   $noTophat;
+my 	 $fastqconly;
+my 	 $useqonly;
+my	 $trackonly;
+my   $notophat;
 my $inPattern = "Tophat*/accepted_hits.bam";
 my $startingDir = "./";
 my $outDir		= "output/";
@@ -49,7 +50,7 @@ my $noQuality;						## prevent read_quality from being called
 my $noRPKMSat;						## prevent RPKM_saturation.py from being run
 my $noFilter;						## prevent script from deDuping
 my $noBamStat;						## prenent bam_stat.py from being run
-my $noQC;							## prevent the runQC sub from being run
+my $noqc;							## prevent the runQC sub from being run
 my $tophatonly;			
 my $species;
 my $mouserefgene = "/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.bed";
@@ -57,16 +58,22 @@ my $humanrefgene = "/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.71.fi
 my $refgene;
 my $now_string = getCurrentTime();
 my $skipFlag = 0;
-my $repOnly;
+my $reponly;
 my $qconly;
+my $qcon; 							## this goes from after tophat to the end of the script
+my $trackon; 						## run from the making tracks onward
+my $processonly;  
+my $processon; 
+
 
 GetOptions(
-	"exp=s"			=>	\$exp,
-	"nofastqc"		=>  \$nofastqc,
-	"dry"			=>	\$dry,
-	"USEQonly"		=>	\$USEQonly,
-	"TRACKonly"		=>	\$TRACKonly,
-	"noTophat"		=>	\$noTophat,
+	"alignGTF=s"	=>		\$alignGTF,						## this overrides the default GTF options
+	"exp=s"			=>		\$exp,
+	"nofastqc"		=>  	\$nofastqc,
+	"dry"			=>		\$dry,
+	"useqonly"		=>		\$useqonly,
+	"trackonly"		=>		\$trackonly,
+	"notophat"		=>		\$notophat,
 	"inPattern=s"	=>		\$inPattern,
 	"startDir=s"	=>		\$startingDir,
 	"outDir=s"		=>		\$outDir,
@@ -81,11 +88,15 @@ GetOptions(
 	"noQuality"		=>		\$noQuality,
 	"noFilter"		=>		\$noFilter,
 	"noBamStat"		=>		\$noBamStat,
-	"noQC"			=>		\$noQC,	
-	"repOnly"		=> 		\$repOnly,
-	"fastQConly"	=>		\$fastQConly,
+	"noqc"			=>		\$noqc,	
+	"reponly"		=> 		\$reponly,
+	"fastqconly"	=>		\$fastqconly,
 	"tophatonly"    =>      \$tophatonly,
-	"qconly"		=>		\$qconly
+	"qconly"		=>		\$qconly,
+	"qcon"			=>		\$qcon,
+	"trackon"		=> 		\$trackon,
+	"processonly"	=>		\$processonly,
+	"processon" 	=>		\$processon,
 	);
 
 if (!defined($exp)){
@@ -135,19 +146,28 @@ $species = tools::meta::getSpecies(
 	); 
 print "species\t$species\n";
 
+$fastqDir = tools::fq::findFastQPath(
+	exp 		=> $exp,
+	path 		=> $dataPath,
+	sampleHash 	=> $sampleHash,
+	) unless ($nofastqc && $notophat);
+
+if ($reponly){
+	print "report only\n";
+	goto FINISH;
+}
+
 if ( $qconly ){
 	print "QC only\n";
 	goto QC;
 }
 
-$fastqDir = tools::fq::findFastQPath(
-	exp 		=> $exp,
-	path 		=> $dataPath,
-	sampleHash 	=> $sampleHash,
-	) unless ($nofastqc && $noTophat);
+if ( $qcon ){
+	print "QC on -- Skip alignment";
+	goto QC;
+}
 
-# ## addRows to sample database
-tools::db::addSamples( sh => $sampleHash, fastqdir => $fastqDir, species => $species );
+
 
 if( defined($species) ){
 	print $RUNLOG "Species:\t$species\n"; 
@@ -156,7 +176,7 @@ if( defined($species) ){
 	die "No Species defined";
 }
 
-if ($fastQConly){
+if ($fastqconly){
 	print "fastQC only\n";
 	goto FASTQC;
 }
@@ -172,15 +192,24 @@ if ( $tophatonly ){
 }
 
 ## check if USEQ only
-if ($USEQonly) {
+if ($useqonly) {
 	print "Running USEQ only\n";
 	goto USEQ;
 }
 
 ## check for track only
-if ($TRACKonly) {
+if ($trackonly) {
 	print "Making browser tracks only\n";
 	goto TRACK;
+}
+
+if ($trackon) {
+	print "Going from making tracks on\n";
+	goto TRACK;
+}
+
+if ( $processonly || $processon ){
+	goto PROCESS;
 }
 
 FASTQC:
@@ -193,12 +222,8 @@ tools::fq::fastQC(
 #check that all fastqc dirs were created
 print $RUNLOG "\n\nFASTQC VALIDATION\n";
 
-tools::runval::checkFastQC(
-	RUNLOG =>	$RUNLOG,
-	fastqDir => $fastqDir,
-	analysisDir => $analysisDir
-	);
-if ($fastQConly){
+
+if ($fastqconly){
 	goto FINISH;
 }
 ENDFASTQC:
@@ -212,15 +237,12 @@ tools::fq::runTophat(
 	analysisDir => $analysisDir,
 	species => $species,
 	dry 		=> $dry,
-	) unless ($noTophat);
+	alignGTF => $alignGTF,
+	) unless ($notophat);
 
 print $RUNLOG "\n\nTOPHAT VALIDATION\n";
 
-tools::runval::checkTophat(
-	RUNLOG => $RUNLOG,
-	sampleHash => $sampleHash,
-	analysisDir => $analysisDir,
-	);
+
 
 if ($tophatonly){
 	goto FINISH;
@@ -237,18 +259,22 @@ tools::bam::processBam(
 	RUNLOG => $RUNLOG
 	);
 
-tools::db::addBams{
-	sh => $sampleHash,
-	type => "accepted_hits_marked_dup"
-};
 
-tools::db::addMarkDup(sh =>$sampleHash);
-tools::db::addBamStat(sh => $sampleHash);
-tools::db::addReadDistribution(sh => $sampleHash);
 
 if ( $qconly ){
 	goto FINISH;
 }
+
+PROCESS:
+
+if ($processonly || $processon){
+	tools::bam::makeProcessedBam( RUNLOG => $RUNLOG );
+}
+
+if ($processonly) {
+	goto FINISH;
+}
+
 
 TRACK:
 ## make Genome tracks
@@ -258,7 +284,7 @@ tools::bam::makeTracks(
 	RUNLOG => $RUNLOG
 	);
 ## check for track only
-if ($TRACKonly) {
+if ($trackonly) {
 	print "Qconly - going to FINSH\n";
 	goto FINISH;
 }
@@ -284,36 +310,66 @@ tools::bam::runDRDS(
 	species => $species,
 	);
 
-tools::runval::checkDRDS(
+if ($useqonly){
+	goto FINISH;
+}
+
+FINISH:
+
+# ## addRows to sample database
+tools::db::addSamples( sh => $sampleHash, fastqdir => $fastqDir, species => $species );
+
+# tools::db::addBams{ 'sh' , $sampleHash, 'type' , "accepted_hits_marked_dup" };
+tools::db::addBams( sh=>$sampleHash, type=>"accepted_hits_marked_dup" );
+tools::db::addMarkDup(sh =>$sampleHash);
+tools::db::addBamStat(sh => $sampleHash);
+tools::db::addReadDistribution(sh => $sampleHash);
+
+## not essential feature right now
+# tools::report::checkFastQC(
+# 	RUNLOG =>	$RUNLOG,
+# 	analysisDir => $analysisDir,
+# 	);
+tools::report::checkTophat(
+	RUNLOG => $RUNLOG,
+	sampleHash => $sampleHash,
+	analysisDir => $analysisDir,
+	);
+
+tools::report::checkRunQC(
+	RUNLOG => $RUNLOG,
+	sampleHash => $sampleHash,
+	analysisDir => $analysisDir,
+	);
+
+tools::report::checkDRDS(
 	bamID=>	"processed",
 	sampleHash => $sampleHash,
 	analysisDir => $analysisDir,
 	);
-
-tools::runval::checkDRDS(
+tools::report::checkDRDS(
 	bamID=>	"marked_dup",
 	sampleHash => $sampleHash,
 	analysisDir => $analysisDir,
 	);
-
-if ($USEQonly){
-	goto FINISH;
-}
-
-my $repDir = "QCreport";
+my $repDir = "QCreport/";
 system("mkdir -p $repDir");
-my $filename = "${repDir}/${now_string}-${exp}-QCreport.html";
+my $filename = "${repDir}/${exp}-QCreport.html";
 print "filename: ".$filename."\n";
-
 open my $QCreport, "> $filename" or die "could not open QC report\n";
-tools::report::writeHeader(fh => $QCreport, exp => $exp );
+tools::report::writeHeader(fh => $QCreport, exp => $exp, curtime => $now_string );
 tools::report::writeLegend(fh => $QCreport, exp => $exp );
 tools::report::writeBamStat(fh => $QCreport, exp => $exp  );
 tools::report::writeMarkDup(fh => $QCreport, exp => $exp  );
+
+tools::report::writeFigTables(fh => $QCreport, 
+	sampleHash => $sampleHash,
+	repdir => $repDir,
+	analysisDir => $analysisDir,
+	);
+
 tools::report::writeFooter(fh => $QCreport);
 
-
-FINISH:
 print "analysis complete\n";
 close( $RUNLOG );
 close ( LOG );

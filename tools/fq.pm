@@ -58,7 +58,7 @@ sub runTophat{
 	my	 $NUM_THREADS=12;
 	my	 $MM9_INDEX="/work/Common/Data/Bowtie_Indexes/mm9";
 	my	 $HG19_INDEX="/work/Common/Data/Bowtie_Indexes/hg19";
-	my   $GG4_INDEX="/work/Common/Data/Bowtie_Indexes/galGal4_ERCC92";
+	my   $GG4_INDEX="/work/Common/Data/Bowtie_Indexes/galGal4.72_ERCC92";
 	my	 $HG_GTF="/work/Common/Data/Annotation/human/Homo_sapiens.GRCh37.71.fixed.gtf";
 	my	 $MM_GTF="/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.gtf";
 	my 	 $GG4_GTF="/work/Common/Data/Annotation/ercc/galGal4.72_ERCC92.gtf";
@@ -72,6 +72,7 @@ sub runTophat{
 	my $fastqDir  = $args{fastqDir};
 	my $analysisDir = $args{analysisDir};
 	my $species = $args{species};
+	my $alignGTF = $args{alignGTF};
 	my $dry = $args{dry};
 	my $pairedEnd;
 	my $read1;
@@ -103,6 +104,9 @@ sub runTophat{
 	}
 	else {
 		die "No definition for ".${$sampleHash}{$sample1}{'Organism'}." contact comeone who can fix this";
+	}
+	if (defined($alignGTF)){
+		$TOPGTF = $alignGTF;
 	}
 
 	$exp =~ s/R//;
