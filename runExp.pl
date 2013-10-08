@@ -271,12 +271,16 @@ if ($processonly || $processon){
 	tools::bam::makeProcessedBam( RUNLOG => $RUNLOG );
 }
 
+
 if ($processonly) {
 	goto FINISH;
 }
 
 
 TRACK:
+
+tools::bam::makeProcessedBam(RUNLOG=> $RUNLOG);
+
 ## make Genome tracks
 
 tools::bam::makeTracks(

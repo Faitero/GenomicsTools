@@ -5,8 +5,13 @@ use Data::Dumper;
 use File::Basename;
 use File::Glob;
 use IO::Handle;
+use IPC::System::Simple qw(system);
+use IPC::System::Simple qw(capture);
+
+
 
 my $dry = 0; 
+
 
 sub fastQC{
 	my %args = @_;
@@ -47,6 +52,25 @@ sub findFastQPath{
 	$dir .= "/";
 	print "returning $dir\n";
 	return $dir;
+}
+
+
+# returns hash ref with path to fastqs or error for a given sample;
+sub findFastQPathSample{
+	my %args 	= 	@_;
+	my $file = $args{file};
+	print "Finding directory for file \t $file\n";
+	my $dataPath  = $args{path};
+	$dataPath = "/Data01/gnomex/ExperimentData/" unless defined $dataPath;
+	my $path = capture("find $dataPath -name *$file*");
+	my $rh = {};
+	$rh->{name} = $file;
+	if ($path == '') {
+		$rh->{error} = "Could not be found on file system";
+	} else {
+		$rh->{path} = $path;
+	}
+	return $rh;
 }
 
 
@@ -103,7 +127,7 @@ sub runTophat{
 		$transcriptomeIndex .= "/gg4";
 	}
 	else {
-		die "No definition for ".${$sampleHash}{$sample1}{'Organism'}." contact comeone who can fix this";
+		die "No definition for ".${$sampleHash}{$sample1}{'Organism'}." contact someone who can fix this";
 	}
 	if (defined($alignGTF)){
 		$TOPGTF = $alignGTF;

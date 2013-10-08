@@ -33,6 +33,22 @@ sub makeExpSampleHash{
 	my $sampleHash = parseSampleSheet($samplesheet);
 	my $expSampleHash = {};
 	my $exp = $args{exp};
+	
+	if (!defined($exp)){
+		print "enter experiment id:\n";
+		$exp = <stdin>;
+	}
+	chomp $exp;
+	if ( $exp =~ m/^\d+$/){
+		$exp .= "R";
+	} elsif ( $exp =~ m/^\d+R$/){
+	} else{
+		die "Invalid Experiment: must be of the form <experiment #>R";
+	}
+
+	unless ( -e $samplesheet ){
+		die "Invalid Sample Sheet";
+	}
 	$exp =~ s/R//;
 	## check if experiment exists in this sample sheet
 	if ( !defined ( $sampleHash )){

@@ -79,9 +79,6 @@ sub processBam{
 			);
 		}
 	}	
-
-	processBam(RUNLOG=> $RUNLOG);
-	
 }
 
 
@@ -96,14 +93,14 @@ sub makeProcessedBam{
 		my $baiFile = $file;
 		$baiFile =~ s/.bam$/.bai/;	
 		print $RUNLOG "\n\nmarkedDup BAM index file validation\n";
-		tools:runval::checkIfExists(file=>$baiFile, RUNLOG=>$RUNLOG);
+		
 		$file = filterBam($file);
 		print "processed file:\t$file";
 		buildBamIndex($file);
 		$baiFile = $file;
 		$baiFile =~ s/.bam$/.bai/;
 		print $RUNLOG "\n\nprocessed BAM index file validation\n";
-		tools:runval::checkIfExists(file=>$baiFile, RUNLOG=>$RUNLOG);
+		tools::report::checkIfExists(file=>$baiFile, RUNLOG=>$RUNLOG);
 	}
 }
 

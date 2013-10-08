@@ -1,0 +1,1 @@
+select Request.number, Sample.number, PropertyEntry.valueString, organism , codeApplication from Request join Sample on Sample.idRequest = Request.idRequest join Property on Property.name='Associated Files' left join PropertyEntry on PropertyEntry.idSample=Sample.idSample and PropertyEntry.idProperty=Property.idProperty join Organism where Organism.idOrganism = Sample.idOrganism
