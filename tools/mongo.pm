@@ -3,25 +3,37 @@ use strict;
 use warnings;
 use Data::Dumper;
 use MongoDB::MongoClient;
+use Scalar::Util qw(blessed);
+our @ISA = qw(MongoDB::MongoClient);
 
 
 # returns a handle to the samples collection.
 sub getDB{
+	
 	my $client = MongoDB::MongoClient->new;
 	my $db = $client->get_database( 'b2bPipeline' );
 	
 	return $db;
 }
 
+sub new{
+	my $class = shift;
+	my $self = {};
+	$self->{db} = getDB;
+	print "db->{db} = ". blessed($self->{db})."\n";
+	bless ($self, $class);
+	return $self;
+}
+
 # Adds entries from sample hashes to the sample collection.
 # Reqd. parameters:
 # sh=>$sampleHash
 sub addSamps{
+	my $db = shift;
 	my %args = @_;
 	my $sh = $args{sh};
-	my $db = getDB();
-	my $sampColl = $db->get_collection( 'samples' );
-	my $expColl = $db->get_collection( 'experiments' );
+	my $sampColl = $db->{db}->get_collection( 'samples' );
+	my $expColl = $db->{db}->get_collection( 'experiments' );
 	# for testing DB
 	# $sampColl->drop;
 	# $expColl->drop;
@@ -76,10 +88,10 @@ sub addSamps{
 ## this adds the pipeline->Samples object to the samples databse
 ## required Params : sh => hashRef of Samples 
 sub addPipelineSamples{
+	my $db = shift;
 	my %args = @_;
 	my $sh = $args{sh};
-	my $db = getDB;
-	my $sampColl = $db->get_collection( 'samples' );
+	my $sampColl = $db->{db}->get_collection( 'samples' );
 	for my $key ( keys %$sh ){
 		print "Adding sample $key to the database\n";
 		# print Dumper($sh->{$key});
@@ -92,12 +104,12 @@ sub addPipelineSamples{
 ##checks the database for files returning the path if present
 ## and 0 if not present;
 sub checkSampFileDB{
+	my $db = shift;
 	my %args= @_;
 	my $samp = $args{samp};
 	my $read = $args{read};
 	print "mongo::checkSampFileDB\t$samp\t$read\n";
-	my $db = getDB();
-	my $coll = $db->get_collection('samples');
+	my $coll = $db->{db}->get_collection('samples');
 	my $file = $coll->find( { "_id" => $samp} );
 	my $fileObj = $file->next;
 	my $filename = $fileObj->{files}->{$read}->{name};
@@ -109,6 +121,7 @@ sub checkSampFileDB{
 			return $filename;
 		}
 	} else {
+		print "$filename not in database\n";
 		return 0;
 	}
 }
@@ -125,14 +138,14 @@ sub checkSampFileDB{
 # val => $value,
 # db => $database,
 sub addField{
+	my $db = shift;
 	my %args = @_;
 	my $coll = $args{coll};
 	my $qfld = $args{qfld};
 	my $qval = $args{qval};
 	my $fld = $args{fld};
 	my $val = $args{val};
-	my $db = getDB();
-	$coll = $db->get_collection($coll);
+	$coll = $db->{db}->get_collection($coll);
 	$coll->update(
 		{$qfld=>$qval},
 		{'$set'=> {$fld => $val} });
@@ -143,10 +156,11 @@ sub addField{
 # exp => $exp,
 # dir => $dir,
 sub addFastQDir {
+	my $db = shift;
 	my %args = @_;
 	my $exp = $args{exp};
 	my $dir = $args{dir};
-	addField(
+	$db->addField(
 		coll => "experiments",
 		qfld => "_id",
 		qval => $exp,
@@ -157,9 +171,9 @@ sub addFastQDir {
 
 ## add rows to meas collection
 sub addBamStat{
-	my $db = getDB();
-	my $sampColl = $db->get_collection('samples');
-	my $measColl = $db->get_collection('meas');
+	my $db = shift;
+	my $sampColl = $db->{db}->get_collection('samples');
+	my $measColl = $db->{db}->get_collection('meas');
 	$measColl->drop;
 	my %args = @_;
 	my $exp = $args{exp};
@@ -207,7 +221,7 @@ sub addBamStat{
 		## check if the bamstat is set yet
 		# $measColl->update({'_id' => "bamstat_".$samp."_".$file}, { '$set' => { "file" => $file, "samples_id" => $samp, 'type'=>'bamstat', 'data' =>{%$rh}} }, {'upsert' => 1, 'safe' => 1});
 		# $measColl->update({'_id' => "bamstat_".$samp."_".$file}, { '$addToSet' => { "fields" => {'$each' =>  [@orderedFlds] } } }, {'upsert' => 1, 'safe' => 1});
-		insertMeasColl(
+		$db->insertMeasColl(
 			samp => $samp,
 			sh => $rh,
 			file => $file,
@@ -221,8 +235,9 @@ sub addBamStat{
 ## returnHash-> {id} -> {fldName} ->{value}
 ##		
 sub getBamStat{
+	my $db = shift;
 	my %args = @_;
-	return queryMeasColl(
+	return $db->queryMeasColl(
 		exp => $args{exp},
 		file => $args{file},
 		expDir => $args{expDir},
@@ -231,9 +246,9 @@ sub getBamStat{
 }
 
 sub addMarkDuplicates{
-	my $db = getDB();
-	my $sampColl = $db->get_collection('samples');
-	my $measColl = $db->get_collection('meas');
+	my $db = shift;
+	my $sampColl = $db->{db}->get_collection('samples');
+	my $measColl = $db->{db}->get_collection('meas');
 	my %args = @_;
 	my $exp = $args{exp};
 	my $file = $args{file};
@@ -285,7 +300,7 @@ sub addMarkDuplicates{
 		$sh->{fields} = \@orderedFlds;
 		# $measColl->update({'_id' => "markdup_".$samp."_".$file}, { '$set' => {"file" => $file, "samples_id" => $samp, 'type'=>'markdup', "command"=>$command, 'data' =>{%$rh}} }, {'upsert' => 1, 'safe' => 1});
 		# $measColl->update({'_id' => "markDuplicates_".$samp."_".$file}, {'$set' => { %{$sh} }}, {'upsert' => 1, 'safe' => 1});
-		insertMeasColl(
+		$db->insertMeasColl(
 			samp => $samp,
 			sh => $sh,
 			file => $file,
@@ -294,12 +309,13 @@ sub addMarkDuplicates{
 }
 
 sub getMarkDuplicates {
+	my $db = shift;
 	my %args = @_;
 	my $exp = $args{exp};
 	my $file = $args{file};
 	my $expDir = $args{expdir};
 
-	return queryMeasColl (
+	return $db->queryMeasColl (
 		exp => $exp,
 		file => $file,
 		expDir =>$expDir,
@@ -308,8 +324,8 @@ sub getMarkDuplicates {
 }
 
 sub addInnerDistance {
-	my $db = getDB();
-	my $sampColl = $db->get_collection('samples');
+	my $db = shift;
+	my $sampColl = $db->{db}->get_collection('samples');
 	my %args = @_;
 	my $exp = $args{exp};
 	my $file = $args{file};
@@ -346,7 +362,7 @@ sub addInnerDistance {
 		$sh->{data}->{bin1} = \@bin1;
 		$sh->{data}->{bin2} = \@bin2;
 		$sh->{data}->{freq} = \@freq;
-		insertMeasColl(
+		$db->insertMeasColl(
 			samp => $samp,
 			sh => $sh,
 			file => $file,
@@ -355,8 +371,9 @@ sub addInnerDistance {
 }
 
 sub getInnerDistance {
+	my $db = shift;
 	my %args = @_;
-	return queryMeasColl(
+	return $db->queryMeasColl(
 		exp => $args{exp},
 		file => $args{file},
 		expDir => $args{expDir},
@@ -365,8 +382,8 @@ sub getInnerDistance {
 }
 
 sub addGeneBodyCov {
-	my $db = getDB();
-	my $sampColl = $db->get_collection('samples');
+	my $db = shift;
+	my $sampColl = $db->{db}->get_collection('samples');
 	my %args = @_;
 	my $exp = $args{exp};
 	my $file = $args{file};
@@ -411,7 +428,7 @@ sub addGeneBodyCov {
 		$sh->{file} = $file;
 		$sh->{meas} = "gene_body_coverage";
 		# print Dumper($sh);
-		insertMeasColl(
+		$db->insertMeasColl(
 			samp => $samp,
 			sh => $sh,
 			file => $file,
@@ -420,6 +437,7 @@ sub addGeneBodyCov {
 }
 
 sub getGeneBodyCov {
+	my $db = shift;
 	my %args = @_;
 	return queryMeasColl(
 		exp => $args{exp},
@@ -435,8 +453,8 @@ sub getGeneBodyCov {
 
 
 sub insertMeasColl{
-	my $db = getDB();
-	my $measColl = $db->get_collection('meas');
+	my $db = shift;
+	my $measColl = $db->{db}->get_collection('meas');
 	my %args = @_;
 	my $file = $args{file};
 	my $sh = $args{sh};
@@ -450,8 +468,8 @@ sub insertMeasColl{
 }
 
 sub queryMeasColl{
-	my $db = getDB();
-	my $measColl = $db->get_collection('meas');
+	my $db = shift;
+	my $measColl = $db->{db}->get_collection('meas');
 	my %args = @_;
 	my $exp = $args{exp};
 	my $file = $args{file};
