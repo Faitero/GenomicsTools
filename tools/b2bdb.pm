@@ -55,32 +55,28 @@ sub queryB2BSampleFiles{
 		for my $fld (@flds){
 			chomp $fld;
 		}
-		$sh->{$flds[0]}->{files}->{$flds[4]} .= $flds[2]."," ; ##if (defined $sh->{$flds[0]}->{files}->{$flds[4]} && !($sh->{$flds[0]}->{files}->{$flds[4]} =~ $flds[2]) );
-
+		$sh->{$flds[0]}->{files}->{$flds[4]}->{path} = $flds[2] ; ##if (defined $sh->{$flds[0]}->{files}->{$flds[4]} && !($sh->{$flds[0]}->{files}->{$flds[4]} =~ $flds[2]) );
+		$sh->{$flds[0]}->{files}->{$flds[4]}->{size} = -s $flds[2];
 		# push (@{$sh->{$flds[0]}->{files}->{$flds[4]}} , $flds[2] );
 		$sh->{$flds[0]}->{species} = $flds[1];
 		$sh->{$flds[0]}->{type} = $flds[3];
 	}
 
-	## there are duplicate rows
-	print Dumper ($sh) if $debug;
-	for my $samp (keys(%{$sh})){
-		for my $file ( keys %{$sh->{$samp}->{files}} ){
-			chop $sh->{$samp}->{files}->{$file};
-		}
-	}
-	print Dumper ($sh) if $debug;
-	print Dumper ($sh->{"37X5"}->{files}->{fastqRead2}) if $debug;
-	for my $file ($sh->{"37X5"}->{files}->{fastqRead2}){
-		print $file."\n";
-	}
+	# ## there are duplicate rows
+	# print Dumper ($sh) if $debug;
+	# for my $samp (keys(%{$sh})){
+	# 	for my $file ( keys %{$sh->{$samp}->{files}} ){
+	# 		chop $sh->{$samp}->{files}->{$file};
+	# 	}
+	# }
+
 	return $sh;
 }
 
 
 unless ( caller ) {
-	queryB2BSampleFiles;
-
+	my $sh = queryB2BSampleFiles;
+	print Dumper $sh;
 }
 
 

@@ -4,7 +4,6 @@ number	organism	concat(propertyValue, year(Request.createDate), '/', filename)	c
 5X3	Human	/Data01/gnomex/ExperimentData/2011/5R/fastq/7940X15_81BNAABXX_8_sequence.txt.gz	MRNASEQ	fastqRead1
 24X1	Zebrafish	/Data01/gnomex/ExperimentData/2011/24R/Fastq/8187X1_110524_SN141_0355_AD0D99ABXX_1.txt.gz	MRNASEQ	fastqRead1
 24X2	Zebrafish	/Data01/gnomex/ExperimentData/2011/24R/Fastq/8187X2_110524_SN141_0355_AD0D99ABXX_1.txt.gz	MRNASEQ	fastqRead1
-24X4	Zebrafish	/Data01/gnomex/ExperimentData/2011/24R/Triplicate Fastq/9004X1_120214_SN141_0456_AD0P20ACXX_1.txt.gz	MRNASEQ	fastqRead1
 24X4	Zebrafish	/Data01/gnomex/ExperimentData/2011/24R/Fastq/9004X1_120214_SN141_0456_AD0P20ACXX_1.txt.gz	MRNASEQ	fastqRead1
 25X1	Zebrafish	/Data01/gnomex/ExperimentData/2011/25R/Fatq/8092X1_110412_SN141_0334_A81FDFABXX_8.txt.gz	MRNASEQ	fastqRead1
 25X2	Zebrafish	/Data01/gnomex/ExperimentData/2011/25R/Fatq/8092X2_110412_SN141_0334_A81FDFABXX_8.txt.gz	MRNASEQ	fastqRead1
@@ -27,16 +26,114 @@ number	organism	concat(propertyValue, year(Request.createDate), '/', filename)	c
 28X1	Mouse	/Data01/gnomex/ExperimentData/2011/28R/SCAR_RNAseq_raw_data/SCAR_pool.ATCACG.s_8_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
 29X1	Mouse	/Data01/gnomex/ExperimentData/2011/29R/upload_staging/Benoit.ATCACG.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 29X1	Mouse	/Data01/gnomex/ExperimentData/2011/29R/upload_staging/Benoit.ATCACG.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-32X1	Mouse	/Data01/gnomex/ExperimentData/2011/32R/data/s_6_sequence.txt.bz2	CHIPSEQ	fastqRead1
-32X2	Mouse	/Data01/gnomex/ExperimentData/2011/32R/data/s_7_sequence.txt.bz2	CHIPSEQ	fastqRead1
-32X3	Mouse	/Data01/gnomex/ExperimentData/2011/32R/data/s_5_sequence.txt.bz2	CHIPSEQ	fastqRead1
-32X4	Mouse	/Data01/gnomex/ExperimentData/2011/32R/data/FC_00279_s_8_sequence.txt.bz2	CHIPSEQ	fastqRead1
-32X5	Mouse	/Data01/gnomex/ExperimentData/2011/32R/data/FC_00279_s_8_sequence.txt.bz2	CHIPSEQ	fastqRead1
-32X5	Mouse	/Data01/gnomex/ExperimentData/2011/32R/data/s_8_sequence.txt.bz2	CHIPSEQ	fastqRead1
 33X1	Zebrafish	/Data01/gnomex/ExperimentData/2011/33R/FAstq/8331X1_110817_SN141_0375_AB0AEVABXX_3.txt.gz	MRNASEQ	fastqRead1
 33X2	Zebrafish	/Data01/gnomex/ExperimentData/2011/33R/FAstq/8331X2_110817_SN141_0375_AB0AEVABXX_3.txt.gz	MRNASEQ	fastqRead1
 34X1	Zebrafish	/Data01/gnomex/ExperimentData/2011/34R/Fastq/8330X1_110817_SN141_0375_AB0AEVABXX_2.txt.gz	MRNASEQ	fastqRead1
 34X2	Zebrafish	/Data01/gnomex/ExperimentData/2011/34R/Fastq/8330X2_110817_SN141_0375_AB0AEVABXX_2.txt.gz	MRNASEQ	fastqRead1
+36X1	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.ACAGTG.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X1	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.ACAGTG.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X2	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.ACTTGA.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X2	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.ACTTGA.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X3	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.ATCACG.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X3	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.ATCACG.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X4	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.CAGATC.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X4	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.CAGATC.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X5	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.CGATGT.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X5	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.CGATGT.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X6	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.GCCAAT.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X6	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.GCCAAT.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X7	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.TGACCA.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X7	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.TGACCA.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X8	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.TTAGGC.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X8	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.TTAGGC.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X9	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.AATACC.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X9	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.AATACC.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X10	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.AGCTAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X10	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.AGCTAA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X11	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.CTTGTA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X11	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.CTTGTA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X12	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.GATCAG.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X12	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.GATCAG.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X13	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.GGCTAC.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X13	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.GGCTAC.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X14	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.GTCGAA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X14	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.GTCGAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X15	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.TAGCTT.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+36X15	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.TAGCTT.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X16	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.TGCAAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+36X16	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.TGCAAA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+38X1	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACAGTG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+38X1	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACAGTG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+38X2	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACTTGA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+38X2	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACTTGA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+38X3	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ATCACG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+38X3	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ATCACG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+38X4	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CAGATC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+38X4	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CAGATC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+38X5	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CGATGT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+38X5	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CGATGT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+38X6	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.GCCAAT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+38X6	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.GCCAAT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+38X7	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TGACCA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+38X7	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TGACCA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+38X8	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TTAGGC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+38X8	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TTAGGC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X1	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_MT_1.GTCGAA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X1	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_MT_1.GTCGAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+39X2	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_MT_3.AGCTAA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X2	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_MT_3.AGCTAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+39X3	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_WT_1.GGCTAC.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+39X3	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_WT_1.GGCTAC.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X4	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_WT_2.CTTGTA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X4	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_WT_2.CTTGTA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+39X5	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_AT.CAGATC.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+39X5	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_AT.CAGATC.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X6	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_AV.ACAGTG.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+39X6	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_AV.ACAGTG.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X7	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_PT.ACTTGA.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+39X7	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_PT.ACTTGA.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X8	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_PV.GCCAAT.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+39X8	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_PV.GCCAAT.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X9	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_AT.TTAGGC.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+39X9	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_AT.TTAGGC.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X10	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_AV.ATCACG.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+39X10	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_AV.ATCACG.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X11	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_PT.TGACCA.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+39X11	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_PT.TGACCA.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X12	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_PV.CGATGT.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+39X12	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_PV.CGATGT.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X1	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/30V_post.TGACCA.s_6_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X1	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/30V_post.TGACCA.s_6_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X2	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/30V_pre.TTAGGC.s_6_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X2	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/30V_pre.TTAGGC.s_6_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X3	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/32V_post.GCCAAT.s_6_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X3	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/32V_post.GCCAAT.s_6_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X4	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/32V_pre.ACAGTG.s_6_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X4	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/32V_pre.ACAGTG.s_6_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X5	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/8V_post.CGATGT.s_6_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X5	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/8V_post.CGATGT.s_6_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X6	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/8V_pre.ATCACG.s_6_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X6	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/8V_pre.ATCACG.s_6_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X7	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_AV.ATCACG.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X7	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_AV.ATCACG.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X8	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_MV.CGATGT.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X8	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_MV.CGATGT.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X9	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_PV.TTAGGC.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X9	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_PV.TTAGGC.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X10	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_TV.TGACCA.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X10	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_TV.TGACCA.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X11	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_AV.ACAGTG.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X11	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_AV.ACAGTG.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X12	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_MV.GCCAAT.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X12	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_MV.GCCAAT.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X13	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_PV.CAGATC.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X13	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_PV.CAGATC.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X14	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_TV.ACTTGA.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+40X14	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_TV.ACTTGA.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+40X15	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/g134_2.txt.gz	MRNASEQ	fastqRead2
+40X15	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/g134_1.txt.gz	MRNASEQ	fastqRead1
+40X16	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/g467_1.txt.gz	MRNASEQ	fastqRead1
+40X16	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/g467_2.txt.gz	MRNASEQ	fastqRead2
 44X1	Mouse	/Data01/gnomex/ExperimentData/2011/44R/sequence.txt/H3K4me1_MES_Rep_1_JW-H19c_sequence.txt.gz	CHIPSEQ	fastqRead1
 44X2	Mouse	/Data01/gnomex/ExperimentData/2011/44R/sequence.txt/H3K4me3_MES_Rep_1_JW-H20c_sequence.txt.gz	CHIPSEQ	fastqRead1
 44X3	Mouse	/Data01/gnomex/ExperimentData/2011/44R/sequence.txt/H3K27ac_MES_Rep_1_JW-H22c_sequence.txt.gz	CHIPSEQ	fastqRead1
@@ -106,66 +203,58 @@ number	organism	concat(propertyValue, year(Request.createDate), '/', filename)	c
 49X1	Mouse	/Data01/gnomex/ExperimentData/2011/49R/fastq/s_8_E12.5v_input_sequence.txt.gz	CHIPSEQ	fastqRead1
 49X2	Mouse	/Data01/gnomex/ExperimentData/2011/49R/fastq/s_8__E12.5v_EZH2_sequence.txt.gz	CHIPSEQ	fastqRead1
 49X3	Mouse	/Data01/gnomex/ExperimentData/2011/49R/fastq/s_8_E12.5v_H3K27me3_sequence.txt.gz	CHIPSEQ	fastqRead1
-50X1	Mouse	/Data01/gnomex/ExperimentData/2011/56R/upload_staging/TG4S-control-4.111013-FC325.L007_R1.gz	MRNASEQ	fastqRead1
-50X1	Mouse	/Data01/gnomex/ExperimentData/2011/50R/upload_staging/TG4S-control-4.111013-FC325.L007_R1.gz	MRNASEQ	fastqRead1
-50X1	Mouse	/Data01/gnomex/ExperimentData/2011/56R/upload_staging/TG4S-control-4.111013-FC325.L007_R2.gz	MRNASEQ	fastqRead2
 50X1	Mouse	/Data01/gnomex/ExperimentData/2011/50R/upload_staging/TG4S-control-4.111013-FC325.L007_R2.gz	MRNASEQ	fastqRead2
-50X2	Mouse	/Data01/gnomex/ExperimentData/2011/56R/upload_staging/TG4S-KO-4.111013-FC325.L007_R1.gz	MRNASEQ	fastqRead1
+50X1	Mouse	/Data01/gnomex/ExperimentData/2011/50R/upload_staging/TG4S-control-4.111013-FC325.L007_R1.gz	MRNASEQ	fastqRead1
 50X2	Mouse	/Data01/gnomex/ExperimentData/2011/50R/upload_staging/TG4S-KO-4.111013-FC325.L007_R1.gz	MRNASEQ	fastqRead1
-50X2	Mouse	/Data01/gnomex/ExperimentData/2011/56R/upload_staging/TG4S-KO-4.111013-FC325.L007_R2.gz	MRNASEQ	fastqRead2
 50X2	Mouse	/Data01/gnomex/ExperimentData/2011/50R/upload_staging/TG4S-KO-4.111013-FC325.L007_R2.gz	MRNASEQ	fastqRead2
 52X1	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-control-1.110808-FC294.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 52X1	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-control-1.110808-FC294.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-52X3	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-control-2.110830-FC301.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 52X3	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-control-2.110830-FC301.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-52X5	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-control-4.111013-FC325.L007_R1.fastq.gz	MRNASEQ	fastqRead1
+52X3	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-control-2.110830-FC301.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 52X5	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-control-4.111013-FC325.L007_R2.fastq.gz	MRNASEQ	fastqRead2
-52X7	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-KO-1.110808-FC294.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+52X5	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-control-4.111013-FC325.L007_R1.fastq.gz	MRNASEQ	fastqRead1
 52X7	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-KO-1.110808-FC294.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+52X7	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-KO-1.110808-FC294.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 52X9	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-KO-2.110830-FC301.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 52X9	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-KO-2.110830-FC301.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-52X11	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-KO-4.111013-FC325.L007_R1.fastq.gz	MRNASEQ	fastqRead1
 52X11	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-KO-4.111013-FC325.L007_R2.fastq.gz	MRNASEQ	fastqRead2
+52X11	Mouse	/Data01/gnomex/ExperimentData/2011/52R/Ezh2_KO_control/TG4S-KO-4.111013-FC325.L007_R1.fastq.gz	MRNASEQ	fastqRead1
 53X1	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/A8-D10-0.2a_ATCACG_L002_R1.fastq.gz	TDNASEQ	fastqRead1
 53X1	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/A8-D10-0.2a_ATCACG_L002_R2.fastq.gz	TDNASEQ	fastqRead2
 53X2	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/A8-D10-0.2b_CGATGT_L002_R1.fastq.gz	TDNASEQ	fastqRead1
 53X2	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/A8-D10-0.2b_CGATGT_L002_R2.fastq.gz	TDNASEQ	fastqRead2
-53X3	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/A8-D6-0.2a_ACAGTG_L002_R1.fastq.gz	TDNASEQ	fastqRead1
 53X3	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/A8-D6-0.2a_ACAGTG_L002_R2.fastq.gz	TDNASEQ	fastqRead2
-53X4	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/A8-D6-0.2b_GCCAAT_L003_R1.fastq.gz	TDNASEQ	fastqRead1
+53X3	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/A8-D6-0.2a_ACAGTG_L002_R1.fastq.gz	TDNASEQ	fastqRead1
 53X4	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/A8-D6-0.2b_GCCAAT_L003_R2.fastq.gz	TDNASEQ	fastqRead2
-53X5	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/DKO-D10-0.3a_TTAGGC_L002_R1.fastq.gz	TDNASEQ	fastqRead1
+53X4	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/A8-D6-0.2b_GCCAAT_L003_R1.fastq.gz	TDNASEQ	fastqRead1
 53X5	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/DKO-D10-0.3a_TTAGGC_L002_R2.fastq.gz	TDNASEQ	fastqRead2
-53X6	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/DKO-D10-0.3b_TGACCA_L002_R1.fastq.gz	TDNASEQ	fastqRead1
+53X5	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/DKO-D10-0.3a_TTAGGC_L002_R1.fastq.gz	TDNASEQ	fastqRead1
 53X6	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/DKO-D10-0.3b_TGACCA_L002_R2.fastq.gz	TDNASEQ	fastqRead2
-53X7	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/DKO-D6-0.3a_GATCAG_L003_R1.fastq.gz	TDNASEQ	fastqRead1
+53X6	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/DKO-D10-0.3b_TGACCA_L002_R1.fastq.gz	TDNASEQ	fastqRead1
 53X7	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/DKO-D6-0.3a_GATCAG_L003_R2.fastq.gz	TDNASEQ	fastqRead2
+53X7	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/DKO-D6-0.3a_GATCAG_L003_R1.fastq.gz	TDNASEQ	fastqRead1
 53X8	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/DKO-D6-0.3b_TAGCTT_L003_R1.fastq.gz	TDNASEQ	fastqRead1
 53X8	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/DKO-D6-0.3b_TAGCTT_L003_R2.fastq.gz	TDNASEQ	fastqRead2
 53X9	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Nkx2.5-D10-0.2a_GTCGAA_L005_R1.fastq.gz	TDNASEQ	fastqRead1
 53X9	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Nkx2.5-D10-0.2a_GTCGAA_L005_R2.fastq.gz	TDNASEQ	fastqRead2
-53X10	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Nkx2.5-D10-0.2b_AGCTAA_L005_R1.fastq.gz	TDNASEQ	fastqRead1
 53X10	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Nkx2.5-D10-0.2b_AGCTAA_L005_R2.fastq.gz	TDNASEQ	fastqRead2
-53X11	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Nkx2.5-D6-0.2a_GGCTAC_L005_R1.fastq.gz	TDNASEQ	fastqRead1
+53X10	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Nkx2.5-D10-0.2b_AGCTAA_L005_R1.fastq.gz	TDNASEQ	fastqRead1
 53X11	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Nkx2.5-D6-0.2a_GGCTAC_L005_R2.fastq.gz	TDNASEQ	fastqRead2
-53X12	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Nkx2.5-D6-0.2b_CTTGTA_L005_R1.fastq.gz	TDNASEQ	fastqRead1
+53X11	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Nkx2.5-D6-0.2a_GGCTAC_L005_R1.fastq.gz	TDNASEQ	fastqRead1
 53X12	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Nkx2.5-D6-0.2b_CTTGTA_L005_R2.fastq.gz	TDNASEQ	fastqRead2
+53X12	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Nkx2.5-D6-0.2b_CTTGTA_L005_R1.fastq.gz	TDNASEQ	fastqRead1
 53X13	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Tbx5-D10-0.2a_CAGATC_L003_R1.fastq.gz	TDNASEQ	fastqRead1
 53X13	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Tbx5-D10-0.2a_CAGATC_L003_R2.fastq.gz	TDNASEQ	fastqRead2
 53X14	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Tbx5-D10-0.2b_ACTTGA_L003_R1.fastq.gz	TDNASEQ	fastqRead1
 53X14	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Tbx5-D10-0.2b_ACTTGA_L003_R2.fastq.gz	TDNASEQ	fastqRead2
 53X15	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Tbx5-D6-0.2a_TGCAAA_L005_R1.fastq.gz	TDNASEQ	fastqRead1
 53X15	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Tbx5-D6-0.2a_TGCAAA_L005_R2.fastq.gz	TDNASEQ	fastqRead2
-53X16	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Tbx5-D6-0.2b_AATACC_L005_R1.fastq.gz	TDNASEQ	fastqRead1
 53X16	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Tbx5-D6-0.2b_AATACC_L005_R2.fastq.gz	TDNASEQ	fastqRead2
+53X16	Mouse	/Data01/gnomex/ExperimentData/2012/53R/upload_staging/Tbx5-D6-0.2b_AATACC_L005_R1.fastq.gz	TDNASEQ	fastqRead1
 56X1	Mouse	/Data01/gnomex/ExperimentData/2012/56R/upload_staging/TG4S-KO-4.111013-FC325.L007_R1.gz	MRNASEQ	fastqRead1
-56X1	Mouse	/Data01/gnomex/ExperimentData/2012/50R/upload_staging/TG4S-KO-4.111013-FC325.L007_R1.gz	MRNASEQ	fastqRead1
 56X1	Mouse	/Data01/gnomex/ExperimentData/2012/56R/upload_staging/TG4S-KO-4.111013-FC325.L007_R2.gz	MRNASEQ	fastqRead2
-56X1	Mouse	/Data01/gnomex/ExperimentData/2012/50R/upload_staging/TG4S-KO-4.111013-FC325.L007_R2.gz	MRNASEQ	fastqRead2
 56X2	Mouse	/Data01/gnomex/ExperimentData/2012/56R/upload_staging/TG4S-control-4.111013-FC325.L007_R1.gz	MRNASEQ	fastqRead1
-56X2	Mouse	/Data01/gnomex/ExperimentData/2012/50R/upload_staging/TG4S-control-4.111013-FC325.L007_R1.gz	MRNASEQ	fastqRead1
 56X2	Mouse	/Data01/gnomex/ExperimentData/2012/56R/upload_staging/TG4S-control-4.111013-FC325.L007_R2.gz	MRNASEQ	fastqRead2
-56X2	Mouse	/Data01/gnomex/ExperimentData/2012/50R/upload_staging/TG4S-control-4.111013-FC325.L007_R2.gz	MRNASEQ	fastqRead2
 69X1	Human	/Data01/gnomex/ExperimentData/2012/69R/Fastq/8531X1_111206_SN141_0426_AD0EKYABXX_1.txt.gz	MRNASEQ	fastqRead1
 69X2	Human	/Data01/gnomex/ExperimentData/2012/69R/Fastq/8531X2_111206_SN141_0426_AD0EKYABXX_1.txt.gz	MRNASEQ	fastqRead1
 69X3	Human	/Data01/gnomex/ExperimentData/2012/69R/Fastq/8531X3_111206_SN141_0426_AD0EKYABXX_1.txt.gz	MRNASEQ	fastqRead1
@@ -207,48 +296,56 @@ number	organism	concat(propertyValue, year(Request.createDate), '/', filename)	c
 70X1	Human	/Data01/gnomex/ExperimentData/2012/70R/Fastq/8789X1_111118_SN141_0417_BC04PLABXX_6.txt	MRNASEQ	fastqRead1
 70X2	Human	/Data01/gnomex/ExperimentData/2012/70R/Fastq/8789X2_111118_SN141_0417_BC04PLABXX_6.txt	MRNASEQ	fastqRead1
 70X3	Human	/Data01/gnomex/ExperimentData/2012/70R/Fastq/8789X3_111118_SN141_0417_BC04PLABXX_6.txt	MRNASEQ	fastqRead1
-77X1	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RA_p0_ACAGTG.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+76X1	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/PV_mouse.AGCTAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+76X1	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/PV_mouse.AGCTAA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+76X2	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/AV_mouse.CTTGTA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+76X2	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/AV_mouse.CTTGTA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+76X3	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/MV_mouse.GTCGAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+76X3	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/MV_mouse.GTCGAA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+76X4	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/TV_mouse.TGCAAA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+76X4	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/TV_mouse.TGCAAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
 77X1	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RA_p0_ACAGTG.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+77X1	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RA_p0_ACAGTG.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X2	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LV_p0_ACTTGA.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X2	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LV_p0_ACTTGA.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-77X3	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RA_E14.5_ATCACG.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X3	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RA_E14.5_ATCACG.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-77X4	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RV_p0_CAGATC.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+77X3	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RA_E14.5_ATCACG.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X4	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RV_p0_CAGATC.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+77X4	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RV_p0_CAGATC.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X5	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LA_E14.5_CGATGT.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X5	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LA_E14.5_CGATGT.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-77X6	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LA_p0_GCCAAT.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X6	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LA_p0_GCCAAT.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+77X6	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LA_p0_GCCAAT.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X7	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LV_E14.5_TGACCA.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X7	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LV_E14.5_TGACCA.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-77X8	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RV_E14.5_TTAGGC.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X8	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RV_E14.5_TTAGGC.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-77X9	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LV_P10_AATACC.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+77X8	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RV_E14.5_TTAGGC.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X9	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LV_P10_AATACC.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+77X9	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LV_P10_AATACC.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X10	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LA_P10_g2.AGCTAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X10	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LA_P10_AGCTAA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-77X11	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LV_P3_CTTGTA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X11	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LV_P3_CTTGTA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-77X12	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RA_P3_GATCAG.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+77X11	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LV_P3_CTTGTA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X12	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RA_P3_GATCAG.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+77X12	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RA_P3_GATCAG.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X13	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RV_P3_GGCTAC.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X13	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RV_P3_GGCTAC.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-77X14	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RA_P10_GTCGAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X14	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RA_P10_GTCGAA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-77X15	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LA_P3_TAGCTT.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
+77X14	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RA_P10_GTCGAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X15	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LA_P3_TAGCTT.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
+77X15	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/LA_P3_TAGCTT.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X16	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RV_P10_TGCAAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
 77X16	Mouse	/Data01/gnomex/ExperimentData/2012/77R/bioanalysis/RV_P10_TGCAAA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-81X1	Human	/Data01/gnomex/ExperimentData/2012/81R/Fastq/s_1_1_sequence_00hour_RNA1.txt.bz2	MRNASEQ	fastqRead1
 81X1	Human	/Data01/gnomex/ExperimentData/2012/81R/Fastq/s_1_2_sequence_00hour_RNA2.txt.bz2	MRNASEQ	fastqRead2
+81X1	Human	/Data01/gnomex/ExperimentData/2012/81R/Fastq/s_1_1_sequence_00hour_RNA1.txt.bz2	MRNASEQ	fastqRead1
 81X2	Human	/Data01/gnomex/ExperimentData/2012/81R/Fastq/s_1_1_sequence_01hour_RNA1.txt.bz2	MRNASEQ	fastqRead1
 81X2	Human	/Data01/gnomex/ExperimentData/2012/81R/Fastq/s_1_2_sequence_01hour_RNA2.txt.bz2	MRNASEQ	fastqRead2
-81X3	Human	/Data01/gnomex/ExperimentData/2012/81R/Fastq/s_1_1_sequence_04hour_RNA1.txt.bz2	MRNASEQ	fastqRead1
 81X3	Human	/Data01/gnomex/ExperimentData/2012/81R/Fastq/s_1_2_sequence_04hour_RNA2.txt.bz2	MRNASEQ	fastqRead2
+81X3	Human	/Data01/gnomex/ExperimentData/2012/81R/Fastq/s_1_1_sequence_04hour_RNA1.txt.bz2	MRNASEQ	fastqRead1
 81X4	Human	/Data01/gnomex/ExperimentData/2012/81R/Fastq/s_1_1_sequence_12hour_RNA1.txt.bz2	MRNASEQ	fastqRead1
 81X4	Human	/Data01/gnomex/ExperimentData/2012/81R/Fastq/s_1_2_sequence_12hour_RNA2.txt.bz2	MRNASEQ	fastqRead2
-86X1	Mouse	/Data01/gnomex/ExperimentData/2012/86R/bioanalysis/120507-FC412-L5-CGATGT--Bruneau--BL6_Baf60c_het--Mm--R1.fq	MRNASEQ	fastqRead1
 86X1	Mouse	/Data01/gnomex/ExperimentData/2012/86R/bioanalysis/120507-FC412-L5-CGATGT--Bruneau--BL6_Baf60c_het--Mm--R2.fq	MRNASEQ	fastqRead2
+86X1	Mouse	/Data01/gnomex/ExperimentData/2012/86R/bioanalysis/120507-FC412-L5-CGATGT--Bruneau--BL6_Baf60c_het--Mm--R1.fq	MRNASEQ	fastqRead1
 86X2	Mouse	/Data01/gnomex/ExperimentData/2012/86R/bioanalysis/120507-FC412-L5-TAGCTT--Bruneau--BL6_Baf60c_mut--Mm--R1.fq	MRNASEQ	fastqRead1
 86X2	Mouse	/Data01/gnomex/ExperimentData/2012/86R/bioanalysis/120507-FC412-L5-TAGCTT--Bruneau--BL6_Baf60c_mut--Mm--R2.fq	MRNASEQ	fastqRead2
 87X1	Zebrafish	/Data01/gnomex/ExperimentData/2012/87R/Fastq/9012X1_120223_SN1117_0072_AD0NNTACXX_7.txt.gz	MRNASEQ	fastqRead1
@@ -261,74 +358,56 @@ number	organism	concat(propertyValue, year(Request.createDate), '/', filename)	c
 91X1	Mouse	/Data01/gnomex/ExperimentData/2012/91R/bioanalysis/120607-FC437-L1-ATCACG--Bruneau--BK15-Tbx5Nkx2.5-DKO-d10--Mm--R2.fq.gz	MRNASEQ	fastqRead2
 91X2	Mouse	/Data01/gnomex/ExperimentData/2012/91R/bioanalysis/120607-FC437-L1-CGATGT--Bruneau--BK29-Tbx5Nkx2.5-DKO-d6--Mm--R1.fq.gz	MRNASEQ	fastqRead1
 91X2	Mouse	/Data01/gnomex/ExperimentData/2012/91R/bioanalysis/120607-FC437-L1-CGATGT--Bruneau--BK29-Tbx5Nkx2.5-DKO-d6--Mm--R2.fq.gz	MRNASEQ	fastqRead2
-91X3	Mouse	/Data01/gnomex/ExperimentData/2012/91R/bioanalysis/120607-FC437-L1-TTAGGC--Bruneau--BK30-Tbx5Nkx2.5-DKO-d6--Mm--R1.fq.gz	MRNASEQ	fastqRead1
 91X3	Mouse	/Data01/gnomex/ExperimentData/2012/91R/bioanalysis/120607-FC437-L1-TTAGGC--Bruneau--BK30-Tbx5Nkx2.5-DKO-d6--Mm--R2.fq.gz	MRNASEQ	fastqRead2
+91X3	Mouse	/Data01/gnomex/ExperimentData/2012/91R/bioanalysis/120607-FC437-L1-TTAGGC--Bruneau--BK30-Tbx5Nkx2.5-DKO-d6--Mm--R1.fq.gz	MRNASEQ	fastqRead1
 92X1	Mouse	/Data01/gnomex/ExperimentData/2012/92R/bioanalysis/Benoit-ATCACG_L002_1-2_WT.R1.fastq.gz	MRNASEQ	fastqRead1
 92X1	Mouse	/Data01/gnomex/ExperimentData/2012/92R/bioanalysis/Benoit-ATCACG_L002_1-2_WT.R2.fastq.gz	MRNASEQ	fastqRead2
-92X2	Mouse	/Data01/gnomex/ExperimentData/2012/92R/bioanalysis/Benoit-CGATGT_L002_1-3_WT.R1.fastq.gz	MRNASEQ	fastqRead1
 92X2	Mouse	/Data01/gnomex/ExperimentData/2012/92R/bioanalysis/Benoit-CGATGT_L002_1-3_WT.R2.fastq.gz	MRNASEQ	fastqRead2
+92X2	Mouse	/Data01/gnomex/ExperimentData/2012/92R/bioanalysis/Benoit-CGATGT_L002_1-3_WT.R1.fastq.gz	MRNASEQ	fastqRead1
 92X3	Mouse	/Data01/gnomex/ExperimentData/2012/92R/bioanalysis/Benoit-TGACCA_L002_1-9_KO.R1.fastq.gz	MRNASEQ	fastqRead1
 92X3	Mouse	/Data01/gnomex/ExperimentData/2012/92R/bioanalysis/Benoit-TGACCA_L002_1-9_KO.R2.fastq.gz	MRNASEQ	fastqRead2
-92X4	Mouse	/Data01/gnomex/ExperimentData/2012/92R/bioanalysis/Benoit-TTAGGC_L002_1-7_KO.R1.fastq.gz	MRNASEQ	fastqRead1
 92X4	Mouse	/Data01/gnomex/ExperimentData/2012/92R/bioanalysis/Benoit-TTAGGC_L002_1-7_KO.R2.fastq.gz	MRNASEQ	fastqRead2
+92X4	Mouse	/Data01/gnomex/ExperimentData/2012/92R/bioanalysis/Benoit-TTAGGC_L002_1-7_KO.R1.fastq.gz	MRNASEQ	fastqRead1
 93X1	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L1-ACAGTG--Srivastava--10-12S--Hs--R1.fq	MRNASEQ	fastqRead1
 93X1	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L1-ACAGTG--Srivastava--10-12S--Hs--R2.fq	MRNASEQ	fastqRead2
-93X2	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L1-ATCACG--Srivastava--4-6S--Hs--R1.fq	MRNASEQ	fastqRead1
 93X2	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L1-ATCACG--Srivastava--4-6S--Hs--R2.fq	MRNASEQ	fastqRead2
+93X2	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L1-ATCACG--Srivastava--4-6S--Hs--R1.fq	MRNASEQ	fastqRead1
 93X3	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L1-CGATGT--Srivastava--4-6F--Hs--R1.fq	MRNASEQ	fastqRead1
 93X3	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L1-CGATGT--Srivastava--4-6F--Hs--R2.fq	MRNASEQ	fastqRead2
-93X4	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L1-TGACCA--Srivastava--7-9F--Hs--R1.fq	MRNASEQ	fastqRead1
 93X4	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L1-TGACCA--Srivastava--7-9F--Hs--R2.fq	MRNASEQ	fastqRead2
+93X4	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L1-TGACCA--Srivastava--7-9F--Hs--R1.fq	MRNASEQ	fastqRead1
 93X5	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L1-TTAGGC--Srivastava--7-9S--Hs--R1.fq	MRNASEQ	fastqRead1
 93X5	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L1-TTAGGC--Srivastava--7-9S--Hs--R2.fq	MRNASEQ	fastqRead2
 93X6	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-ACTTGA--Srivastava--13-15F--Hs--R1.fq	MRNASEQ	fastqRead1
 93X6	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-ACTTGA--Srivastava--13-15F--Hs--R2.fq	MRNASEQ	fastqRead2
-93X7	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-CAGATC--Srivastava--13-15S--Hs--R1.fq	MRNASEQ	fastqRead1
 93X7	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-CAGATC--Srivastava--13-15S--Hs--R2.fq	MRNASEQ	fastqRead2
-93X8	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-GATCAG--Srivastava--16-18S--Hs--R1.fq	MRNASEQ	fastqRead1
+93X7	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-CAGATC--Srivastava--13-15S--Hs--R1.fq	MRNASEQ	fastqRead1
 93X8	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-GATCAG--Srivastava--16-18S--Hs--R2.fq	MRNASEQ	fastqRead2
+93X8	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-GATCAG--Srivastava--16-18S--Hs--R1.fq	MRNASEQ	fastqRead1
 93X9	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-GCCAAT--Srivastava--10-12F--Hs--R1.fq	MRNASEQ	fastqRead1
 93X9	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-GCCAAT--Srivastava--10-12F--Hs--R2.fq	MRNASEQ	fastqRead2
-93X10	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-TAGCTT--Srivastava--16-18F--Hs--R1.fq	MRNASEQ	fastqRead1
 93X10	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-TAGCTT--Srivastava--16-18F--Hs--R2.fq	MRNASEQ	fastqRead2
-102X1	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/498_003_3_R1.fastq.gz	DNASEQ	fastqRead1
+93X10	Human	/Data01/gnomex/ExperimentData/2012/93R/upload_staging/120625-FC447-L2-TAGCTT--Srivastava--16-18F--Hs--R1.fq	MRNASEQ	fastqRead1
 102X1	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/498_003_3_R1.fastq.gz	DNASEQ	fastqRead1
-102X1	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/498_003_3_R2.fastq.gz	DNASEQ	fastqRead2
 102X1	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/498_003_3_R2.fastq.gz	DNASEQ	fastqRead2
-102X2	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/540_002_MNA_R1.fastq.gz	DNASEQ	fastqRead1
 102X2	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/540_002_MNA_R1.fastq.gz	DNASEQ	fastqRead1
-102X2	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/540_002_MNA_R2.fastq.gz	DNASEQ	fastqRead2
 102X2	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/540_002_MNA_R2.fastq.gz	DNASEQ	fastqRead2
-102X3	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/520_007_NB_R1.fastq.gz	DNASEQ	fastqRead1
 102X3	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/520_007_NB_R1.fastq.gz	DNASEQ	fastqRead1
-102X3	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/520_007_NB_R2.fastq.gz	DNASEQ	fastqRead2
 102X3	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/520_007_NB_R2.fastq.gz	DNASEQ	fastqRead2
-102X4	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1117-005-NA-R1.fastq.gz	DNASEQ	fastqRead1
 102X4	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1117-005-NA-R2.fastq.gz	DNASEQ	fastqRead2
-102X10	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/1449_002_LA_R1.fastq.gz	DNASEQ	fastqRead1
+102X4	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1117-005-NA-R1.fastq.gz	DNASEQ	fastqRead1
 102X10	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1449_002_LA_R1.fastq.gz	DNASEQ	fastqRead1
-102X10	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/1449_002_LA_R2.fastq.gz	DNASEQ	fastqRead2
 102X10	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1449_002_LA_R2.fastq.gz	DNASEQ	fastqRead2
-102X11	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/1508_006_LA_R1.fastq.gz	DNASEQ	fastqRead1
-102X11	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1508_006_LA_R1.fastq.gz	DNASEQ	fastqRead1
-102X11	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/1508_006_LA_R2.fastq.gz	DNASEQ	fastqRead2
 102X11	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1508_006_LA_R2.fastq.gz	DNASEQ	fastqRead2
-102X12	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/1526_007_LA_R1.gz	DNASEQ	fastqRead1
+102X11	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1508_006_LA_R1.fastq.gz	DNASEQ	fastqRead1
 102X12	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1526_007_LA_R1.gz	DNASEQ	fastqRead1
-102X12	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/1526_007_LA_R2.gz	DNASEQ	fastqRead2
 102X12	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1526_007_LA_R2.gz	DNASEQ	fastqRead2
-102X13	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/1537_004_LC_R1.gz	DNASEQ	fastqRead1
-102X13	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1537_004_LC_R1.gz	DNASEQ	fastqRead1
-102X13	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/1537_004_LC_R2.gz	DNASEQ	fastqRead2
 102X13	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1537_004_LC_R2.gz	DNASEQ	fastqRead2
-102X14	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/1549_006_2_R1.fastq.gz	DNASEQ	fastqRead1
+102X13	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1537_004_LC_R1.gz	DNASEQ	fastqRead1
 102X14	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1549_006_2_R1.fastq.gz	DNASEQ	fastqRead1
-102X14	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/1549_006_2_R2.fastq.gz	DNASEQ	fastqRead2
 102X14	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1549_006_2_R2.fastq.gz	DNASEQ	fastqRead2
-102X15	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/1549_006_4_R1.fastq.gz	DNASEQ	fastqRead1
-102X15	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1549_006_4_R1.fastq.gz	DNASEQ	fastqRead1
-102X15	Mouse	/Data01/gnomex/ExperimentData/2012/102R/Raw Reads/1549_006_4_R2.fastq.gz	DNASEQ	fastqRead2
 102X15	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1549_006_4_R2.fastq.gz	DNASEQ	fastqRead2
+102X15	Mouse	/Data01/gnomex/ExperimentData/2012/102R/upload_staging/1549_006_4_R1.fastq.gz	DNASEQ	fastqRead1
 103X1	Human	/Data01/gnomex/ExperimentData/2012/103R/ETS1/ETS1_00hour.fastq.bz2	DNASEQ	fastqRead1
 103X2	Human	/Data01/gnomex/ExperimentData/2012/103R/ETS1/ETS1_01hour.fastq.bz2	DNASEQ	fastqRead1
 103X3	Human	/Data01/gnomex/ExperimentData/2012/103R/ETS1/ETS1_04hour.fastq.bz2	DNASEQ	fastqRead1
@@ -356,172 +435,136 @@ number	organism	concat(propertyValue, year(Request.createDate), '/', filename)	c
 103X25	Human	/Data01/gnomex/ExperimentData/2012/103R/H3K27ac_fastq/H3K27ac_1hour_c646.fastq.bz2	DNASEQ	fastqRead1
 103X26	Human	/Data01/gnomex/ExperimentData/2012/103R/H3K27ac_fastq/H3K27ac_4hour_c646.fastq.bz2	DNASEQ	fastqRead1
 103X27	Human	/Data01/gnomex/ExperimentData/2012/103R/H3K27ac_fastq/histone_input_4hour_rep2.fastq.bz2	DNASEQ	fastqRead1
-107X1	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/Benoit-ATCACG_L002_1-2_WT.R1.fastq.bz2	MRNASEQ	fastqRead1
 107X1	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/Benoit-ATCACG_L002_1-2_WT.R2.fastq.bz2	MRNASEQ	fastqRead2
-107X2	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/Benoit-CGATGT_L002_1-3_WT.R1.fastq.bz2	MRNASEQ	fastqRead1
+107X1	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/Benoit-ATCACG_L002_1-2_WT.R1.fastq.bz2	MRNASEQ	fastqRead1
 107X2	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/Benoit-CGATGT_L002_1-3_WT.R2.fastq.bz2	MRNASEQ	fastqRead2
+107X2	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/Benoit-CGATGT_L002_1-3_WT.R1.fastq.bz2	MRNASEQ	fastqRead1
 107X3	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/Benoit-TGACCA_L002_1-9_KO.R1.fastq.bz2	MRNASEQ	fastqRead1
 107X3	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/Benoit-TGACCA_L002_1-9_KO.R2.fastq.bz2	MRNASEQ	fastqRead2
-107X4	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/Benoit-TTAGGC_L002_1-7_KO.R1.fastq.bz2	MRNASEQ	fastqRead1
 107X4	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/Benoit-TTAGGC_L002_1-7_KO.R2.fastq.bz2	MRNASEQ	fastqRead2
+107X4	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/Benoit-TTAGGC_L002_1-7_KO.R1.fastq.bz2	MRNASEQ	fastqRead1
 107X5	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/pool3.GGCTAC.s_2_FFPF_sequence.txt	MRNASEQ	fastqRead1
-107X6	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/pool3.AGCTAA.s_2_FFPF_sequence.txt	MRNASEQ	fastqRead1
+107X6	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/pool3.CTTGTA.s_2_FFPF_sequence.txt	MRNASEQ	fastqRead1
 107X7	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/pool3.GTCGAA.s_2_FFPF_sequence.txt	MRNASEQ	fastqRead1
 107X8	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/pool3.AGCTAA.s_2_FFPF_sequence.txt	MRNASEQ	fastqRead1
-107X9	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/120507-FC412-L5-CGATGT--Bruneau--BL6_Baf60c_het--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 107X9	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/120507-FC412-L5-CGATGT--Bruneau--BL6_Baf60c_het--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
-107X10	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/120507-FC412-L5-TAGCTT--Bruneau--BL6_Baf60c_mut--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
+107X9	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/120507-FC412-L5-CGATGT--Bruneau--BL6_Baf60c_het--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 107X10	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/120507-FC412-L5-TAGCTT--Bruneau--BL6_Baf60c_mut--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
+107X10	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/120507-FC412-L5-TAGCTT--Bruneau--BL6_Baf60c_mut--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 111X1	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-ACAGTG--Tabin--LV_1--Gg--R1.fq	MRNASEQ	fastqRead1
 111X1	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-ACAGTG--Tabin--LV_1--Gg--R2.fq	MRNASEQ	fastqRead2
-111X2	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-ACTTGA--Tabin--LV_4--Gg--R1.fq	MRNASEQ	fastqRead1
 111X2	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-ACTTGA--Tabin--LV_4--Gg--R2.fq	MRNASEQ	fastqRead2
-111X3	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-ATCACG--Tabin--LA_1--Gg--R1.fq	MRNASEQ	fastqRead1
+111X2	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-ACTTGA--Tabin--LV_4--Gg--R1.fq	MRNASEQ	fastqRead1
 111X3	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-ATCACG--Tabin--LA_1--Gg--R2.fq	MRNASEQ	fastqRead2
+111X3	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-ATCACG--Tabin--LA_1--Gg--R1.fq	MRNASEQ	fastqRead1
 111X4	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-CAGATC--Tabin--LV_3--Gg--R1.fq	MRNASEQ	fastqRead1
 111X4	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-CAGATC--Tabin--LV_3--Gg--R2.fq	MRNASEQ	fastqRead2
-111X5	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-CGATGT--Tabin--LA_2--Gg--R1.fq	MRNASEQ	fastqRead1
 111X5	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-CGATGT--Tabin--LA_2--Gg--R2.fq	MRNASEQ	fastqRead2
+111X5	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-CGATGT--Tabin--LA_2--Gg--R1.fq	MRNASEQ	fastqRead1
 111X6	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-GCCAAT--Tabin--LV_2--Gg--R1.fq	MRNASEQ	fastqRead1
 111X6	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-GCCAAT--Tabin--LV_2--Gg--R2.fq	MRNASEQ	fastqRead2
 111X7	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-TGACCA--Tabin--LA_4--Gg--R1.fq	MRNASEQ	fastqRead1
 111X7	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-TGACCA--Tabin--LA_4--Gg--R2.fq	MRNASEQ	fastqRead2
-111X8	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-TTAGGC--Tabin--LA_3--Gg--R1.fq	MRNASEQ	fastqRead1
 111X8	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-TTAGGC--Tabin--LA_3--Gg--R2.fq	MRNASEQ	fastqRead2
+111X8	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2012/111R/upload_staging/120831-FC494-L7-TTAGGC--Tabin--LA_3--Gg--R1.fq	MRNASEQ	fastqRead1
 112X1	Mouse	/Data01/gnomex/ExperimentData/2012/112R/fastq/YAP1ChIP_003_s_1_sequence.txt.bz2	CHIPSEQ	fastqRead1
 112X2	Mouse	/Data01/gnomex/ExperimentData/2012/112R/fastq/INPUT_s_1_sequence.txt.gz	CHIPSEQ	fastqRead1
-115X1	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1000_007_1_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X1	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1000_007_1_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X1	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1000_007_1_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X1	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1000_007_1_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X2	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1116_006_NA_pe_1.fq.gz	TDNASEQ	fastqRead1
+115X1	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1000_007_1_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X2	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1116_006_NA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X2	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1116_006_NA_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X2	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1116_006_NA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X3	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1117_006_ND_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X3	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1117_006_ND_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X3	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1117_006_ND_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X3	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1117_006_ND_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X4	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1128_006_1_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X4	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1128_006_1_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X4	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1128_006_1_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X4	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1128_006_1_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X5	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1146_007_1_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X5	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1146_007_1_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X5	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1146_007_1_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X5	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1146_007_1_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X6	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1163_006_NA_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X6	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1163_006_NA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X6	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1163_006_NA_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X6	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1163_006_NA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X7	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1200_003_NA_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X7	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1200_003_NA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X7	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1200_003_NA_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X7	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1200_003_NA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X8	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1273_002_2_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X8	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1273_002_2_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X8	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1273_002_2_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X8	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1273_002_2_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X9	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1289_003_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X9	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1289_003_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X9	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1289_003_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X9	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1289_003_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X10	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1298_005_LC_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X10	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1298_005_LC_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X10	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1298_005_LC_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X10	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1298_005_LC_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X11	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1454_002_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X11	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1454_002_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X11	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1454_002_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X11	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1454_002_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X12	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1456_002_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
+115X11	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1454_002_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X12	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1456_002_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X12	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1456_002_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X12	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1456_002_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X13	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1519_005_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X13	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1519_005_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X13	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1519_005_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X13	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1519_005_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X14	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1528_002_NB_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X14	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1528_002_NB_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X14	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1528_002_NB_pe_2.fq.gz	TDNASEQ	fastqRead2
+115X13	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1519_005_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X14	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1528_002_NB_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X15	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1562_004_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X15	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1562_004_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X15	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1562_004_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
+115X14	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1528_002_NB_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X15	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1562_004_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X16	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1565_004_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X16	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1565_004_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X16	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1565_004_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
+115X15	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1562_004_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X16	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1565_004_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X17	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1585_003_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X17	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1585_003_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X17	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1585_003_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
+115X16	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1565_004_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X17	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1585_003_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X18	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1660_004_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X18	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1660_004_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X18	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1660_004_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
+115X17	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1585_003_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X18	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1660_004_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X19	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1702_003_2_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X19	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1702_003_2_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X19	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1702_003_2_pe_2.fq.gz	TDNASEQ	fastqRead2
+115X18	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1660_004_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X19	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1702_003_2_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X20	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1709_003_MLA_pe_1.fq.gz	TDNASEQ	fastqRead1
+115X19	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1702_003_2_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X20	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1709_003_MLA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X20	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1709_003_MLA_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X20	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1709_003_MLA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X21	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1727_002_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X21	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1727_002_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X21	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1727_002_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X21	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1727_002_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X22	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1752_002_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
+115X21	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1727_002_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X22	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1752_002_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X23	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1775_002_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
+115X22	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1752_002_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X23	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1775_002_LA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X23	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/1775_002_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X23	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/1775_002_LA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X24	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/386_007_ND_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X24	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/386_007_ND_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X24	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/386_007_ND_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X24	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/386_007_ND_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X25	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/508_004_NL_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X25	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/508_004_NL_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X25	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/508_004_NL_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X25	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/508_004_NL_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X26	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/635_164_NA_pe_1.fq.gz	TDNASEQ	fastqRead1
+115X25	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/508_004_NL_pe_1.fq.gz	TDNASEQ	fastqRead1
 115X26	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/635_164_NA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X26	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/635_164_NA_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X26	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/635_164_NA_pe_2.fq.gz	TDNASEQ	fastqRead2
-115X27	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/796_002_NA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X27	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/796_002_NA_pe_1.fq.gz	TDNASEQ	fastqRead1
-115X27	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw Reads/796_002_NA_pe_2.fq.gz	TDNASEQ	fastqRead2
 115X27	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/796_002_NA_pe_2.fq.gz	TDNASEQ	fastqRead2
+115X27	Mouse	/Data01/gnomex/ExperimentData/2013/115R/Raw_Reads/796_002_NA_pe_1.fq.gz	TDNASEQ	fastqRead1
 116X1	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L2-ATCACG--Lo--HLHS_635-189-1--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 116X1	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L2-ATCACG--Lo--HLHS_635-189-1--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
 116X2	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-CGATGT--Lo--CTRL_635-189-6--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 116X2	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-CGATGT--Lo--CTRL_635-189-6--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
-116X3	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-TTAGGC--Lo--CTRL_635-189-8--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 116X3	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-TTAGGC--Lo--CTRL_635-189-8--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
+116X3	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-TTAGGC--Lo--CTRL_635-189-8--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 116X4	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-TGACCA--Lo--CTRL_635-189-10--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 116X4	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-TGACCA--Lo--CTRL_635-189-10--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
 116X5	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-ACAGTG--Lo--CTRL_635-195-2--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 116X5	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-ACAGTG--Lo--CTRL_635-195-2--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
-116X6	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L2-GCCAAT--Lo--HLHS_635-195-3--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 116X6	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L2-GCCAAT--Lo--HLHS_635-195-3--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
-116X7	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-CAGATC--Lo--CTRL_635-195-6--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
+116X6	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L2-GCCAAT--Lo--HLHS_635-195-3--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 116X7	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-CAGATC--Lo--CTRL_635-195-6--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
-116X8	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L2-ACTTGA--Lo--HLHS_635-195-7--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
+116X7	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-CAGATC--Lo--CTRL_635-195-6--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 116X8	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L2-ACTTGA--Lo--HLHS_635-195-7--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
+116X8	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L2-ACTTGA--Lo--HLHS_635-195-7--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 116X9	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L2-GATCAG--Lo--HLHS_635A-145-2--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 116X9	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L2-GATCAG--Lo--HLHS_635A-145-2--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
 116X10	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-TAGCTT--Lo--CTRL_635A-145-5--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
 116X10	Mouse	/Data01/gnomex/ExperimentData/2013/116R/upload_staging/121231-FE0301-L3-TAGCTT--Lo--CTRL_635A-145-5--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
-117X1	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-ATCACG--Hiroko--A_E9.5--Mm--R1.fq	MRNASEQ	fastqRead1
-117X1	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-ATCACG--Hiroko--A_E9.5--Mm--R2.fq	MRNASEQ	fastqRead2
-117X2	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-CGATGT--Hiroko--V_E9.5--Mm--R1.fq	MRNASEQ	fastqRead1
-117X2	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-CGATGT--Hiroko--V_E9.5--Mm--R2.fq	MRNASEQ	fastqRead2
-117X3	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-TTAGGC--Hiroko--OFT_E9.5--Mm--R1.fq	MRNASEQ	fastqRead1
-117X3	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-TTAGGC--Hiroko--OFT_E9.5--Mm--R2.fq	MRNASEQ	fastqRead2
+117X1	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-ATCACG--Hiroko--A_E9.5--Mm--R1.fq.gz	MRNASEQ	fastqRead1
+117X1	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-ATCACG--Hiroko--A_E9.5--Mm--R2.fq.gz	MRNASEQ	fastqRead2
+117X2	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-CGATGT--Hiroko--V_E9.5--Mm--R1.fq.gz	MRNASEQ	fastqRead1
+117X2	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-CGATGT--Hiroko--V_E9.5--Mm--R2.fq.gz	MRNASEQ	fastqRead2
+117X3	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-TTAGGC--Hiroko--OFT_E9.5--Mm--R2.fq.gz	MRNASEQ	fastqRead2
+117X3	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-TTAGGC--Hiroko--OFT_E9.5--Mm--R1.fq.gz	MRNASEQ	fastqRead1
+130X1	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB005511_CHS00009192_TGACCA_L007_R1.fastq.bz2	DNASEQ	fastqRead1
+130X2	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB005511_CHS00009194_CTTGTA_L007_R1.fastq.bz2	DNASEQ	fastqRead1
+130X3	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB005511_CHS00009191_ACTTGA_L007_R1.fastq.bz2	DNASEQ	fastqRead1
+130X4	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB005511_CHS00009193_GCCAAT_L007_R1.fastq.bz2	DNASEQ	fastqRead1
+130X5	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB005711_CHS00009430_CGATGT_L008_R1.fastq.bz2	DNASEQ	fastqRead1
+130X6	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB005711_CHS00009431_TAGCTT_L008_R1.fastq.bz2	DNASEQ	fastqRead1
+130X7	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006082_CHS00010158_CAGATC_L003_R1.fastq.bz2	DNASEQ	fastqRead1
+130X8	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006083_CHS00010161_GCCAAT_L005_R1.fastq.bz2	DNASEQ	fastqRead1
+130X9	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006084_CHS00010164_CAGATC_L006_R1.fastq.bz2	DNASEQ	fastqRead1
+130X10	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006084_CHS00010165_ACTTGA_L006_R1.fastq.bz2	DNASEQ	fastqRead1
+130X11	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006084_CHS00010166_TAGCTT_L006_R1.fastq.bz2	DNASEQ	fastqRead1
+130X12	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006085_CHS00010168_TGACCA_L007_R1.fastq.bz2	DNASEQ	fastqRead1
+130X13	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006085_CHS00010169_GATCAG_L007_R1.fastq.bz2	DNASEQ	fastqRead1
+130X14	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006085_CHS00010170_ACAGTG_L007_R1.fastq.bz2	DNASEQ	fastqRead1
+130X15	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006086_CHS00010172_CTTGTA_L008_R1.fastq.bz2	DNASEQ	fastqRead1
+130X16	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006521_CHS00010895_ACTTGA_L003_R1.fastq.bz2	DNASEQ	fastqRead1
 131X1	Mouse	/Data01/gnomex/ExperimentData/2013/131R/upload_staging/LIB005709_CHS00009418_CGATGT_L003_R1.fastq.bz2	DNASEQ	fastqRead1
 131X2	Mouse	/Data01/gnomex/ExperimentData/2013/131R/upload_staging/LIB005709_CHS00009419_TGACCA_L003_R1.fastq.bz2	DNASEQ	fastqRead1
 131X3	Mouse	/Data01/gnomex/ExperimentData/2013/131R/upload_staging/LIB005709_CHS00009420_ACAGTG_L003_R1.fastq.bz2	DNASEQ	fastqRead1
@@ -534,48 +577,48 @@ number	organism	concat(propertyValue, year(Request.createDate), '/', filename)	c
 132X5	Mouse	/Data01/gnomex/ExperimentData/2013/132R/upload_staging/LIB005710_CHS00009427_CAGATC_L005_R1.fastq.bz2	DNASEQ	fastqRead1
 132X6	Mouse	/Data01/gnomex/ExperimentData/2013/132R/upload_staging/LIB005710_CHS00009428_TAGCTT_L005_R1.fastq.bz2	DNASEQ	fastqRead1
 132X7	Mouse	/Data01/gnomex/ExperimentData/2013/132R/upload_staging/LIB005710_CHS00009429_CTTGTA_L005_R1.fastq.bz2	DNASEQ	fastqRead1
-133X1	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004588_CGATGT_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X1	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004588_CGATGT_L005_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X2	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004674_TGACCA_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
+133X1	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004588_CGATGT_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X2	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004674_TGACCA_L005_R2.fastq.bz2	MRNASEQ	fastqRead2
+133X2	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004674_TGACCA_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X3	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004675_ACAGTG_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X3	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004675_ACAGTG_L005_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X4	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004676_GCCAAT_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X4	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004676_GCCAAT_L005_R2.fastq.bz2	MRNASEQ	fastqRead2
+133X4	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004676_GCCAAT_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X5	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004677_CAGATC_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X5	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004677_CAGATC_L005_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X6	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004678_TAGCTT_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X6	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004678_TAGCTT_L005_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X7	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004679_CTTGTA_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
+133X6	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004678_TAGCTT_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X7	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004679_CTTGTA_L005_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X8	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004589_CGATGT_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
+133X7	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003615_TRA00004679_CTTGTA_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X8	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004589_CGATGT_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X9	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004680_TGACCA_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
+133X8	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004589_CGATGT_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X9	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004680_TGACCA_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X10	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004681_ACAGTG_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
+133X9	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004680_TGACCA_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X10	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004681_ACAGTG_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X11	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004682_GCCAAT_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
+133X10	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004681_ACAGTG_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X11	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004682_GCCAAT_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
+133X11	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004682_GCCAAT_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X12	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004683_CAGATC_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X12	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004683_CAGATC_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X13	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004684_TAGCTT_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X13	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004684_TAGCTT_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
+133X13	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004684_TAGCTT_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X14	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004685_CTTGTA_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X14	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB003616_TRA00004685_CTTGTA_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
 133X15	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007222_CGATGT_L003_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X15	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007222_CGATGT_L003_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X16	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007223_TGACCA_L003_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X16	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007223_TGACCA_L003_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X17	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007224_ACAGTG_L003_R1.fastq.bz2	MRNASEQ	fastqRead1
+133X16	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007223_TGACCA_L003_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X17	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007224_ACAGTG_L003_R2.fastq.bz2	MRNASEQ	fastqRead2
+133X17	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007224_ACAGTG_L003_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X18	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007225_GCCAAT_L003_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X18	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007225_GCCAAT_L003_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X19	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007226_CAGATC_L003_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X19	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007226_CAGATC_L003_R2.fastq.bz2	MRNASEQ	fastqRead2
+133X19	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007226_CAGATC_L003_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X20	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007227_CTTGTA_L003_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X20	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004623_TRA00007227_CTTGTA_L003_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X21	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004624_TRA00007228_CGATGT_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X21	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004624_TRA00007228_CGATGT_L005_R2.fastq.bz2	MRNASEQ	fastqRead2
+133X21	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004624_TRA00007228_CGATGT_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X22	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004624_TRA00007229_TGACCA_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X22	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004624_TRA00007229_TGACCA_L005_R2.fastq.bz2	MRNASEQ	fastqRead2
 133X23	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004624_TRA00007230_ACAGTG_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
@@ -584,21 +627,34 @@ number	organism	concat(propertyValue, year(Request.createDate), '/', filename)	c
 133X24	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004624_TRA00007231_GCCAAT_L005_R2.fastq.bz2	MRNASEQ	fastqRead2
 133X25	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004624_TRA00007232_CAGATC_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X25	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004624_TRA00007232_CAGATC_L005_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X26	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004624_TRA00007233_CTTGTA_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X26	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004624_TRA00007233_CTTGTA_L005_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X27	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007234_CGATGT_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
+133X26	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004624_TRA00007233_CTTGTA_L005_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X27	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007234_CGATGT_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X28	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007235_TGACCA_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
+133X27	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007234_CGATGT_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X28	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007235_TGACCA_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
+133X28	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007235_TGACCA_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X29	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007236_ACAGTG_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X29	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007236_ACAGTG_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
 133X30	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007237_GCCAAT_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X30	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007237_GCCAAT_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
-133X31	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007238_CAGATC_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X31	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007238_CAGATC_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
+133X31	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007238_CAGATC_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X32	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007239_CTTGTA_L006_R1.fastq.bz2	MRNASEQ	fastqRead1
 133X32	Mouse	/Data01/gnomex/ExperimentData/2013/133R/upload_staging/LIB004625_TRA00007239_CTTGTA_L006_R2.fastq.bz2	MRNASEQ	fastqRead2
+134X1	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004180_CHS00006035_CGATGT_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
+134X2	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004180_CHS00006036_TGACCA_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
+134X3	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004180_CHS00006037_ACAGTG_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
+134X4	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004180_CHS00006038_GCCAAT_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
+134X5	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004180_CHS00006039_CTTGTA_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
 134X6	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004181_CHS00006040_CGATGT_L003_R1.fastq.bz2	CHIPSEQ	fastqRead1
+134X7	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004181_CHS00006041_TGACCA_L003_R1.fastq.bz2	CHIPSEQ	fastqRead1
+134X8	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004181_CHS00006042_ACAGTG_L003_R1.fastq.bz2	CHIPSEQ	fastqRead1
+134X9	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004181_CHS00006043_GCCAAT_L003_R1.fastq.bz2	CHIPSEQ	fastqRead1
+134X10	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004181_CHS00006044_CTTGTA_L003_R1.fastq.bz2	CHIPSEQ	fastqRead1
+134X11	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/s_4_eland_extended_mm9_25-36.txt	CHIPSEQ	fastqRead1
+134X12	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/s_5_eland_extended_mm9_25-36.txt	CHIPSEQ	fastqRead1
+134X13	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/s_6_eland_extended_mm9_25-36.txt	CHIPSEQ	fastqRead1
+134X14	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/s_7_eland_extended_mm9_25-36.txt	CHIPSEQ	fastqRead1
 136X1	Mouse	/Data01/gnomex/ExperimentData/2013/136R/fastq/Heart_Tie2TRAP_rep1_ACAGTG_R1.fastq	MRNASEQ	fastqRead1
 136X1	Mouse	/Data01/gnomex/ExperimentData/2013/136R/fastq/Heart_Tie2TRAP_rep1_ACAGTG_R2.fastq	MRNASEQ	fastqRead2
 136X2	Mouse	/Data01/gnomex/ExperimentData/2013/136R/fastq/Heart_Tie2TRAP_rep2_GCCAAT_R1.fastq	MRNASEQ	fastqRead1
@@ -607,12 +663,8 @@ number	organism	concat(propertyValue, year(Request.createDate), '/', filename)	c
 136X3	Mouse	/Data01/gnomex/ExperimentData/2013/136R/fastq/Heart_TNTTRAP_rep1_CAGATC_R2.fastq	MRNASEQ	fastqRead2
 136X4	Mouse	/Data01/gnomex/ExperimentData/2013/136R/fastq/Heart_TNTTRAP_rep2_CTTGTA_R1.fastq	MRNASEQ	fastqRead1
 136X4	Mouse	/Data01/gnomex/ExperimentData/2013/136R/fastq/Heart_TNTTRAP_rep2_CTTGTA_R2.fastq	MRNASEQ	fastqRead2
-136X5	Mouse	/Data01/gnomex/ExperimentData/2013/136R/fastq/Heart_Input_TGACCA_R1.fastq	MRNASEQ	fastqRead1
 136X5	Mouse	/Data01/gnomex/ExperimentData/2013/136R/fastq/Heart_Input_TGACCA_R2.fastq	MRNASEQ	fastqRead2
-145X2	Chrysemys picta - Turtle	/Data01/gnomex/ExperimentData/2013/145R/upload_staging/130222-FC581-L3-CGATGT--Bruneau--14-2--Cp--R2.fq.bz2	MRNASEQ	fastqRead2
-145X5	Chrysemys picta - Turtle	/Data01/gnomex/ExperimentData/2013/145R/upload_staging/130222-FC581-L5-ACAGTG--Bruneau--8-1B--Cp--R1.fq.bz2	MRNASEQ	fastqRead1
-145X6	Chrysemys picta - Turtle	/Data01/gnomex/ExperimentData/2013/145R/upload_staging/130222-FC581-L5-GCCAAT--Bruneau--8-1C--Cp--R1.fq.bz2	MRNASEQ	fastqRead1
-145X6	Chrysemys picta - Turtle	/Data01/gnomex/ExperimentData/2013/145R/upload_staging/130222-FC581-L5-GCCAAT--Bruneau--8-1C--Cp--R2.fq.bz2	MRNASEQ	fastqRead2
+136X5	Mouse	/Data01/gnomex/ExperimentData/2013/136R/fastq/Heart_Input_TGACCA_R1.fastq	MRNASEQ	fastqRead1
 146X1	Mouse	/Data01/gnomex/ExperimentData/2013/146R/upload_staging/LIB005711_CHS00009432_TGACCA_L008_R1.fastq.bz2	CHIPSEQ	fastqRead1
 146X2	Mouse	/Data01/gnomex/ExperimentData/2013/146R/upload_staging/LIB005711_CHS00009433_ACAGTG_L008_R1.fastq.bz2	CHIPSEQ	fastqRead1
 146X3	Mouse	/Data01/gnomex/ExperimentData/2013/146R/upload_staging/LIB005712_CHS00009434_GCCAAT_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
@@ -641,304 +693,12 @@ number	organism	concat(propertyValue, year(Request.createDate), '/', filename)	c
 157X10	Xenopus tropicalis	/Data01/gnomex/ExperimentData/2013/157R/Fastq/9953X10_130425_SN141_0679_BD252FACXX_3.txt.gz	MRNASEQ	fastqRead1
 157X11	Xenopus tropicalis	/Data01/gnomex/ExperimentData/2013/157R/Fastq/9953X11_130425_SN141_0679_BD252FACXX_3.txt.gz	MRNASEQ	fastqRead1
 157X12	Xenopus tropicalis	/Data01/gnomex/ExperimentData/2013/157R/Fastq/9953X12_130425_SN141_0679_BD252FACXX_3.txt.gz	MRNASEQ	fastqRead1
-167X1	Mouse	/Data01/gnomex/ExperimentData/2013/167R/upload_staging/LIB005960_CHS00010002_CGATGT_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
-167X2	Mouse	/Data01/gnomex/ExperimentData/2013/167R/upload_staging/LIB005960_CHS00010008_TGACCA_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
-167X3	Mouse	/Data01/gnomex/ExperimentData/2013/167R/upload_staging/LIB005960_CHS00010005_GCCAAT_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
-171X1	Mouse	/Data01/gnomex/ExperimentData/2013/171R/upload_staging/LIB006971_CHS00011793_CTTGTA_L007_R1.fastq.bz2	CHIPSEQ	fastqRead1
-171X2	Mouse	/Data01/gnomex/ExperimentData/2013/171R/upload_staging/LIB006971_CHS00011794_TGACCA_L007_R1.fastq.bz2	CHIPSEQ	fastqRead1
-171X3	Mouse	/Data01/gnomex/ExperimentData/2013/171R/upload_staging/LIB006972_CHS00011795_CAGATC_L008_R1.fastq.bz2	CHIPSEQ	fastqRead1
-171X4	Mouse	/Data01/gnomex/ExperimentData/2013/171R/upload_staging/LIB006972_CHS00011796_ACTTGA_L008_R1.fastq.bz2	CHIPSEQ	fastqRead1
-171X5	Mouse	/Data01/gnomex/ExperimentData/2013/171R/upload_staging/LIB006972_CHS00011797_GATCAG_L008_R1.fastq.bz2	CHIPSEQ	fastqRead1
-171X6	Mouse	/Data01/gnomex/ExperimentData/2013/171R/upload_staging/LIB006972_CHS00011798_TAGCTT_L008_R1.fastq.bz2	CHIPSEQ	fastqRead1
-172X1	Mouse	/Data01/gnomex/ExperimentData/2013/172R/upload_staging/LIB006972_CHS00011799_ACAGTG_L008_R1.fastq.bz2	CHIPSEQ	fastqRead1
-35X1	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.ACAGTG.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-35X1	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.ACAGTG.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-35X2	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.ATCACG.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-35X2	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.ATCACG.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-35X3	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.CGATGT.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-35X3	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.CGATGT.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-35X4	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.GCCAAT.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-35X4	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.GCCAAT.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-35X5	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.TGACCA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-35X5	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.TGACCA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-35X6	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.TTAGGC.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-35X6	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.TTAGGC.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X1	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming1.ACAGTG.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X1	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.ACAGTG.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X1	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.ACAGTG.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X2	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming1.ACTTGA.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X2	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.ACTTGA.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X2	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming1.ACTTGA.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X2	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.ACTTGA.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X3	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming1.ATCACG.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X3	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.ATCACG.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X3	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming1.ATCACG.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X3	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.ATCACG.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X4	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming1.CAGATC.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X4	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.CAGATC.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X4	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming1.CAGATC.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X4	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.CAGATC.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X5	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.CGATGT.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X5	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.CGATGT.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X6	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming1.GCCAAT.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X6	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.GCCAAT.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X6	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming1.GCCAAT.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X6	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.GCCAAT.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X7	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming1.TGACCA.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X7	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.TGACCA.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X7	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.TGACCA.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X8	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.TTAGGC.s_2_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X8	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming1.TTAGGC.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X8	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming1.TTAGGC.s_2_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X9	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming2.AATACC.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X9	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.AATACC.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X9	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.AATACC.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X10	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming2.AGCTAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X10	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.AGCTAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X10	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming2.AGCTAA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X10	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.AGCTAA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X11	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming2.CTTGTA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X11	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.CTTGTA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X11	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming2.CTTGTA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X11	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.CTTGTA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X12	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.GATCAG.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X12	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.GATCAG.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X13	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.GGCTAC.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X13	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.GGCTAC.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X14	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming2.GTCGAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X14	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.GTCGAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X14	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming2.GTCGAA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X14	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.GTCGAA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X15	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming2.TAGCTT.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X15	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.TAGCTT.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X15	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.TAGCTT.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X16	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming2.TGCAAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X16	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.TGCAAA.s_1_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-36X16	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Ming2.TGCAAA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-36X16	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Ming2.TGCAAA.s_1_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-37X1	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.ACAGTG.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-37X1	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.ACAGTG.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-37X2	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.ATCACG.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-37X2	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.ATCACG.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-37X3	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.CGATGT.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-37X3	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.CGATGT.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-37X4	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.GCCAAT.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-37X4	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.GCCAAT.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-37X5	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.TGACCA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-37X5	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.TGACCA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-37X6	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.TTAGGC.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-37X6	Gallus gallus - Chicken	/Data01/gnomex/ExperimentData/2011/35R/bioanalysis/Tabin.TTAGGC.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X1	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.ACAGTG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X1	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACAGTG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X1	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.ACAGTG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X1	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACAGTG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X2	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.ACTTGA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X2	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACTTGA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X2	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.ACTTGA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X2	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACTTGA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X3	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.ATCACG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X3	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ATCACG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X3	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.ATCACG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X3	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ATCACG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X4	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.CAGATC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X4	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CAGATC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X4	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.CAGATC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X4	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CAGATC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X5	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.CGATGT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X5	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CGATGT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X5	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.CGATGT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X5	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CGATGT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X6	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.GCCAAT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X6	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.GCCAAT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X6	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.GCCAAT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X6	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.GCCAAT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X7	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.TGACCA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X7	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TGACCA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X7	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.TGACCA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X7	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TGACCA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X8	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.TTAGGC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X8	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TTAGGC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X8	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.TTAGGC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X8	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TTAGGC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X9	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.ACAGTG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X9	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACAGTG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X9	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.ACAGTG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X9	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACAGTG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X10	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.ACTTGA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X10	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACTTGA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X10	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.ACTTGA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X10	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACTTGA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X11	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.ATCACG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X11	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ATCACG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X11	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.ATCACG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X11	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ATCACG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X12	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.CAGATC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X12	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CAGATC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X12	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.CAGATC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X12	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CAGATC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X13	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.CGATGT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X13	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CGATGT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X13	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.CGATGT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X13	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CGATGT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X14	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.GCCAAT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X14	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.GCCAAT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X14	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.GCCAAT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X14	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.GCCAAT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X15	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.TGACCA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X15	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TGACCA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X15	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.TGACCA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X15	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TGACCA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X16	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.TTAGGC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X16	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TTAGGC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X16	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.TTAGGC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X16	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TTAGGC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X17	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.ACAGTG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X17	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACAGTG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X17	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.ACAGTG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X17	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACAGTG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X18	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.ACTTGA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X18	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACTTGA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X18	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.ACTTGA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X18	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ACTTGA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X19	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.ATCACG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X19	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ATCACG.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X19	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.ATCACG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X19	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.ATCACG.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X20	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.CAGATC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X20	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CAGATC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X20	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.CAGATC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X20	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CAGATC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X21	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.CGATGT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X21	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CGATGT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X21	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.CGATGT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X21	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.CGATGT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X22	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.GCCAAT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X22	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.GCCAAT.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X22	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.GCCAAT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X22	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.GCCAAT.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X23	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.TGACCA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X23	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TGACCA.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X23	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.TGACCA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X23	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TGACCA.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X24	Mouse	/Data01/gnomex/ExperimentData/2011/36R/bioanalysis/Delaughter.TTAGGC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X24	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TTAGGC.s_4_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-38X24	Mouse	/Data01/gnomex/ExperimentData/2011/36R/upload_staging/Delaughter.TTAGGC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-38X24	Mouse	/Data01/gnomex/ExperimentData/2011/38R/upload_staging/Delaughter.TTAGGC.s_4_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-39X1	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_MT_1.GTCGAA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-39X1	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_MT_1.GTCGAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-39X2	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_MT_3.AGCTAA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-39X2	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_MT_3.AGCTAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-39X3	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_WT_1.GGCTAC.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-39X3	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_WT_1.GGCTAC.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-39X4	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_WT_2.CTTGTA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-39X4	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/LV_WT_2.CTTGTA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-39X5	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_AT.CAGATC.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-39X5	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_AT.CAGATC.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-39X6	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_AV.ACAGTG.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-39X6	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_AV.ACAGTG.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-39X7	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_PT.ACTTGA.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-39X7	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_PT.ACTTGA.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-39X8	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_PV.GCCAAT.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-39X8	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/MT_PV.GCCAAT.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-39X9	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_AT.TTAGGC.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-39X9	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_AT.TTAGGC.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-39X10	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_AV.ATCACG.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-39X10	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_AV.ATCACG.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-39X11	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_PT.TGACCA.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-39X11	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_PT.TGACCA.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-39X12	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_PV.CGATGT.s_merge_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-39X12	Mouse	/Data01/gnomex/ExperimentData/2011/39R/bioanalysis/WT_PV.CGATGT.s_merge_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X1	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/30V_post.TGACCA.s_6_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X1	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/30V_post.TGACCA.s_6_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X2	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/30V_pre.TTAGGC.s_6_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X2	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/30V_pre.TTAGGC.s_6_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X3	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/32V_post.GCCAAT.s_6_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X3	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/32V_post.GCCAAT.s_6_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X4	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/32V_pre.ACAGTG.s_6_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X4	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/32V_pre.ACAGTG.s_6_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X5	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/8V_post.CGATGT.s_6_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X5	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/8V_post.CGATGT.s_6_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X6	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/8V_pre.ATCACG.s_6_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X6	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/8V_pre.ATCACG.s_6_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X7	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_AV.ATCACG.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X7	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_AV.ATCACG.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X8	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_MV.CGATGT.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X8	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_MV.CGATGT.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X9	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_PV.TTAGGC.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X9	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_PV.TTAGGC.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X10	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_TV.TGACCA.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X10	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T3_TV.TGACCA.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X11	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_AV.ACAGTG.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X11	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_AV.ACAGTG.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X12	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_MV.GCCAAT.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X12	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_MV.GCCAAT.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X13	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_PV.CAGATC.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X13	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_PV.CAGATC.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X14	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_TV.ACTTGA.s_5_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-40X14	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/T4_TV.ACTTGA.s_5_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-40X15	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/g134_1.txt.gz	MRNASEQ	fastqRead1
-40X15	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/g134_2.txt.gz	MRNASEQ	fastqRead2
-40X16	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/g467_1.txt.gz	MRNASEQ	fastqRead1
-40X16	Sheep	/Data01/gnomex/ExperimentData/2011/40R/bioanalysis/g467_2.txt.gz	MRNASEQ	fastqRead2
-76X1	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/PV_mouse.AGCTAA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-76X1	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/PV_mouse.AGCTAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-76X2	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/AV_mouse.CTTGTA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-76X2	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/AV_mouse.CTTGTA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-76X3	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/MV_mouse.GTCGAA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-76X3	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/MV_mouse.GTCGAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-76X4	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/TV_mouse.TGCAAA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-76X4	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/TV_mouse.TGCAAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-76X5	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/PV_mouse.AGCTAA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-76X5	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/PV_mouse.AGCTAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-76X6	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/AV_mouse.CTTGTA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-76X7	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/MV_mouse.GTCGAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-76X8	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/TV_mouse.TGCAAA.s_3_1_FFPF_sequence.txt.gz	MRNASEQ	fastqRead1
-76X8	Mouse	/Data01/gnomex/ExperimentData/2012/76R/bioanalysis/TV_mouse.TGCAAA.s_3_2_FFPF_sequence.txt.gz	MRNASEQ	fastqRead2
-86X1	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/120507-FC412-L5-CGATGT--Bruneau--BL6_Baf60c_het--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
-86X1	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/120507-FC412-L5-CGATGT--Bruneau--BL6_Baf60c_het--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
-86X2	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/120507-FC412-L5-TAGCTT--Bruneau--BL6_Baf60c_mut--Mm--R1.fq.bz2	MRNASEQ	fastqRead1
-86X2	Mouse	/Data01/gnomex/ExperimentData/2012/107R/upload_staging/120507-FC412-L5-TAGCTT--Bruneau--BL6_Baf60c_mut--Mm--R2.fq.bz2	MRNASEQ	fastqRead2
-117X1	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-ATCACG--Hiroko--A_E9.5--Mm--R1.fq.gz	MRNASEQ	fastqRead1
-117X1	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-ATCACG--Hiroko--A_E9.5--Mm--R2.fq.gz	MRNASEQ	fastqRead2
-117X2	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-CGATGT--Hiroko--V_E9.5--Mm--R1.fq.gz	MRNASEQ	fastqRead1
-117X2	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-CGATGT--Hiroko--V_E9.5--Mm--R2.fq.gz	MRNASEQ	fastqRead2
-117X3	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-TTAGGC--Hiroko--OFT_E9.5--Mm--R1.fq.gz	MRNASEQ	fastqRead1
-117X3	Mouse	/Data01/gnomex/ExperimentData/2013/117R/upload_staging/121102-FC549-L1-TTAGGC--Hiroko--OFT_E9.5--Mm--R2.fq.gz	MRNASEQ	fastqRead2
-130X1	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB005511_CHS00009192_TGACCA_L007_R1.fastq.bz2	DNASEQ	fastqRead1
-130X2	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB005511_CHS00009194_CTTGTA_L007_R1.fastq.bz2	DNASEQ	fastqRead1
-130X3	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB005511_CHS00009191_ACTTGA_L007_R1.fastq.bz2	DNASEQ	fastqRead1
-130X4	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB005511_CHS00009193_GCCAAT_L007_R1.fastq.bz2	DNASEQ	fastqRead1
-130X5	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB005711_CHS00009430_CGATGT_L008_R1.fastq.bz2	DNASEQ	fastqRead1
-130X6	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB005711_CHS00009431_TAGCTT_L008_R1.fastq.bz2	DNASEQ	fastqRead1
-130X7	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006082_CHS00010158_CAGATC_L003_R1.fastq.bz2	DNASEQ	fastqRead1
-130X8	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006083_CHS00010161_GCCAAT_L005_R1.fastq.bz2	DNASEQ	fastqRead1
-130X9	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006084_CHS00010164_CAGATC_L006_R1.fastq.bz2	DNASEQ	fastqRead1
-130X10	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006084_CHS00010165_ACTTGA_L006_R1.fastq.bz2	DNASEQ	fastqRead1
-130X11	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006084_CHS00010166_TAGCTT_L006_R1.fastq.bz2	DNASEQ	fastqRead1
-130X12	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006085_CHS00010168_TGACCA_L007_R1.fastq.bz2	DNASEQ	fastqRead1
-130X13	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006085_CHS00010169_GATCAG_L007_R1.fastq.bz2	DNASEQ	fastqRead1
-130X14	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006085_CHS00010170_ACAGTG_L007_R1.fastq.bz2	DNASEQ	fastqRead1
-130X15	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006086_CHS00010172_CTTGTA_L008_R1.fastq.bz2	DNASEQ	fastqRead1
-130X16	Mouse	/Data01/gnomex/ExperimentData/2013/130R/upload_staging/LIB006521_CHS00010895_ACTTGA_L003_R1.fastq.bz2	DNASEQ	fastqRead1
-134X1	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004180_CHS00006035_CGATGT_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
-134X2	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004180_CHS00006036_TGACCA_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
-134X3	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004180_CHS00006037_ACAGTG_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
-134X4	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004180_CHS00006038_GCCAAT_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
-134X5	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004180_CHS00006039_CTTGTA_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
-134X7	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004181_CHS00006041_TGACCA_L003_R1.fastq.bz2	CHIPSEQ	fastqRead1
-134X8	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004181_CHS00006042_ACAGTG_L003_R1.fastq.bz2	CHIPSEQ	fastqRead1
-134X9	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004181_CHS00006043_GCCAAT_L003_R1.fastq.bz2	CHIPSEQ	fastqRead1
-134X10	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/LIB004181_CHS00006044_CTTGTA_L003_R1.fastq.bz2	CHIPSEQ	fastqRead1
-134X11	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/s_4_eland_extended_mm9_25-36.txt	CHIPSEQ	fastqRead1
-134X12	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/s_5_eland_extended_mm9_25-36.txt	CHIPSEQ	fastqRead1
-134X13	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/s_6_eland_extended_mm9_25-36.txt	CHIPSEQ	fastqRead1
-134X14	Mouse	/Data01/gnomex/ExperimentData/2013/134R/upload_staging/s_7_eland_extended_mm9_25-36.txt	CHIPSEQ	fastqRead1
-163X1	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120601Boy_D12-2207_1_sequence.fastq.gz	DMRNASEQ	fastqRead1
 163X1	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120601Boy_D12-2207_2_sequence.fastq.gz	DMRNASEQ	fastqRead2
-163X2	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120601Boy_D12-2208_1_sequence.fastq.gz	DMRNASEQ	fastqRead1
+163X1	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120601Boy_D12-2207_1_sequence.fastq.gz	DMRNASEQ	fastqRead1
 163X2	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120601Boy_D12-2208_2_sequence.fastq.gz	DMRNASEQ	fastqRead2
-163X3	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120830BoyR_D12-3735_1_sequence.fastq.gz	DMRNASEQ	fastqRead1
+163X2	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120601Boy_D12-2208_1_sequence.fastq.gz	DMRNASEQ	fastqRead1
 163X3	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120830BoyR_D12-3735_2_sequence.fastq.gz	DMRNASEQ	fastqRead2
+163X3	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120830BoyR_D12-3735_1_sequence.fastq.gz	DMRNASEQ	fastqRead1
 163X4	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120830BoyR_D12-3736_1_sequence.fastq.gz	DMRNASEQ	fastqRead1
 163X4	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120830BoyR_D12-3736_2_sequence.fastq.gz	DMRNASEQ	fastqRead2
 163X5	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120830BoyR_D12-3737_1_sequence.fastq.gz	DMRNASEQ	fastqRead1
@@ -949,56 +709,18 @@ number	organism	concat(propertyValue, year(Request.createDate), '/', filename)	c
 163X7	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120830BoyR_D12-3739_2_sequence.fastq.gz	DMRNASEQ	fastqRead2
 163X8	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120830BoyR_D12-3740_1_sequence.fastq.gz	DMRNASEQ	fastqRead1
 163X8	Mouse	/Data01/gnomex/ExperimentData/2013/163R/upload_staging/120830BoyR_D12-3740_2_sequence.fastq.gz	DMRNASEQ	fastqRead2
-164X1	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011205_ATCACG_L001_R2.fastq.bz2	MRNASEQ	fastqRead1
-164X1	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011205_ATCACG_L001_R1.fastq.bz2	MRNASEQ	fastqRead1
-164X1	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011205_ATCACG_L002_R1.fastq.bz2	MRNASEQ	fastqRead2
-164X1	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011205_ATCACG_L002_R2.fastq.bz2	MRNASEQ	fastqRead2
-164X2	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011206_CGATGT_L001_R1.fastq.bz2	MRNASEQ	fastqRead1
-164X2	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011206_CGATGT_L001_R2.fastq.bz2	MRNASEQ	fastqRead1
-164X2	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011206_CGATGT_L002_R1.fastq.bz2	MRNASEQ	fastqRead2
-164X2	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011206_CGATGT_L002_R2.fastq.bz2	MRNASEQ	fastqRead2
-164X3	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011207_TTAGGC_L001_R2.fastq.bz2	MRNASEQ	fastqRead1
-164X3	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011207_TTAGGC_L001_R1.fastq.bz2	MRNASEQ	fastqRead1
-164X3	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011207_TTAGGC_L002_R2.fastq.bz2	MRNASEQ	fastqRead2
-164X3	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011207_TTAGGC_L002_R1.fastq.bz2	MRNASEQ	fastqRead2
-164X4	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011208_TGACCA_L001_R1.fastq.bz2	MRNASEQ	fastqRead1
-164X4	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011208_TGACCA_L001_R2.fastq.bz2	MRNASEQ	fastqRead1
-164X4	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011208_TGACCA_L002_R1.fastq.bz2	MRNASEQ	fastqRead2
-164X4	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011208_TGACCA_L002_R2.fastq.bz2	MRNASEQ	fastqRead2
-164X5	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011209_ACAGTG_L001_R1.fastq.bz2	MRNASEQ	fastqRead1
-164X5	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011209_ACAGTG_L001_R2.fastq.bz2	MRNASEQ	fastqRead1
-164X5	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011209_ACAGTG_L002_R2.fastq.bz2	MRNASEQ	fastqRead2
-164X5	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011209_ACAGTG_L002_R1.fastq.bz2	MRNASEQ	fastqRead2
-164X6	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011210_GCCAAT_L001_R2.fastq.bz2	MRNASEQ	fastqRead1
-164X6	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011210_GCCAAT_L001_R1.fastq.bz2	MRNASEQ	fastqRead1
-164X6	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011210_GCCAAT_L002_R2.fastq.bz2	MRNASEQ	fastqRead2
-164X6	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011210_GCCAAT_L002_R1.fastq.bz2	MRNASEQ	fastqRead2
-164X7	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011211_CAGATC_L001_R1.fastq.bz2	MRNASEQ	fastqRead1
-164X7	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011211_CAGATC_L001_R2.fastq.bz2	MRNASEQ	fastqRead1
-164X7	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011211_CAGATC_L002_R2.fastq.bz2	MRNASEQ	fastqRead2
-164X7	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011211_CAGATC_L002_R1.fastq.bz2	MRNASEQ	fastqRead2
-164X8	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011212_ACTTGA_L001_R2.fastq.bz2	MRNASEQ	fastqRead1
-164X8	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011212_ACTTGA_L001_R1.fastq.bz2	MRNASEQ	fastqRead1
-164X8	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011212_ACTTGA_L002_R2.fastq.bz2	MRNASEQ	fastqRead2
-164X8	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011212_ACTTGA_L002_R1.fastq.bz2	MRNASEQ	fastqRead2
-164X9	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011213_GATCAG_L001_R1.fastq.bz2	MRNASEQ	fastqRead1
-164X9	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011213_GATCAG_L001_R2.fastq.bz2	MRNASEQ	fastqRead1
-164X9	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011213_GATCAG_L002_R2.fastq.bz2	MRNASEQ	fastqRead2
-164X9	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011213_GATCAG_L002_R1.fastq.bz2	MRNASEQ	fastqRead2
-164X10	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011214_TAGCTT_L001_R2.fastq.bz2	MRNASEQ	fastqRead1
-164X10	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011214_TAGCTT_L001_R1.fastq.bz2	MRNASEQ	fastqRead1
-164X10	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011214_TAGCTT_L002_R1.fastq.bz2	MRNASEQ	fastqRead2
-164X10	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011214_TAGCTT_L002_R2.fastq.bz2	MRNASEQ	fastqRead2
-164X11	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011215_GGCTAC_L001_R2.fastq.bz2	MRNASEQ	fastqRead1
-164X11	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011215_GGCTAC_L001_R1.fastq.bz2	MRNASEQ	fastqRead1
-164X11	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011215_GGCTAC_L002_R1.fastq.bz2	MRNASEQ	fastqRead2
-164X11	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011215_GGCTAC_L002_R2.fastq.bz2	MRNASEQ	fastqRead2
-164X12	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011216_CTTGTA_L001_R1.fastq.bz2	MRNASEQ	fastqRead1
-164X12	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011216_CTTGTA_L001_R2.fastq.bz2	MRNASEQ	fastqRead1
-164X12	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011216_CTTGTA_L002_R2.fastq.bz2	MRNASEQ	fastqRead2
-164X12	Mouse	/Data01/gnomex/ExperimentData/2013/164R/upload_staging/LIB006740_TRA00011216_CTTGTA_L002_R1.fastq.bz2	MRNASEQ	fastqRead2
+167X1	Mouse	/Data01/gnomex/ExperimentData/2013/167R/upload_staging/LIB005960_CHS00010002_CGATGT_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
+167X2	Mouse	/Data01/gnomex/ExperimentData/2013/167R/upload_staging/LIB005960_CHS00010008_TGACCA_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
+167X3	Mouse	/Data01/gnomex/ExperimentData/2013/167R/upload_staging/LIB005960_CHS00010005_GCCAAT_L002_R1.fastq.bz2	CHIPSEQ	fastqRead1
 168X1	Mouse	/Data01/gnomex/ExperimentData/2013/168R/upload_staging/LIB004500_CHS00006718_CGATGT_L001_R1.fastq.bz2	CHIPSEQ	fastqRead1
 168X2	Mouse	/Data01/gnomex/ExperimentData/2013/168R/upload_staging/LIB004500_CHS00006719_TGACCA_L001_R1.fastq.bz2	CHIPSEQ	fastqRead1
 168X3	Mouse	/Data01/gnomex/ExperimentData/2013/168R/upload_staging/LIB004500_CHS00006720_GCCAAT_L001_R1.fastq.bz2	CHIPSEQ	fastqRead1
 168X4	Mouse	/Data01/gnomex/ExperimentData/2013/168R/upload_staging/LIB004500_CHS00006721_CTTGTA_L001_R1.fastq.bz2	CHIPSEQ	fastqRead1
 168X5	Mouse	/Data01/gnomex/ExperimentData/2013/168R/upload_staging/LIB004500_CHS00006722_ACAGTG_L001_R1.fastq.bz2	CHIPSEQ	fastqRead1
+171X1	Mouse	/Data01/gnomex/ExperimentData/2013/171R/upload_staging/LIB006971_CHS00011793_CTTGTA_L007_R1.fastq.bz2	CHIPSEQ	fastqRead1
+171X2	Mouse	/Data01/gnomex/ExperimentData/2013/171R/upload_staging/LIB006971_CHS00011794_TGACCA_L007_R1.fastq.bz2	CHIPSEQ	fastqRead1
+171X3	Mouse	/Data01/gnomex/ExperimentData/2013/171R/upload_staging/LIB006972_CHS00011795_CAGATC_L008_R1.fastq.bz2	CHIPSEQ	fastqRead1
+171X4	Mouse	/Data01/gnomex/ExperimentData/2013/171R/upload_staging/LIB006972_CHS00011796_ACTTGA_L008_R1.fastq.bz2	CHIPSEQ	fastqRead1
+171X5	Mouse	/Data01/gnomex/ExperimentData/2013/171R/upload_staging/LIB006972_CHS00011797_GATCAG_L008_R1.fastq.bz2	CHIPSEQ	fastqRead1
+171X6	Mouse	/Data01/gnomex/ExperimentData/2013/171R/upload_staging/LIB006972_CHS00011798_TAGCTT_L008_R1.fastq.bz2	CHIPSEQ	fastqRead1
+172X1	Mouse	/Data01/gnomex/ExperimentData/2013/172R/upload_staging/LIB006972_CHS00011799_ACAGTG_L008_R1.fastq.bz2	CHIPSEQ	fastqRead1
