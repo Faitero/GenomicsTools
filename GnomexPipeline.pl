@@ -15,26 +15,39 @@ $pl->getLanes;
 
 $pl->buildFastQCCommandHash;
 
-
+$pl->multiprocessQ(%{$pl->{commands}->{fastqc}}) unless $dry;
 
 $pl->make_fastq_MCF_commands;
 
+$pl->multiprocessQ(%{$pl->{commands}->{trim}});
 
 $pl->buildAlignCommandHash;
 
-print Dumper $pl->{commands};
-<>;
+$pl->multiprocessQ(%{$pl->{commands}->{align}}) unless $dry;
+
+$pl->makeDeDupeCommandHash;
+
+	print Dumper $pl->{commands};
+# <>;
+
+# $pl->multiprocessQ( %{$pl->{commands}->{markDupes} } ) unless $dry;
+
+
+
 
 
 
 # $pl->{mdb}->addPipelineSamples( sh => $pl->{samples} );
 
-$pl->multiprocessQ(%{$pl->{commands}->{fastqc}}) unless $dry;
 
-$pl->multiprocessQ(%{$pl->{commands}->{trim}});
 
-$pl->multiprocessQ(%{$pl->{commands}->{align}}) unless $dry;
-$pl->logFieldReport;
+
+
+
+
+
+
+# $pl->logFieldReport;
 
 
 

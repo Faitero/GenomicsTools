@@ -10,13 +10,13 @@ use IPC::System::Simple qw(system);
 use IPC::System::Simple qw(capture);
 use Getopt::Long;
 use tools::mongo;
-use Proc::Queue size => 20, debug => 1;
+use Proc::Queue size => 10, debug => 1;
 use POSIX ":sys_wait_h";
 use Switch;
 use Scalar::Util qw(blessed);
 
 our $dry = 0;
-our $debug = 1;
+our $debug = 0;
 
 
 # print Dumper($pl->{fastqc});
@@ -28,6 +28,9 @@ sub new{
 	my $class = shift;
 	my %args = @_;
 	my $noload = $args{noload}; 
+	if ( ! defined( $noload ) ){
+		$noload = 0;
+	}
 	my $self = {
 		time => getCurrentTime(),
 		# samples => tools::b2bdb::queryB2BSampleFiles,
@@ -60,7 +63,7 @@ sub new{
 	$self->{db}->{zebrafish}->{refgene} = "/work/Common/Data/Annotation/zebrafish/Danio_rerio.Zv9.73.bed";
 	$self->{mdb} = tools::mongo->new() ;
 	$self->{db}->{contaminantsFasta} = "/work/Common/Data/contaminants/contaminants.fa";
-	print "self->{bdb} = ".blessed($self->{mdb}->{db})."\n";
+	print "self->{bdb} = ".blessed($self->{mdb}->{db})."\n" if $debug;
 	return $self;
 }
 
@@ -319,7 +322,7 @@ sub multiprocessQ{
 	Proc::Queue::waitpids(@pids);
 }
 
-sub make_fastqc_output_string{
+sub make_fastqc_output_path{
 	my $read = shift;
 	my $read1base = basename($read);
 	$read1base =~  s/\.gz$//;
@@ -330,6 +333,23 @@ sub make_fastqc_output_string{
 	$read1base .= "_fastqc.zip";
 	return $read1base;
 }
+
+sub make_fastqc_data_path{
+	my $read = shift;
+	$read = make_fastqc_output_path($read);
+	$read =~ s/.zip$/\/fastqc_data.txt/;
+	return $read;
+}
+
+sub get_fastqc_outdir{
+	my $self = shift;
+	my $samp = shift;
+	my $analysisDir = $self->{analysisDir};
+	my $exp = getExp($samp);
+	my $outdir = $analysisDir."/".$exp."/$samp/fastqc/";
+	return $outdir;
+}
+
 
 ## this builds a hash reference of system commands to run fastqc on the sample fastqs
 ##  will be referred to as 'fastqc' in log field
@@ -360,9 +380,9 @@ sub buildFastQCCommandHash{
 			$self->logErr($msg);
 			next;
 		}
-		my $outdir = $analysisDir."/".$exp."/$samp/fastqc";
+		my $outdir = $self->get_fastqc_outdir($samp);
 		system ("mkdir -p $outdir");
-		my $chkRead1 = $outdir."/".make_fastqc_output_string($read1);
+		my $chkRead1 = $outdir."/".make_fastqc_output_path($read1);
 		print "checking for existance of $chkRead1\n";
 		if (-e $chkRead1){
 			$succMsg = "Success: $chkRead1 exists;";
@@ -375,7 +395,7 @@ sub buildFastQCCommandHash{
 		}
 		if ( exists($self->{samples}->{$samp}->{files}->{fastqRead2}->{path}) ){
 			my $read2 = $self->{samples}->{$samp}->{files}->{fastqRead2}->{path};
-			my $chkRead2 = $outdir."/".make_fastqc_output_string($read2);
+			my $chkRead2 = $outdir."/".make_fastqc_output_path($read2);
 			print "checking for existance of $chkRead2\n";
 			if ( -e  $chkRead2) {
 				$succMsg .= " $chkRead2 exists;";
@@ -385,8 +405,7 @@ sub buildFastQCCommandHash{
 				## check if we have already started a command for this sample
 				if ( exists($self->{commands}->{fastqc}->{$samp} )){
 					$self->{commands}->{fastqc}->{$samp} .= " && ";
-				}
-				
+				}		
 				$self->{commands}->{fastqc}->{ $samp } .=   $command;
 				$succMsg .= " ; $command";
 			}
@@ -396,19 +415,45 @@ sub buildFastQCCommandHash{
 		writeToLogFile("$samp\t$succMsg", $log);
 		$self->runLog($succMsg);
 		$self->logSuccess($succMsg);
-		
 	}
 }
+
+## get fastqc paths, this uses the pipeline object to populate the array of read1 and read2 
+## in samples->samp->fastqc->read1 
+sub get_fastqc_data_paths{
+	my $self = shift;
+	for my $samp ( sort keys %{ $self->{samples} } ){
+		if (exists ($self->{samples}->{$samp}->{files}->{fastqRead1} ) ){
+			if( exists($self->{samples}->{$samp}->{files}->{fastqRead1}->{path} )) {
+				if ( ! exists ( $self->{samples}->{$samp}->{files}->{fastqc}->{fastqRead1} )){
+					$self->{samples}->{$samp}->{files}->{fastqc}->{fastqRead1} = ();
+				}
+				for my $read ( $self->{samples}->{$samp}->{files}->{fastqRead1}->{path} ){
+					my $path = $self->get_fastqc_outdir($samp) . make_fastqc_data_path($read); 
+					push ( @{$self->{samples}->{$samp}->{files}->{fastqc}->{fastqRead1}}, $path );
+				}
+			}
+		}
+		if (exists ($self->{samples}->{$samp}->{files}->{fastqRead2} ) ){
+			if( exists($self->{samples}->{$samp}->{files}->{fastqRead2}->{path} )) {
+				if ( ! exists ( $self->{samples}->{$samp}->{files}->{fastqc}->{fastqRead2} )){
+					$self->{samples}->{$samp}->{files}->{fastqc}->{fastqRead2} = ();
+				}
+				for my $read ( $self->{samples}->{$samp}->{files}->{fastqRead2}->{path} ){
+					my $path = $self->get_fastqc_outdir($samp) . make_fastqc_data_path($read); 
+					push (@{ $self->{samples}->{$samp}->{files}->{fastqc}->{fastqRead2} }, $path );
+				}
+			}
+		}
+	}
+}
+
 
 sub system_bash {
   my @args = ( "bash", "-c", shift );
   system(@args);
 }
 
-# sub capture_bash {
-#   my @args = ( "bash", "-c", "nice" , shift );
-#   capture(@args);
-# }
 
 # wraps bz2 files in subshell so they will work with MCF
 sub read_bz2_fix {
@@ -537,10 +582,12 @@ sub buildAlignCommandHash{
 			next;
 		}
 		
-		# Check if the force flag is ineffect
+		# Check if the force flag is in effect
 		unless ( exists ($self->{align}->{force}) && $self->{align}->{force} ) {
 			$self->runLog("checking for alignment file");
-			if (my @files = glob("$analysisDir/$exp/$pattern1*--$samp/$pattern2*.bam")){
+			my $bamPattern = "$analysisDir/$exp/$samp/$pattern1*--$samp/$pattern2*.bam";
+			$self->{samples}->{$samp}->{expected}->{bam} = "$analysisDir/$exp/$samp/$pattern1*--$samp/$pattern2.bam";
+			if (my @files = glob($bamPattern)){
 				## alignment has been done already
 				if (-s $files[0] < 104857600 ){
 					writeToLogFile("$samp\t".$files[0]."is less than 100BM -- rerunning", $log);
@@ -610,6 +657,56 @@ sub generateTophatCommand{
 	$tophatCommand .= $self->{samples}->{$samp}->{mcf}->{read2}->{path}." " if ($paired);
 	$tophatCommand .= "2>&1 | tee --append $aboutfile";
 	return $tophatCommand;
+}
+
+## searches for expected expected de-duped bams and makes a command to dedupe them if 
+## they are not found
+sub makeDeDupeCommandHash{
+	my $self = shift;
+	my $ULIMIT_RESULT = 1024; ## result of running the shell command ulimit -n. Since this is a shell built-in, it can, for some reason, not be run like a real command, so backticks don't work. `ulimit -n`; chomp($ULIMIT_RESULT);
+	my $maxFileHandles = int(0.8 * $ULIMIT_RESULT/4); ## This is for the MAX_FILE_HANDLES_FOR_READ_ENDS_MAP parameter for MarkDuplicates: From the Picard docs: "Maximum number of file handles to keep open when spilling read ends to disk. Set this number a little lower than the per-process maximum number of file that may be open. This number can be found by executing the 'ulimit -n' command on a Unix system. Default value: 8000."
+	# my $MARKDUPLICATES_PATH = `which MarkDuplicates.jar`; chomp($MARKDUPLICATES_PATH); ## Tries to find "MarkDuplicates.jar" from the Picard suite in the user's $PATH
+	my $GIGABYTES_FOR_PICARD = 6;
+
+	# my $MARKDUPLICATES_PATH = "/work/Apps/Bio/picard/picard-tools-1.90/MarkDuplicates.jar"; 
+	my $MARKDUPLICATES_PATH = `which MarkDuplicates.jar`; 
+	chomp($MARKDUPLICATES_PATH);
+	# my $SORTSAM_PATH = "/bioinformatics/installations/picard/picard-tools-1.89/SortSam.jar";
+	my $SORTSAM_PATH = `which SortSam.jar`;
+	chomp($SORTSAM_PATH);
+
+	for my $samp ( sort keys ( %{ $self->{samples} } ) ){
+		my $bamPattern = $self->{samples}->{$samp}->{expected}->{bam};
+		print "looking for pattern\t$bamPattern\n";
+		my @bams = glob($bamPattern);
+		## check if bam exists
+		if (scalar (@bams) > 0 ){
+			my $expDedupeBam = $bamPattern;
+			$expDedupeBam =~ s/.bam/_marked_dupe.bam/;
+			$self->{samples}->{$samp}->{expected}->{markedDupeBam} = $expDedupeBam;
+			my @ddbams = glob($expDedupeBam);
+			if ( scalar ( @ddbams ) > 0 ){
+				print $ddbams[0] . " already exists, passing.\n";
+				next;
+			}  else {
+				my $inFile = $bams[0];
+				my $outFile = $bams[0];
+				my $dedupExtraMetricsFile = $outFile;
+				$dedupExtraMetricsFile .= "_mark_dup_metrics.txt";
+				my $dedupCmd = (qq{nice java -Xmx${GIGABYTES_FOR_PICARD}g -jar ${MARKDUPLICATES_PATH} }
+				    . qq{ INPUT=$inFile } ## Picard SortSam.jar accepts both SAM and BAM files as input!
+				    . qq{ REMOVE_DUPLICATES=FALSE }
+				    . qq{ CREATE_INDEX=TRUE }
+				    #. ((!$shouldSort) ? qq{ ASSUME_SORTED=TRUE } : qq { }) ## <-- if we use --nosort, then ASSUME they are sorted no matter what!
+				    . qq{ MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=$maxFileHandles }
+				    . qq{ OPTICAL_DUPLICATE_PIXEL_DISTANCE=10 } ## <-- 100 is default but our libraries have single integer coordinate values
+				    . qq{ METRICS_FILE=$dedupExtraMetricsFile }
+				    . qq{ OUTPUT=$outFile }
+				);	
+				$self->{commands}->{markDupes}->{$samp} = $dedupCmd;	
+			}
+		}
+	}
 }
 
 ## returns true if a paired end sample

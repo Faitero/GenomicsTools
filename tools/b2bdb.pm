@@ -27,23 +27,23 @@ QRY
 
 sub queryB2BSampleFiles{
 	my %args = @_;
-	print "Script version of B2BDB\n";
+	
 	my $limit = $args{limit};
 	# print $b2bssh."\n";
 	system ("mkdir -p $dir/sql");
 	my $sqlPath = "sql/getReads.sql";
 	open ( my $fh , '+>', "$dir/$sqlPath" ) || die $!;
-    print $fh $qry;
+    print $fh $qry ;
     close $fh;
     my $scpComm = "rsync -e ssh $dir/$sqlPath $b2bconn:$sqlPath";
-    print $scpComm."\n";
+    print $scpComm."\n" if $debug;
 	system ($scpComm);
 	my $sqlComm = " \"mysql -u ".$ENV{'b2bsqlUN'}." -p".$ENV{'b2bsqlPW'}." --database gnomex <$sqlPath\"";
-	print $b2bssh.$sqlComm."\n";
+	print $b2bssh.$sqlComm."\n" if $debug;
 	system ("mkdir -p $dir/sql/out");
 	open SQLOUT, ">", "$dir/sql/out/res.out";
 	my $res = capture ($b2bssh.$sqlComm);
-	print SQLOUT $res;
+	print SQLOUT $res ;
 	my @rows = split("\n", $res);
 	my $i = 0;
 	my $sh = {};
@@ -55,11 +55,13 @@ sub queryB2BSampleFiles{
 		for my $fld (@flds){
 			chomp $fld;
 		}
-		$sh->{$flds[0]}->{files}->{$flds[4]}->{path} = $flds[2] ; ##if (defined $sh->{$flds[0]}->{files}->{$flds[4]} && !($sh->{$flds[0]}->{files}->{$flds[4]} =~ $flds[2]) );
-		$sh->{$flds[0]}->{files}->{$flds[4]}->{size} = -s $flds[2];
-		# push (@{$sh->{$flds[0]}->{files}->{$flds[4]}} , $flds[2] );
-		$sh->{$flds[0]}->{species} = $flds[1];
-		$sh->{$flds[0]}->{type} = $flds[3];
+		if ( -s $flds[2] ) {
+			$sh->{$flds[0]}->{files}->{$flds[4]}->{path} = $flds[2] ; ##if (defined $sh->{$flds[0]}->{files}->{$flds[4]} && !($sh->{$flds[0]}->{files}->{$flds[4]} =~ $flds[2]) );
+			$sh->{$flds[0]}->{files}->{$flds[4]}->{size} = -s $flds[2];
+			# push (@{$sh->{$flds[0]}->{files}->{$flds[4]}} , $flds[2] );
+			$sh->{$flds[0]}->{species} = $flds[1];
+			$sh->{$flds[0]}->{type} = $flds[3];
+		}
 	}
 
 	# ## there are duplicate rows
@@ -78,68 +80,6 @@ unless ( caller ) {
 	my $sh = queryB2BSampleFiles;
 	print Dumper $sh;
 }
-
-
-
-
-
-## This sub connects to the b2b server via ssh and executes a query on the 
-## gnomex database to get the Request #, the sample #, the associated files field
-## the species and the type of experiment.
-sub getSampMetaAssocFiles{
-	my %args = @_;
-	my $limit = $args{limit};
-	# print $b2bssh."\n";
-	if ($limit) {
-		$qry .= " limit $limit";
-	}
-	
-	system ("mkdir -p $dir/sql");
-	open ( my $fh , '+>', "$dir/sql/AssocFiles.sql" ) || die $!;
-	print $fh $qry;
-	close $fh;
-	my $scpComm = "rsync -e ssh $dir/sql/AssocFiles.sql $b2bconn:sql/AssocFiles.sql";
-	print $scpComm."\n";
-	system ($scpComm);
-	my $sqlComm = " \"mysql -u ".$ENV{'b2bsqlUN'}." -p".$ENV{'b2bsqlPW'}." --database gnomex <sql/AssocFiles.sql\"";
-	print $b2bssh.$sqlComm."\n";
-	system ("mkdir -p $dir/sql/out");
-	open SQLOUT, ">", "$dir/sql/out/res.out";
-	my $res = capture ($b2bssh.$sqlComm);
-	print SQLOUT $res;
-	my @rows = split("\n", $res);
-	my $i = 0;
-	my $sh = {};
-	for my $row (@rows){
-		print $row."\n" if $debug;
-		chomp $row;
-		my @flds = split ("\t", $row);
-		# print Dumper(@flds);
-		if ($i == 0){
-			$i++;
-			next;
-		}
-		# for my $fld (@flds){
-		# 	print $_." field\n";
-		# }
-		$flds[2] =~ s/[,";]//g;
-		my @files = split (' ', $flds[2]);
-		if ($flds[2] ne '' && @files <= 2 && $flds[2] ne 'NULL' && !(lc($flds[2]) =~ m/.jpg$/) && !(lc($flds[2]) =~ m/.pptx$/)){
-			## paired end sample
-			if (@files == 2){
-				$sh->{$flds[1]}->{files}->{read1}->{name} = $files[0];
-				$sh->{$flds[1]}->{files}->{read2}->{name} = $files[1];
-			} else {
-				$sh->{$flds[1]}->{files}->{read1}->{name} = $files[0];
-			}
-			$sh->{$flds[1]}->{species} = $flds[3];
-			$sh->{$flds[1]}->{type} = $flds[4];
-		}
-	}
-	print Dumper($sh) if $debug;
-	return $sh;
-} 
-
 
 
 1;

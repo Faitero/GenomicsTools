@@ -4,14 +4,255 @@ use warnings;
 use Data::Dumper;
 use MongoDB::MongoClient;
 use Scalar::Util qw(blessed);
+use String::Diff;
 our @ISA = qw(MongoDB::MongoClient);
+our $debug = 1;
+
+
+## gets the list of fastqc data files and returns a hashref to them
+sub get_fastqc_data {
+	my %args = @_;
+	my $basedir = $args{basedir};
+	if (!defined ($basedir) ){
+		$basedir = "/Data01/gnomex/Analysis/experiment/";
+	}
+	my @oh = `find $basedir -name fastqc_data.txt | sort`;
+	for my $entry (@oh){
+		chomp $entry;
+	}
+	return \@oh;
+}
+
+
+## gets the sample from the a collection of fastqc paths
+## returns hashRef->$path->$sample 
+sub get_sample_from_path {
+	my @paths = @_;
+	my $oh = {};
+	for my $path ( @paths ){
+		$path =~ m/\/(\d+X\d+)\//;
+		$oh->{$path} = $1;
+	}
+	return $oh;
+}
+
+## takes a string of a fastqc path 
+## returns string that can be used to search for the fastq
+sub fascqc_path_to_file_pattern{
+	my $path  = shift;
+	if (  $path =~ m/\/([^\/]+)_fastqc\// ){
+		print caller()." $1\n" if $debug;
+		return $1;
+	}	
+	else {return 0};
+}
+
+
+## get the read1 and read 2 from the sample
+## takes a path-samp hash
+## returns a samp->read1[path array]
+## 			samp->read2[path array]
+sub get_read_from_path {
+	my $pipe = shift;
+	## first invert hash
+	my $p2s = shift;
+	# print Dumper $pipe;
+	## make out hash
+	my $oh = {};
+	print Dumper $pipe->{samples} if $debug;
+	#make sample files Ref hash reference
+	for my $path ( sort keys %$p2s){
+		my $samp = $p2s->{$path};
+		#make sample files Ref hash reference
+		my $fr = $pipe->{samples}->{$samp}->{files}; 
+		my $pattern = fascqc_path_to_file_pattern($path);
+		my $i = 0 ; 
+		for my $read1 ( $fr->{fastqRead1}->{path} ){
+			print $read1."\n" if $debug;
+			if ( $read1 =~ $pattern ){
+				if (!exists($oh->{$samp}->{read1} )){
+					$oh->{$samp}->{read1} = ();
+				}
+				${$oh->{$samp}->{read1}}[$i] = $path;
+				# print Dumper $oh;
+				# <>;
+				next; 
+			}
+			$i++;
+		}
+		$i = 0;
+		if (exists ($fr->{fastqRead2} )  ){
+			if ($samp eq "5X1"){
+				print "$samp in Read2 loop\n";
+				<>;
+			}
+			for my $read2 ( $fr->{fastqRead2}->{path} ){
+				print $read2."\n" if $debug;
+				if ( $read2 =~ $pattern ){
+					if (!exists($oh->{$samp}->{read2} )){
+						$oh->{$samp}->{read2} = ();
+					}
+					${$oh->{$samp}->{read2}}[$i] = $path;
+					next; 
+				}
+				$i++;
+			}
+		}	
+	}
+	return $oh;
+}
+
+## makes objects from fastqc data output
+sub process_fastqc_data{
+	my $pipe = shift;
+	my $mh = ();
+	my $measColl = $pipe->{mdb}->{db}->get_collection('measurements');
+	for my $samp (sort keys ( %{ $pipe->{samples} } ) ){
+		for my $read ( sort keys ( %{ $pipe->{samples}->{$samp}->{files}->{fastqc} } ) ){
+			my $i ;
+			my $rh = $pipe->{samples}->{$samp}->{files}->{fastqc}->{$read};
+			for ( $i = 0 ; $i <  scalar ( @{$rh} ) ; $i++ ){
+				
+				my $file = $$rh[$i];
+				if ( -e $file ){
+					my $key = "${samp}  ${read}  No. ".eval($i+1);
+					## get per sequence quality
+					my $data = get_per_sequence_qual($key, $file, $samp) ;
+					my $id = $data->{measurement}."__".$key;
+					$id =~ s/ /_/g;
+					$measColl->update({'_id' => $id }, {'$set' => { %{$data} }}, {'upsert' => 1, 'safe' => 1});
+					## get per sequence GC content
+					$data = get_per_sequence_gc($key, $file, $samp);
+					my $id = $data->{measurement}."__".$key;
+					$id =~ s/ /_/g;
+					$measColl->update({'_id' => $id }, {'$set' => { %{$data} }}, {'upsert' => 1, 'safe' => 1});
+
+				}
+			}
+		}
+	}
+}
+
+## makes a measurement object from fastqc file for per sequence quality scores
+sub get_per_sequence_gc{
+	my $key = shift;
+	my $file = shift;
+	my $samp = shift;
+	my $out = {};
+	my $meas = "Per sequence GC content";
+	open my $IN,  "<" , $file ;
+	until(  (my $line = <$IN>) =~ qq/$meas/  ){};
+	my $line = <$IN>;
+	$line =~ s/#//;
+	chomp $line;
+	my @flds = split (" ", $line);
+	# print $flds[0]."\t".$flds[1]."\n";
+	# $out->{_id} = $_id;
+	$out->{key} = $key;
+	$out->{file} = $file;
+	$out->{x_label} = $flds[0];
+	$out->{y_label} = "Proportion of Reads";
+	$out->{values} = ();
+	$out->{samp} = $samp;
+	$out->{measurement} = $meas; 
+	until ( ($line = <$IN>) =~ m/>>END_MODULE/ ){
+		my $val = {};
+		chomp $line ;
+		my @vals = split("\t", $line);
+		$vals[1] =~ s/E/e/;
+		$val->{x} = $vals[0];
+		$val->{y} = $vals[1];
+		$out->{y_total} += $vals[1];
+		push ( @{ $out->{values} } , $val );
+	}
+	for my $val ( @{ $out->{values} } ){
+		$val->{y} /= $out->{y_total};
+	}
+	return $out; 
+}
+
+
+## makes a measurement object from fastqc file for per sequence quality scores
+sub get_per_sequence_qual{
+	my $key = shift;
+	my $file = shift;
+	my $samp = shift;
+	my $out = {};
+	my $meas = "Per sequence quality scores";
+	open my $IN,  "<" , $file ;
+	until(  (my $line = <$IN>) =~ qq/$meas/  ){};
+	my $line = <$IN>;
+	$line =~ s/#//;
+	chomp $line;
+	my @flds = split (" ", $line);
+	# print $flds[0]."\t".$flds[1]."\n";
+	# $out->{_id} = $_id;
+	$out->{key} = $key;
+	$out->{file} = $file;
+	$out->{x_label} = $flds[0];
+	$out->{y_label} = "Proportion of Reads";
+	$out->{values} = ();
+	$out->{samp} = $samp;
+	$out->{measurement} = $meas; 
+	until ( ($line = <$IN>) =~ m/>>END_MODULE/ ){
+		my $val = {};
+		chomp $line ;
+		my @vals = split(" ", $line);
+		$vals[1] =~ s/E/e/;
+		$val->{x} = $vals[0];
+		$val->{y} = $vals[1];
+		$out->{y_total} += $vals[1];
+		push ( @{ $out->{values} } , $val );
+	}
+	for my $val ( @{ $out->{values} } ){
+		$val->{y} /= $out->{y_total};
+	}
+	return $out; 
+}
+
+
+
+
+
+
+# ## this takes an array ref like created from get_read_from_path
+# ## and outputs a data object suitable for insertion into the mondodb
+# ## collection
+# sub parse_fastqc_data{
+# 	my $sh = shift;
+# 	## get list 
+# 	my $oh = {};
+# 	for my $samp ( sort keys %$sh ){
+# 		for my $read ( sort keys %{$sh->{$samp} }){
+# 			my $i = 0;
+# 			for ( $i = 0 ; $i < scalar @{$sh->{$samp}->{$read:while () {
+# 				# body...
+# 			}}} ; $i++ ){
+# 				my $key = "$samp $read $i";
+# 				open my $IN , "<" , ${$sh->{$samp}->{$read}}[$i];
+# 				my $version = <$IN>;
+# 				chomp $version;
+# 				<>;
+# 				<>;
+# 				my $line = <$IN>;
+# 				chomp $line; 
+# 				my $filename = @{split( "\s" , $line )}[1];	
+# 				print $filename;
+# 			}
+# 		}
+# 	}
+# }
+
+
+
+
 
 
 # returns a handle to the samples collection.
 sub getDB{
 	
 	my $client = MongoDB::MongoClient->new;
-	my $db = $client->get_database( 'b2bPipeline' );
+	my $db = $client->get_database( 'restTest' );
 	
 	return $db;
 }
@@ -87,7 +328,7 @@ sub addSamps{
 
 ## this adds the pipeline->Samples object to the samples databse
 ## required Params : sh => hashRef of Samples 
-sub addPipelineSamples{
+sub lineSamples{
 	my $db = shift;
 	my %args = @_;
 	my $sh = $args{sh};
