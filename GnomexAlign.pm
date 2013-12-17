@@ -4,7 +4,7 @@ use File::Basename;
 use strict;
 use warnings;
 use tools::b2bdb;
-use Data::Dumper;
+use Data::Dumper::Concise;
 use tools::fq;
 use IPC::System::Simple qw(system);
 use IPC::System::Simple qw(capture);
@@ -14,6 +14,7 @@ use Proc::Queue size => 10, debug => 1;
 use POSIX ":sys_wait_h";
 use Switch;
 use Scalar::Util qw(blessed);
+use tools::bam;
 
 our $dry = 0;
 our $debug = 0;
@@ -322,6 +323,28 @@ sub multiprocessQ{
 	Proc::Queue::waitpids(@pids);
 }
 
+
+sub multiprocessPerlQ{
+	my $self = shift;
+	my %hash = @_;
+	my @pids;
+	print Dumper %hash;
+	print "In MultiprocessPerlQ\n";
+	
+	for my $samp (sort keys %hash ){
+		print "samp = $samp\n";
+		my $cmd = $hash{$samp}->{cmd};
+		my %args = %{$hash{$samp}->{args}};
+		my $f = fork;
+		if ( defined ($f) && $f==0 ){
+			&{$cmd} (%args);
+			exit(0);
+		}
+		push( @pids, $f ) if defined $f;
+	}
+	Proc::Queue::waitpids(@pids);
+}
+
 sub make_fastqc_output_path{
 	my $read = shift;
 	my $read1base = basename($read);
@@ -383,9 +406,9 @@ sub buildFastQCCommandHash{
 		my $outdir = $self->get_fastqc_outdir($samp);
 		system ("mkdir -p $outdir");
 		my $chkRead1 = $outdir."/".make_fastqc_output_path($read1);
-		print "checking for existance of $chkRead1\n";
+		print "checking for existence of $chkRead1\n";
 		if (-e $chkRead1){
-			$succMsg = "Success: $chkRead1 exists;";
+			$succMsg = "$chkRead1 exists;\n";
 			
 		} else {
 			my $command = "fastqc --outdir=$outdir ".$read1;
@@ -393,12 +416,12 @@ sub buildFastQCCommandHash{
 			$succMsg = $command;
 			
 		}
-		if ( exists($self->{samples}->{$samp}->{files}->{fastqRead2}->{path}) ){
+		if ( exists($self->{samples}->{$samp}->{files}->{fastqRead2}) ){
 			my $read2 = $self->{samples}->{$samp}->{files}->{fastqRead2}->{path};
 			my $chkRead2 = $outdir."/".make_fastqc_output_path($read2);
-			print "checking for existance of $chkRead2\n";
+			print "checking for existence of $chkRead2\n";
 			if ( -e  $chkRead2) {
-				$succMsg .= " $chkRead2 exists;";
+				$succMsg .= " $chkRead2 exists;\n";
 
 			} else {
 				my $command = "fastqc --outdir=$outdir ".$read2;
@@ -407,7 +430,7 @@ sub buildFastQCCommandHash{
 					$self->{commands}->{fastqc}->{$samp} .= " && ";
 				}		
 				$self->{commands}->{fastqc}->{ $samp } .=   $command;
-				$succMsg .= " ; $command";
+				$succMsg .= "; $command\n";
 			}
 		}
 		# print $succMsg."\t"."\n";
@@ -489,17 +512,19 @@ sub make_fastq_MCF_commands{
          $self->{samples}->{$samp}->{mcf}->{read1}->{path} = $r1out;
          my $read2;
          my $r2out;
-         if (exists($self->{samples}->{$samp}->{files}->{fastqRead2}->{path})){
+         if (exists($self->{samples}->{$samp}->{files}->{fastqRead2})){
          	 $read2 = $self->{samples}->{$samp}->{files}->{fastqRead2}->{path};
          	 $r2out = $MCF_Dir.basename ($read2).".MCF.gz";
          	 $self->{samples}->{$samp}->{mcf}->{read2}->{path} = $r2out;
          }
 	     
-	     if ( -e $r1out ||( -e $r1out && defined $r2out && -e $r2out)){
+	     if ( -s $r1out > 50000000 ||(-s $r1out > 50000000 && defined $r2out && $r2out > 50000000)){
+	     	
 	     	my $msg = "$samp\t$r1out\tfile already exists, size ". -s $r1out;
 	     	print $msg ."\n";
 	     	writeToLogFile($msg, $log );
 	     	next;
+	     	
 	     }
 	     my $mcfCommand;
          
@@ -681,18 +706,21 @@ sub makeDeDupeCommandHash{
 		my @bams = glob($bamPattern);
 		## check if bam exists
 		if (scalar (@bams) > 0 ){
-			my $expDedupeBam = $bamPattern;
-			$expDedupeBam =~ s/.bam/_marked_dupe.bam/;
-			$self->{samples}->{$samp}->{expected}->{markedDupeBam} = $expDedupeBam;
-			my @ddbams = glob($expDedupeBam);
+			if ( !defined( $self->{samples}->{$samp}->{expected}->{markDupeBam} ) ){
+				$self->{samples}->{$samp}->{expected}->{markDupeBam} = make_mark_dup_outfile_name($bamPattern);
+			}
+			my $expMarkDupeBam = $self->{samples}->{$samp}->{expected}->{markDupeBam};
+			$self->{samples}->{$samp}->{expected}->{markDupeBam} = $expMarkDupeBam;
+			my @ddbams = glob($expMarkDupeBam);
 			if ( scalar ( @ddbams ) > 0 ){
 				print $ddbams[0] . " already exists, passing.\n";
 				next;
 			}  else {
 				my $inFile = $bams[0];
-				my $outFile = $bams[0];
-				my $dedupExtraMetricsFile = $outFile;
-				$dedupExtraMetricsFile .= "_mark_dup_metrics.txt";
+				my $outFile = make_mark_dup_outfile_name($inFile);
+				
+				$self->{samples}->{$samp}->{expected}->{markDupeBam} = $outFile;
+				my $dedupExtraMetricsFile = $outFile."_mark_dupe_metrics.txt";
 				my $dedupCmd = (qq{nice java -Xmx${GIGABYTES_FOR_PICARD}g -jar ${MARKDUPLICATES_PATH} }
 				    . qq{ INPUT=$inFile } ## Picard SortSam.jar accepts both SAM and BAM files as input!
 				    . qq{ REMOVE_DUPLICATES=FALSE }
@@ -706,6 +734,55 @@ sub makeDeDupeCommandHash{
 				$self->{commands}->{markDupes}->{$samp} = $dedupCmd;	
 			}
 		}
+	}
+}
+
+sub make_mark_dup_outfile_name{
+	my $out = shift;
+	$out =~ s/.bam/_mark_dupe.bam/; 
+	return $out;
+}
+
+
+sub makeRseqcCommandHash{
+	my $self = shift;
+
+	for my $samp ( sort keys ( %{ $self->{samples} } ) ) {
+		if (!defined( $self->{samples}->{$samp}->{expected}->{markDupeBam})){
+			print "no expected markDupeBam, skipping\n";
+			next;
+		}
+		my $bam;
+		print "markDupe bam ". $self->{samples}->{$samp}->{expected}->{markDupeBam} ."'\n";
+		if (exists $self->{samples}->{$samp}->{expected}->{markDupeBam}){
+			$bam = $self->{samples}->{$samp}->{expected}->{markDupeBam};
+		} else {
+			print "expected markDupeBam not found, pass\n";
+			next;
+		}
+		my $species = $self->getSpecies($samp);
+		if ( !$species){
+			print "species not supported\n";
+			next;
+		}
+		my @bams = `ls $bam`;
+		$bam = $bams[0];
+		chomp $bam;
+		print "bam $bam\n";
+		my $outpath = $bam;
+		$outpath =~ s/.bam/_qc/;
+		chomp $outpath;
+		print $outpath."\n";
+		my $args = {file=>$bam , 
+			refgene=>$self->{db}->{$species}->{refgene},
+			outdir=>$outpath,
+			};
+		my $cmd = \&tools::bam::runRSEQC;
+		#print "cmd = $cmd\n";
+		#print "deref cmd = ".&{$cmd}."\n";
+		$self->{commands}->{rseqc}->{$samp}->{cmd} = $cmd;
+		$self->{commands}->{rseqc}->{$samp}->{args} = $args;
+		system ("mkdir -p $outpath");
 	}
 }
 

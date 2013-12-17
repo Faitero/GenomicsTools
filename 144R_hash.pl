@@ -79,9 +79,10 @@ my $sh = {
  'fastqRead2' => {
                                                                            'path' => 
  "/Data01/gnomex/ExperimentData/2013/144R/130308-FC589-L6-CAGATC--Benoit--HH30-4nn--Gg--R2.fq.bz2"}}},
- "144X8" =>{
-  	"type" => "MRNASEQ",
- 	"species" => "chicken",
+
+ "144X9" =>{
+    "type" => "MRNASEQ",
+    "species" => "chicken",
  "files" => {
    'fastqRead1' => {
                                                                             'path' =>

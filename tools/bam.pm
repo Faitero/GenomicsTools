@@ -1,13 +1,14 @@
 package tools::bam;
-# this library contains code required to run QC metrics and differentail expression analysis on 
+# this library contains code required to run QC metrics and differential expression analysis on 
 # Bam files 
 ## test to save
 use tools::runval;
 use strict;
-# use warnings;
+use warnings;
 use Getopt::Long;
 use IO::Handle;
 use diagnostics -verbose;
+use Data::Dumper;
 my $dry = 0;
 
 my $mouserefgene = "/work/Common/Data/Annotation/mouse/mm9/Mus_musculus.NCBIM37.67.fixed.bed";
@@ -262,12 +263,13 @@ sub collectDups{
 
 ## this sub runs a host of the RSEQC programs.
 sub runRSEQC{
-	my ($args) = @_;
-	my $outdir   = $args->{outdir};
+	my %args = @_;
+	print "args ". Dumper %args ."\n";
+	my $outdir   = $args{outdir};
 
 	
-	my $file	= $args->{file};
-	my $refgene = $args->{refgene};
+	my $file	= $args{file};
+	my $refgene = $args{refgene};
 
 	if( !$outdir ){
 		$outdir = $file;
@@ -290,11 +292,11 @@ sub runRSEQC{
 		refgene => $refgene,
 		});
 
-	readQuality({
-		outpath => $outpath,
-		file 	=> $file,
-		refgene => $refgene,
-		});
+	# readQuality({
+	# 	outpath => $outpath,
+	# 	file 	=> $file,
+	# 	refgene => $refgene,
+	# 	});
 
 	readDuplication({
 		outpath => $outpath,
@@ -302,17 +304,17 @@ sub runRSEQC{
 		refgene => $refgene,
 		});
 
-	readGC({
-		outpath => $outpath,
-		file 	=> $file,
-		refgene => $refgene,
-		});
+	# readGC({
+	# 	outpath => $outpath,
+	# 	file 	=> $file,
+	# 	refgene => $refgene,
+	# 	});
 
-	readNVC({
-		outpath => $outpath,
-		file 	=> $file,
-		refgene => $refgene,
-		});
+	# readNVC({
+	# 	outpath => $outpath,
+	# 	file 	=> $file,
+	# 	refgene => $refgene,
+	# 	});
 
 	RPKMsat({
 		outpath => $outpath,
@@ -326,11 +328,11 @@ sub runRSEQC{
 	# 	refgene => $refgene,
 	# 	});
 
-	# juncSat({
-	# 	outpath => $outpath,
-	# 	file 	=> $file,
-	# 	refgene => $refgene,
-	# 	});
+	 juncSat({
+	 	outpath => $outpath,
+	 	file 	=> $file,
+	 	refgene => $refgene,
+	 	});
 
 	readDist({
 		outpath => $outpath,
